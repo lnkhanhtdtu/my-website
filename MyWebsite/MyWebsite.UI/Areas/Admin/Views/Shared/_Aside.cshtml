@@ -1,0 +1,73 @@
+﻿@using Microsoft.AspNetCore.Mvc.TagHelpers
+<aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
+    <div class="app-brand demo">
+        <a href="/admin/homeadmin" class="app-brand-link">
+            <span class="app-brand-logo demo me-1">
+                <img src="~/assets/img/logo.png" alt="Logo" class="rounded-3">
+            </span>
+            @* <span class="app-brand-text demo menu-text fw-semibold ms-2">Scar Auto</span> *@
+        </a>
+
+        <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto">
+            <i class="menu-toggle-icon d-xl-block align-middle"></i>
+        </a>
+    </div>
+
+    <div class="menu-inner-shadow"></div>
+
+    <ul class="menu-inner py-1">
+        <!-- Dashboards -->
+        <li class="menu-item active open">
+            <a href="/admin/homeadmin" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons ri-home-smile-line"></i>
+                <div data-i18n="Dashboards">Dashboards</div>
+                <div class="badge bg-danger rounded-pill ms-auto">5</div>
+            </a>
+            <ul class="menu-sub">
+                <li class="menu-item">
+                    <a href="https://demos.themeselection.com/materio-bootstrap-html-admin-template/html/vertical-menu-template/dashboards-crm.html"
+                       target="_blank"
+                       class="menu-link">
+                        <div data-i18n="CRM">CRM</div>
+                        <div class="badge bg-label-primary fs-tiny rounded-pill ms-auto">Pro</div>
+                    </a>
+                </li>
+            </ul>
+        </li>
+
+        @* <li class="menu-header mt-7"><span class="menu-header-text">Thiết lập</span></li> *@
+        @* *@
+        @* <li class="menu-item"> *@
+        @*     <a class="menu-link" asp-area="Admin" asp-controller="Account" asp-action="Index"> *@
+        @*         <i class="menu-icon tf-icons ri-account-circle-line"></i> *@
+        @*         <div data-i18n="Basic">Tài khoản</div> *@
+        @*     </a> *@
+        @* </li> *@
+        
+        <li class="menu-header mt-7"><span class="menu-header-text">Quản lý sản phẩm</span></li>
+        
+        <li class="menu-item">
+            <a class="menu-link" asp-area="Admin" asp-controller="Categories" asp-action="Index">
+                <i class="menu-icon tf-icons ri-file-list-line"></i>
+                <div data-i18n="Basic">Danh mục sản phẩm</div>
+            </a>
+        </li>
+        
+        <li class="menu-item">
+            <a class="menu-link" asp-area="Admin" asp-controller="ProductAdmin" asp-action="Index">
+                <i class="menu-icon tf-icons ri-product-hunt-line"></i>
+                <div data-i18n="Basic">Sản phẩm</div>
+            </a>
+        </li>
+        
+        <li class="menu-item">
+            <a class="menu-link" asp-area="Admin" asp-controller="Order" asp-action="Index">
+                <i class="menu-icon tf-icons ri-bank-card-line"></i>
+                <div data-i18n="Basic">Đơn đặt hàng</div>
+            </a>
+        </li>
+        
+        
+
+    </ul>
+</aside>
