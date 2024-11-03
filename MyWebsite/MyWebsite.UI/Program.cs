@@ -1,8 +1,9 @@
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
+using MyWebsite.Infrastructure.Configuration;
+
 var builder = WebApplication.CreateBuilder(args);
-builder.Services.AddDbContext<MyWebsiteContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("MyWebsiteContext") ?? throw new InvalidOperationException("Connection string 'MyWebsiteContext' not found.")));
+
+// - Cấu hình Connection String cho database
+builder.Services.ConfigurationIdentity(builder.Configuration);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
@@ -24,6 +25,7 @@ app.UseRouting();
 
 app.UseAuthorization();
 
+// Cấu hình Area Routing
 app.UseEndpoints(endpoints =>
 {
     endpoints.MapControllerRoute(
