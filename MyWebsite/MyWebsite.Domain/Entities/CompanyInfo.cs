@@ -7,7 +7,7 @@ namespace MyWebsite.Domain.Entities
     public class CompanyInfo : BaseEntity
     {
         [Display(Name = "Tên công ty")]
-        public string CompanyName { get; set; }
+        public string Name { get; set; }
 
         [Display(Name = "Logo")]
         public byte[]? Logo { get; set; }

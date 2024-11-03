@@ -1,14 +1,31 @@
+using Microsoft.AspNetCore.Builder;
+using Microsoft.EntityFrameworkCore;
+using MyWebsite.DataAccess.Configuration;
 using MyWebsite.Infrastructure.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// - Cấu hình Connection String cho database
+// Cấu hình Connection String cho database
 builder.Services.ConfigurationIdentity(builder.Configuration);
+
+// Đăng ký các Repositories 
+builder.Services.AddDependencyInjection();
+
+// Đăng ký AutoMapper
+builder.Services.AddAutoMapper();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
+
+// Cấu hình auto migration của Entity Framework Core
+using (var scope = app.Services.CreateScope())
+{
+    var appContext = scope.ServiceProvider.GetRequiredService<MyWebsiteContext>();
+
+    appContext.Database.MigrateAsync().Wait();
+}
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())

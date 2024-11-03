@@ -54,7 +54,7 @@ namespace MyWebsite.UI.Areas.Admin.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("CompanyName,Logo,BusinessField,Slogan,TaxCode,FoundationYear,HeadquartersAddress,PhoneNumber,Email,Website,Id,IsDeleted,CreatedAt")] CompanyInfo companyInfo)
+        public async Task<IActionResult> Create([Bind("Name,Logo,BusinessField,Slogan,TaxCode,FoundationYear,HeadquartersAddress,PhoneNumber,Email,Website,Id,IsDeleted,CreatedAt,UpdatedAt")] CompanyInfo companyInfo)
         {
             if (ModelState.IsValid)
             {
@@ -86,7 +86,7 @@ namespace MyWebsite.UI.Areas.Admin.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("CompanyName,Logo,BusinessField,Slogan,TaxCode,FoundationYear,HeadquartersAddress,PhoneNumber,Email,Website,Id,IsDeleted,CreatedAt")] CompanyInfo companyInfo)
+        public async Task<IActionResult> Edit(int id, [Bind("Name,Logo,BusinessField,Slogan,TaxCode,FoundationYear,HeadquartersAddress,PhoneNumber,Email,Website,Id,IsDeleted,CreatedAt,UpdatedAt")] CompanyInfo companyInfo)
         {
             if (id != companyInfo.Id)
             {

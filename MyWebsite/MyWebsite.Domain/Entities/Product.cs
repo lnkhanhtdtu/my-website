@@ -3,11 +3,13 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MyWebsite.Domain.Entities;
 
+// TODO: Lưu nhiều thuộc tính của sản phẩm: https://viblo.asia/c/EvbLbqKmJnk
+
 [Table("Products", Schema = "dbo")]
 public class Product : BaseEntity
 {
     [Display(Name = "Tên sản phẩm")]
-    public string ProductName { get; set; }
+    public string Name { get; set; }
 
     [Display(Name = "Mô tả")]
     public string Description { get; set; }
@@ -27,6 +29,9 @@ public class Product : BaseEntity
 
     [Display(Name = "Giá")]
     public double? Price { get; set; }
+
+    [Display(Name = "Giá cũ")]
+    public double? OldPrice { get; set; }
 
     public virtual Category? Category { get; set; }
 

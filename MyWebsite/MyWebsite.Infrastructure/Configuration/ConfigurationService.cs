@@ -1,6 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using MyWebsite.Application.Abstracts;
+using MyWebsite.Application.Services;
+using MyWebsite.DataAccess.Repositories;
+using MyWebsite.Domain.Abstracts;
 
 namespace MyWebsite.Infrastructure.Configuration
 {
@@ -31,32 +35,16 @@ namespace MyWebsite.Infrastructure.Configuration
             // });
         }
 
-        // public static void AddDependencyInjection(this IServiceCollection services)
-        // {
-        //     services.AddTransient<PasswordHasher<ApplicationUser>>();
-        //     services.AddTransient<ISqlQueryHandler, SQLQueryHandler>();
-        //     services.AddTransient<IUnitOfWork, UnitOfWork>();
-        //     services.AddTransient<IUserService, UserService>();
-        //     services.AddTransient<IRoleService, RoleService>();
-        //     services.AddTransient<IAuthenticationService, AuthenticationService>();
-        //     services.AddTransient<IImageService, ImageService>();
-        //
-        //     services.AddSingleton(typeof(IConverter), new SynchronizedConverter(new PdfTools()));
-        //     services.AddTransient<IPDFService, PDFService>();
-        //
-        //     services.AddTransient<ICategoryService, CategoryService>();
-        //     services.AddTransient<IProductService, ProductService>();
-        //     services.AddTransient<IOrderService, OrderService>();
-        //     services.AddTransient<ICartService, CartService>();
-        //     services.AddTransient<ICommonService, CommonService>();
-        //
-        //     services.AddTransient<IExcelhandler, Excelhandler>();
-        // }
+        public static void AddDependencyInjection(this IServiceCollection services)
+        {
+            services.AddTransient<IUnitOfWork, UnitOfWork>();
+            services.AddTransient<ICategoryService, CategoryService>();
+        }
 
-        // public static void AddAutoMapper(this IServiceCollection services)
-        // {
-        //     services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
-        // }
+        public static void AddAutoMapper(this IServiceCollection services)
+        {
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+        }
 
         /// <summary>
         /// Thêm cấu hình Authorization cho tất cả các trang trong admin

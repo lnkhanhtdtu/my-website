@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using MyWebsite.Domain.Entities;
 
 public class MyWebsiteContext : DbContext
@@ -12,9 +8,19 @@ public class MyWebsiteContext : DbContext
     {
     }
 
-    public DbSet<MyWebsite.Domain.Entities.Category> Category { get; set; } = default!;
+    public DbSet<Banner> Banners { get; set; } = default!;
 
-    public DbSet<MyWebsite.Domain.Entities.CompanyInfo> CompanyInfo { get; set; } = default!;
+    public DbSet<Category> Categories { get; set; } = default!;
 
-    public DbSet<MyWebsite.Domain.Entities.Product> Product { get; set; } = default!;
+    public DbSet<CompanyInfo> CompanyInfo { get; set; } = default!;
+
+    public DbSet<Image> Images { get; set; } = default!;
+
+    public DbSet<Product> Products { get; set; } = default!;
+
+    public DbSet<ProductAttribute> ProductAttributes { get; set; } = default!;
+
+    public DbSet<ProductAttributeValue> ProductAttributeValues { get; set; } = default!;
+
+    public DbSet<ProductImage> ProductImages { get; set; } = default!;
 }

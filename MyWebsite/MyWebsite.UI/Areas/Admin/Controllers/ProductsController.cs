@@ -22,7 +22,7 @@ namespace MyWebsite.UI.Areas.Admin.Controllers
         // GET: Admin/Products
         public async Task<IActionResult> Index()
         {
-            var myWebsiteContext = _context.Product.Include(p => p.Category);
+            var myWebsiteContext = _context.Products.Include(p => p.Category);
             return View(await myWebsiteContext.ToListAsync());
         }
 
@@ -34,7 +34,7 @@ namespace MyWebsite.UI.Areas.Admin.Controllers
                 return NotFound();
             }
 
-            var product = await _context.Product
+            var product = await _context.Products
                 .Include(p => p.Category)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (product == null)
@@ -48,7 +48,7 @@ namespace MyWebsite.UI.Areas.Admin.Controllers
         // GET: Admin/Products/Create
         public IActionResult Create()
         {
-            ViewData["CategoryId"] = new SelectList(_context.Category, "Id", "CategoryName");
+            ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "Name");
             return View();
         }
 
@@ -57,7 +57,7 @@ namespace MyWebsite.UI.Areas.Admin.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ProductName,Description,CategoryId,ImageData,IsFeatured,Price,Id,IsDeleted,CreatedAt")] Product product)
+        public async Task<IActionResult> Create([Bind("Name,Description,CategoryId,ImageData,IsFeatured,Price,OldPrice,Id,IsDeleted,CreatedAt,UpdatedAt")] Product product)
         {
             if (ModelState.IsValid)
             {
@@ -65,7 +65,7 @@ namespace MyWebsite.UI.Areas.Admin.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CategoryId"] = new SelectList(_context.Category, "Id", "CategoryName", product.CategoryId);
+            ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "Name", product.CategoryId);
             return View(product);
         }
 
@@ -77,12 +77,12 @@ namespace MyWebsite.UI.Areas.Admin.Controllers
                 return NotFound();
             }
 
-            var product = await _context.Product.FindAsync(id);
+            var product = await _context.Products.FindAsync(id);
             if (product == null)
             {
                 return NotFound();
             }
-            ViewData["CategoryId"] = new SelectList(_context.Category, "Id", "CategoryName", product.CategoryId);
+            ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "Name", product.CategoryId);
             return View(product);
         }
 
@@ -91,7 +91,7 @@ namespace MyWebsite.UI.Areas.Admin.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ProductName,Description,CategoryId,ImageData,IsFeatured,Price,Id,IsDeleted,CreatedAt")] Product product)
+        public async Task<IActionResult> Edit(int id, [Bind("Name,Description,CategoryId,ImageData,IsFeatured,Price,OldPrice,Id,IsDeleted,CreatedAt,UpdatedAt")] Product product)
         {
             if (id != product.Id)
             {
@@ -118,7 +118,7 @@ namespace MyWebsite.UI.Areas.Admin.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CategoryId"] = new SelectList(_context.Category, "Id", "CategoryName", product.CategoryId);
+            ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "Name", product.CategoryId);
             return View(product);
         }
 
@@ -130,7 +130,7 @@ namespace MyWebsite.UI.Areas.Admin.Controllers
                 return NotFound();
             }
 
-            var product = await _context.Product
+            var product = await _context.Products
                 .Include(p => p.Category)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (product == null)
@@ -146,10 +146,10 @@ namespace MyWebsite.UI.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var product = await _context.Product.FindAsync(id);
+            var product = await _context.Products.FindAsync(id);
             if (product != null)
             {
-                _context.Product.Remove(product);
+                _context.Products.Remove(product);
             }
 
             await _context.SaveChangesAsync();
@@ -158,7 +158,7 @@ namespace MyWebsite.UI.Areas.Admin.Controllers
 
         private bool ProductExists(int id)
         {
-            return _context.Product.Any(e => e.Id == id);
+            return _context.Products.Any(e => e.Id == id);
         }
     }
 }
