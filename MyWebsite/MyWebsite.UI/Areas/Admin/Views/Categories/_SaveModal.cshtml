@@ -5,7 +5,7 @@
     <div class="mt-4">
         <!-- Modal -->
         <div class="modal fade" id="saveModal" tabindex="-1" aria-hidden="true" data-backdrop="static">
-            <form asp-action="SaveData" asp-controller="Categories" asp-area="Admin" method="post" id="formCategory" enctype="multipart/form-data">
+            <form asp-action="SaveData" asp-controller="Categories" asp-area="Admin" method="post" id="formCategory" enctype="multipart/form-data" class="needs-validation" novalidate>
                 <div class="modal-dialog modal-dialog-centered" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -18,7 +18,15 @@
                         <div class="modal-body">
                             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                             <input type="hidden" asp-for="Id" />
-                            <input type="hidden" asp-for="ImageData" />
+
+                            @if (Model.ImageData != null)
+                            {
+                                <input type="hidden" asp-for="ImageData" value="@Convert.ToBase64String(Model.ImageData)" />
+                            }
+                            else{
+                                <input type="hidden" asp-for="ImageData" />
+                            }
+                            
 
                             <div class="row">
                                 <div class="d-flex align-items-start align-items-sm-center gap-6">
@@ -33,7 +41,7 @@
                                             <i class="ri-upload-2-line d-block d-sm-none"></i>
                                             <input type="file" name="postFile" class="form-control mb-2" onchange="previewMainImage(this)" hidden accept="image/png, image/jpeg" />
                                         </label>
-                                        <div>Chấp nhận file JPG, GIF hoặc PNG</div>
+                                        <div>Chấp nhận file JPG hoặc PNG</div>
                                     </div>
 
                                 </div>
@@ -42,8 +50,11 @@
                             <div class="row">
                                 <div class="col mb-6 mt-2">
                                     <div class="form-floating form-floating-outline">
-                                        <input type="text" asp-for="Name" class="form-control" placeholder="Nhập tên danh mục" />
-                                        <label asp-for="Name"></label>
+                                        <input type="text" asp-for="Name" class="form-control" placeholder="Nhập tên danh mục" required />
+                                        <label asp-for="Name">Tên danh mục</label>
+                                        <div class="invalid-feedback">
+                                            Vui lòng nhập tên danh mục!
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -52,7 +63,7 @@
                                 <div class="col mb-6 mt-2">
                                     <div class="form-floating form-floating-outline">
                                         <select asp-for="ParentId" class="form-select" asp-items="ViewBag.CategoryId">
-                                            <option selected="">Không chọn danh mục cha</option>
+                                            <option selected></option>
                                         </select>
                                         <label asp-for="ParentId"></label>
                                     </div>

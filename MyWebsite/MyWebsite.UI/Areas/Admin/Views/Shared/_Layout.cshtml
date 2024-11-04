@@ -10,6 +10,8 @@
 
     <title>@ViewData["Title"] - MyWebsite.UI</title>
 
+    @* <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" /> *@
+
     <meta name="description" content="" />
 
     <!-- Favicon -->
@@ -120,6 +122,8 @@
     <script src="~/admin/libs/data-table/datatables.bootstrap5.min.js"></script>
     <script src="~/lib/moment/moment.js"></script>
     <script src="~/js/common.js"></script>
+
+    @* <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script> *@
 
     @await RenderSectionAsync("Scripts", required: false)
 </body>

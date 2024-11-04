@@ -96,25 +96,25 @@
                 }
             },
             {
-                data: "parentId", name: "parentId", autoWidth: true
+                data: "parentName", name: "parentName", autoWidth: true
             },
             // Action Edit, Delete
             {
                 data: "id", name: "id", width: "20",
                 render: function (key) {
                     return `<div class="dropdown">
-                                                            <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
-                                                                <i class="ri-more-2-line"></i>
-                                                            </button>
-                                                            <div class="dropdown-menu" data-key="${key}">
-                                                                <a class="dropdown-item btn-edit" href="#" >
-                                                                    <i class="ri-pencil-line me-1 text-warning"></i> Edit
-                                                                </a>
-                                                                <a class="dropdown-item btn-delete" href="#">
-                                                                    <i class="ri-delete-bin-6-line me-1 text-danger"></i> Delete
-                                                                </a>
-                                                            </div>
-                                                        </div>`;
+                                        <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
+                                            <i class="ri-more-2-line"></i>
+                                        </button>
+                                        <div class="dropdown-menu" data-key="${key}">
+                                            <a class="dropdown-item btn-edit" href="#" >
+                                                <i class="ri-pencil-line me-1 text-warning"></i> Sửa
+                                            </a>
+                                            <a class="dropdown-item btn-delete" href="#">
+                                                <i class="ri-delete-bin-6-line me-1 text-danger"></i> Xóa
+                                            </a>
+                                        </div>
+                                    </div>`;
                 }
             }
         ];
@@ -125,6 +125,10 @@
             $('#saveModal').modal('show');
             $('#formCategory').trigger("reset");
             document.getElementById('previewImage').src = '/images/default-image.png';
+
+            // Reset các trường ẩn
+            $('#Id').val('0');
+            $('#ImageData').val('');
         });
 
         $(document).on("click", ".btn-edit", function () {
@@ -134,11 +138,19 @@
                 url: `${getById}/${key}`,
                 method: "GET",
                 success: function (data) {
-                    console.log(data);
-                    mapObjectToControlView(data);
-                    // Chèn ảnh mặc định nếu không tồn tại
-                    document.getElementById('previewImage').src = `${data.imageData ? `data:image/png;base64,${data.imageData}` : '/images/default-image.png'}`;
+                    // Hiển thị modal trước
                     $('#saveModal').modal('show');
+            
+                    // Sau đó đợi một chút để đảm bảo modal đã được render
+                    setTimeout(function() {
+                        console.log(data);
+                        mapObjectToControlView(data);
+
+                        document.getElementById('previewImage').src = `${data.imageData ? `data:image/png;base64,${data.imageData}` : '/images/default-image.png'}`;
+                    }, 100); // Đợi 100ms
+                },
+                error: function(error) {
+                    console.error('Error fetching category data:', error);
                 }
             });
         });
@@ -169,6 +181,7 @@
 
                     reader.onload = function (event) {
                         var image = document.createElement('img');
+                        image.id = 'previewImage';
                         image.className = 'img-thumbnail mr-3 mb-2';
                         image.style.maxHeight = '200px';
                         image.style.maxWidth = '300px';
@@ -196,10 +209,15 @@
                 contentType: false, // Important: Do not set content type
                 processData: false, // Important: Do not process data
                 success: function (response) {
-                    $(elementName).DataTable().ajax.reload();
-                    showToaster("Success", id == 0 ? "Tạo thành công" : "Cập nhật thành công");
                     console.log(response);
-                    $('#saveModal').modal('hide');
+
+                    if (response.status !== 'Error') {
+                        $('#saveModal').modal('hide');
+                        $(elementName).DataTable().ajax.reload();
+                        showToaster("Success", id === 0 ? "Tạo thành công" : "Cập nhật thành công");
+                    } else {
+                        showToaster("Error", id === 0 ? "Tạo thất bại" : "Cập nhật thất bại");
+                    }
                 },
                 error: function (response) {
                     console.log(response);

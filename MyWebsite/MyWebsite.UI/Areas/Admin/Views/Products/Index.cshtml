@@ -1,90 +1,230 @@
-﻿@model IEnumerable<MyWebsite.Domain.Entities.Product>
+﻿@model MyWebsite.Application.DTOs.ViewModels.ProductViewModel
 
 @{
-    ViewData["Title"] = "Index";
-    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Danh sách sản phẩm";
 }
 
-<h1>Index</h1>
+<!-- Basic Bootstrap Table -->
+<div class="card">
+    <h5 class="card-header">
+        <!-- Button trigger modal -->
+        <a asp-action="Create" asp-controller="Products" asp-area="Admin" class="btn"><i class="ri-add-circle-fill"></i></a>
+        @* <button type="button" class="btn" id="btnAddProduct"> *@
+        @*     <i class="ri-add-circle-fill"></i> *@
+        @* </button> *@
+        Danh sách sản phẩm
+    </h5>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Description)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ImageData)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IsFeatured)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Price)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.OldPrice)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Category)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IsDeleted)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CreatedAt)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.UpdatedAt)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ImageData)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IsFeatured)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Price)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.OldPrice)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Category.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IsDeleted)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CreatedAt)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.UpdatedAt)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
+    <div class="table-responsive text-nowrap table-hover">
+        <table id="myTable" class="table">
+            <thead>
+            <tr>
+                <th>
+                    #
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CategoryId)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Price)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.OldPrice)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.IsFeatured)
+                </th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody class="table-border-bottom-0">
+            <tr>
+                <td>No Data</td>
+                <td>No Data</td>
+                <td>No Data</td>
+                <td>No Data</td>
+                <td>No Data</td>
+                <td>No Data</td>
+                <td>No Data</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<!--/ Basic Bootstrap Table -->
+@section Scripts {
+    <script src="~/js/registerDataTable.js"></script>
+
+    <script src="https://cdn.tiny.cloud/1/bbyaalzflkoysrzgbozkp2atu9cmg9allcksiq8epoyfdvuz/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+    <script>
+        // Khởi tạo Description
+        tinyMCEInit("#Description");
+    </script>
+
+    <script>
+        const elementName = "#myTable";
+        const url = '@Url.Action("GetProductPagination", "Products")';
+        const getById = '@Url.Action("GetById", "Products", new { area = "Admin" })';
+        const editUrl = '@Url.Action("SaveData", "Products", new { area = "Admin" })';
+        const deleteUrl = '@Url.Action("SoftDelete", "Products", new { area = "Admin" })';
+
+        const columns = [
+            // STT
+            {
+                data: null, name: "stt", width: 50,
+                render: function (data, type, row, meta) { return meta.row + 1; }
+            },
+            {
+                data: "createdAt", name: "createdAt", autoWidth: true,
+                render: data => moment(data).format("DD/MM/YYYY")
+            },
+            {
+                data: "title", name: "title", autoWidth: true,
+                render: function (data, type, row) {
+                    return `<td>
+                                <div class="d-flex align-items-center">
+                                    <div class="me-4">
+                                        <img src="${row.imageData ? `data:image/png;base64,${row.imageData}` : '/images/default-images/default-image.png'}" class="rounded-2"alt="Ảnh sản  phẩm" style="max-height: 75px; max-width:150px">
+                                    </div>
+                                    <div>
+                                        <h6 class="mb-0">${data}</h6>
+                                        <small>${row.price ? '<div>' + row.price.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' }) + '</div>' : ''}</small>
+                                    </div>
+
+                                </div>
+                            </td>`;
+                }
+            },
+            {
+                data: "priceDiscount", name: "priceDiscount", autoWidth: true,
+                render: function (data, type, row) {
+                    return data ? '<div class="text-end">' + data.toFixed(2) + '%</div>' : '';
+                }
+            },
+            {
+                data: "isPromotion", name: "isPromotion", width: "30",
+                render: function (data, type, row) {
+                    return `<input type="checkbox" class="form-check-input" ${data ? 'checked' : ''} disabled>`;
+                }
+            },
+            {
+                data: "isSellingWell", name: "isSellingWell", width: "30",
+                render: function (data, type, row) {
+                    return `<input type="checkbox" class="form-check-input" ${data ? 'checked' : ''} disabled>`;
+                }
+            },
+            {
+                data: "isHighestRating", name: "isHighestRating", width: "30",
+                render: function (data, type, row) {
+                    return `<input type="checkbox" class="form-check-input" ${data ? 'checked' : ''} disabled>`;
+                }
+            },
+            // Action Edit, Delete
+            {
+                data: "id", name: "id", width: "20",
+                render: function (key) {
+                    return `<div class="dropdown">
+                                <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
+                                    <i class="ri-more-2-line"></i>
+                                </button>
+                                <div class="dropdown-menu" data-key="${key}">
+                                    <a class="dropdown-item btn-edit" href="#" >
+                                        <i class="ri-pencil-line me-1 text-warning"></i> Edit
+                                    </a>
+                                    <a class="dropdown-item btn-delete" href="#">
+                                        <i class="ri-delete-bin-6-line me-1 text-danger"></i> Delete
+                                    </a>
+                                </div>
+                            </div>`;
+                }
+            }
+        ];
+
+        registerDataTable(elementName, columns, url);
+
+        $(document).on("click", "#btnAddProduct", function () {
+            $('#saveProductModal').modal('show');
+            $('#formProduct').trigger("reset");
+            document.getElementById('previewImage').src = '/images/default-images/default-image.png';
+        });
+
+        $(document).on("click", ".btn-edit", function () {
+            const key = $(this).closest("div").data("key");
+
+            $.ajax({
+                url: `${getById}/${key}`,
+                method: "GET",
+                success: function (data) {
+                    console.log(data);
+                    mapObjectToControlView(data);
+                    $('#saveProductModal').modal('show');
+                }
+            });
+        });
+
+        $(document).on("click", ".btn-delete", function () {
+            const key = $(this).closest("div").data("key");
+            console.log("Delete key: ", key);
+            $.ajax({
+                url: `${deleteUrl}/${key}`,
+                method: "POST",
+                success: function (data) {
+                    $(elementName).DataTable().ajax.reload();
+                    showToaster("Success", "Xóa thành công");
+                    console.log(data);
+                }
+            });
+        });
+
+        function previewMainImage(input) {
+            var preview = document.getElementById('previewMainImage');
+            preview.innerHTML = ''; // Xóa các hình ảnh trước đó để cập nhật hình ảnh mới
+
+            if (input.files) {
+                var filesAmount = input.files.length;
+
+                for (var i = 0; i < filesAmount; i++) {
+                    var reader = new FileReader();
+
+                    reader.onload = function (event) {
+                        var image = document.createElement('img');
+                        image.className = 'img-thumbnail mr-3 mb-2';
+                        image.style.maxHeight = '200px';
+                        image.style.maxWidth = '300px';
+                        image.src = event.target.result;
+                        preview.appendChild(image);
+                    }
+
+                    reader.readAsDataURL(input.files[i]);
+                }
+            }
+        }
+
+        $('#formProduct').submit(function (e) {
+
+            e.preventDefault();
+
+            var formData = new FormData(this);
+
+            $.ajax({
+                url: $(this).attr('action'),
+                type: $(this).attr('method'),
+                data: formData,
+                contentType: false, // Important: Do not set content type
+                processData: false, // Important: Do not process data
+                success: function (response) {
+                    $(elementName).DataTable().ajax.reload();
+                    showToaster("Success", "Tạo / Cập Nhật thành công");
+                    console.log(response);
+                    $('#saveProductModal').modal('hide');
+                },
+                error: function (response) {
+                    console.log(response);
+                }
+            });
+        });
+    </script>
 }
-    </tbody>
-</table>

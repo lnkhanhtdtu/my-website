@@ -12,6 +12,8 @@ namespace MyWebsite.Domain.Abstracts
         DbSet<T> Table<T>() where T : class;
 
         ICategoryRepository CategoryRepository { get; }
+
+        IProductRepository ProductRepository { get; set; }
         // IProductRepository ProductRepository { get; }
         // IOrderRepository OrderRepository { get; }
         // ICartRepository CartRepository { get; }

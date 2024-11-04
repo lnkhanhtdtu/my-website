@@ -37,7 +37,7 @@ namespace MyWebsite.DataAccess.Repositories
         {
             if (category == null)
             {
-                throw new ArgumentException($"Category with id {category.Id} not found.");
+                throw new ArgumentException($"Category not found.");
             }
 
             category.IsDeleted = true;

@@ -83,7 +83,13 @@ function mapObjectToControlView(modelView) {
 // Xử lý hình ảnh
 function handleImageElement(value) {
     const imgSrc = `${value ? `data:image/png;base64,${value}` : '/images/default-image.png'}`;
-    document.getElementById('previewImage').src = imgSrc;
+    var previewImage = document.getElementById('previewImage');
+
+    if (previewImage) {
+        previewImage.src = imgSrc;
+    } else {
+        console.log("Lỗi!!!");
+    }
 }
 
 // Xử lý ngày tháng
@@ -103,3 +109,26 @@ function handleTinyMCEElement(elementId, value) {
 function formatCurrency(amount) {
     return new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(amount);
 }
+
+// Xử lý validation on form submit
+(function () {
+    'use strict';
+
+    // Fetch all the forms we want to apply custom Bootstrap validation styles to
+    var forms = document.querySelectorAll('.needs-validation');
+
+    // Loop over them and prevent submission
+    Array.prototype.slice.call(forms)
+        .forEach(function (form) {
+            form.addEventListener('submit',
+                function (event) {
+                    if (!form.checkValidity()) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+
+                    form.classList.add('was-validated');
+                },
+                false);
+        });
+})();

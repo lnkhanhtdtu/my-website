@@ -39,14 +39,39 @@ namespace MyWebsite.UI.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> SaveData(CategoryViewModel category, IFormFile? postFile)
         {
-            await _categoryService.SaveData(category, postFile);
-            return RedirectToAction("Index");
+            if (!ModelState.IsValid)
+            {
+                var errors = ModelState
+                    .Where(x => x.Value.Errors.Count > 0)
+                    .Select(x => new { Property = x.Key, Errors = x.Value.Errors.Select(e => e.ErrorMessage).ToList() })
+                    .ToList();
+
+                return Json(new { status = "Error", message = "Dữ liệu không hợp lệ", errors = errors });
+            }
+
+            if (category.ParentId.HasValue && category.ParentId == category.Id)
+            {
+                return Json(new { status = "Error", message = "Danh mục không thể là danh mục cha của chính nó" });
+            }
+
+            try
+            {
+                await _categoryService.SaveData(category, postFile);
+                ViewData["CategoryId"] = await _categoryService.GetCategoriesForDropdownListAsync();
+                return Json(new { status = "Ok", message = "Lưu dữ liệu thành công" });
+            }
+            catch (Exception ex)
+            {
+                // Log the exception
+                return Json(new { status = "Error", message = "Có lỗi xảy ra khi lưu dữ liệu: " + ex.Message });
+            }
         }
 
         [HttpPost]
         public async Task<IActionResult> SoftDelete(int id)
         {
             await _categoryService.SoftDelete(id);
+            ViewData["CategoryId"] = await _categoryService.GetCategoriesForDropdownListAsync();
             return Json(new { status = "Ok" });
         }
     }

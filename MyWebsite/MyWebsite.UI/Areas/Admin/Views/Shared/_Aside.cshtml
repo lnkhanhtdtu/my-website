@@ -1,4 +1,12 @@
 ﻿@using Microsoft.AspNetCore.Mvc.TagHelpers
+
+@{
+    bool IsActive(string controller)
+    {
+        return ViewContext.RouteData.Values["Controller"].ToString() == controller;
+    }
+}
+
 <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
     <div class="app-brand demo">
         <a href="/admin/homeadmin" class="app-brand-link">
@@ -46,21 +54,21 @@
         
         <li class="menu-header mt-7"><span class="menu-header-text">Quản lý sản phẩm</span></li>
         
-        <li class="menu-item">
+        <li class="menu-item @(IsActive("Banners") ? "active" : "")">
             <a class="menu-link" asp-area="Admin" asp-controller="Banners" asp-action="Index">
                 <i class="menu-icon tf-icons ri-file-list-line"></i>
                 <div data-i18n="Basic">Banner</div>
             </a>
         </li>
 
-        <li class="menu-item">
+        <li class="menu-item @(IsActive("Categories") ? "active" : "")">
             <a class="menu-link" asp-area="Admin" asp-controller="Categories" asp-action="Index">
                 <i class="menu-icon tf-icons ri-file-list-line"></i>
                 <div data-i18n="Basic">Danh mục sản phẩm</div>
             </a>
         </li>
         
-        <li class="menu-item">
+        <li class="menu-item @(IsActive("Products") ? "active" : "")">
             <a class="menu-link" asp-area="Admin" asp-controller="Products" asp-action="Index">
                 <i class="menu-icon tf-icons ri-product-hunt-line"></i>
                 <div data-i18n="Basic">Sản phẩm</div>

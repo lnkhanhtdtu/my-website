@@ -30,7 +30,7 @@ namespace MyWebsite.Application.Services
 
             try
             {
-                
+
                 Expression<Func<Category, bool>> expression = entity => !entity.IsDeleted;
 
                 var categories = await _unitOfWork.CategoryRepository.GetAllCategory(expression);
@@ -42,7 +42,10 @@ namespace MyWebsite.Application.Services
 
                 var totalRecords = categoriesDto.Count();
 
-                var data = categoriesDto.Skip(request.SkipItems).Take(request.PageSize).ToList();
+                var data = categoriesDto
+                    .Skip(request.SkipItems).Take(request.PageSize)
+                    .OrderBy(x => x.ParentId).ThenBy(x => x.Name)
+                    .ToList();
 
                 return new ResponseDatatable<CategoryDTO>
                 {
@@ -68,7 +71,7 @@ namespace MyWebsite.Application.Services
         {
             var categoryEntity = _mapper.Map<Category>(category);
 
-            if (postFile != null)
+            if (postFile is { Length: > 0 })
             {
                 using (MemoryStream ms = new MemoryStream())
                 {
@@ -76,9 +79,20 @@ namespace MyWebsite.Application.Services
                     byte[] fileBytes = ms.ToArray();
                     categoryEntity.ImageData = fileBytes;
                 }
-            }
 
-            await _unitOfWork.CategoryRepository.SaveData(categoryEntity);
+                await _unitOfWork.CategoryRepository.SaveData(categoryEntity);
+            } 
+            else if (categoryEntity.Id > 0) // TODO: Cần sửa lại trường hợp update data nhưng không update hình ảnh
+            {
+                var existingCategory = await _unitOfWork.CategoryRepository.GetById(categoryEntity.Id);
+                if (existingCategory != null)
+                {
+                    existingCategory.ParentId = categoryEntity.ParentId;
+                    existingCategory.Name = categoryEntity.Name;
+
+                    await _unitOfWork.CategoryRepository.SaveData(existingCategory);
+                }
+            }
 
             await _unitOfWork.Commit();
         }
@@ -98,7 +112,7 @@ namespace MyWebsite.Application.Services
 
         public async Task<SelectList> GetCategoriesForDropdownListAsync()
         {
-            var categories = await _unitOfWork.CategoryRepository.GetAllCategory(x => !x.IsDeleted);
+            var categories = await _unitOfWork.CategoryRepository.GetAllCategory(x => !x.IsDeleted && x.ParentId == null);
             return new SelectList(categories, nameof(Category.Id), nameof(Category.Name));
         }
 
