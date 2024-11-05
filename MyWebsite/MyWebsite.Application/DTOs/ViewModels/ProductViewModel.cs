@@ -1,4 +1,5 @@
-﻿using MyWebsite.Domain.Entities;
+﻿using Microsoft.AspNetCore.Http;
+using MyWebsite.Domain.Entities;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -6,6 +7,7 @@ namespace MyWebsite.Application.DTOs.ViewModels
 {
     public class ProductViewModel
     {
+        List<IFormFile> ProductImages { get; set; }
         public int Id { get; set; }
 
         [Display(Name = "Ngày tạo")]

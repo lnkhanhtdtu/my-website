@@ -3,6 +3,7 @@ using MyWebsite.Application.Abstracts;
 using MyWebsite.Application.DTOs;
 using MyWebsite.Application.DTOs.ViewModels;
 using MyWebsite.Domain.Entities;
+using Newtonsoft.Json;
 
 namespace MyWebsite.UI.Areas.Admin.Controllers
 {
@@ -40,7 +41,7 @@ namespace MyWebsite.UI.Areas.Admin.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> SaveData(ProductViewModel product, IFormFile? postFile)
+        public async Task<IActionResult> SaveData(ProductViewModel product, IFormFile? postFile, List<IFormFile> productImages)
         {
             if (!ModelState.IsValid)
             {
@@ -54,7 +55,21 @@ namespace MyWebsite.UI.Areas.Admin.Controllers
 
             try
             {
+                // https://christianbayer.github.io/image-uploader/#example-1
+                // https://www.jqueryscript.net/demo/ajax-file-uploader/
+                // https://www.jqueryscript.net/demo/drag-drop-image-uploader/
+                    if (ProductImages != null && ProductImages.Count > 0)
+                        {
+                            foreach (var file in ProductImages)
+                            {
+                                // Xử lý file ở đây
+                                // Ví dụ: lưu file, thêm vào database, etc.
+                            }
+                        }
+
                 await _productService.SaveData(product, postFile);
+
+
                 return Json(new { status = "Ok", message = "Lưu dữ liệu thành công" });
             }
             catch (Exception ex)

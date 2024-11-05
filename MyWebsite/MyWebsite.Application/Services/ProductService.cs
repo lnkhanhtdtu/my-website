@@ -110,9 +110,9 @@ namespace MyWebsite.Application.Services
                     // existingProduct.Images = existingProduct.Images;
                     existingProduct.IsFeatured = productEntity.IsFeatured;
                     existingProduct.Price = productEntity.Price;
-                    existingProduct.OldPricePrice = productEntity.OldPrice;
+                    existingProduct.OldPrice = productEntity.OldPrice;
 
-                    await _unitOfWork.CategoryRepository.SaveData(existingProduct);
+                    await _unitOfWork.ProductRepository.SaveData(existingProduct, postFile);
                 }
             }
             

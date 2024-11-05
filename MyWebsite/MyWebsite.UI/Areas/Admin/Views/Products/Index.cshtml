@@ -59,8 +59,20 @@
         </table>
     </div>
 </div>
+
+@* <div class="form-group"> *@
+@*     <label for="productImages">Hình ảnh sản phẩm</label> *@
+@*     <div class="input-images" id="productImages"></div> *@
+@* </div> *@
+
+@section Styles
+{
+    <link href="~/admin/libs/image-uploader/dist/image-uploader.min.css" rel="stylesheet" />
+}
+
 <!--/ Basic Bootstrap Table -->
 @section Scripts {
+    <script src="~/admin/libs/image-uploader/dist/image-uploader.min.js"></script>
     <script src="~/js/registerDataTable.js"></script>
 
     <script src="https://cdn.tiny.cloud/1/bbyaalzflkoysrzgbozkp2atu9cmg9allcksiq8epoyfdvuz/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
@@ -70,6 +82,30 @@
     </script>
 
     <script>
+        $(function () {
+            $('.input-images').imageUploader({
+                imagesInputName: 'ProductImages',
+                preloadedInputName: 'oldImages',
+                preloaded: [],
+                label: 'Kéo và thả hình ảnh vào đây hoặc click để chọn',
+                extensions: ['.jpg', '.jpeg', '.png'],
+                mimes: ['image/jpeg', 'image/png'],
+                errorMessage: 'Chỉ cho phép các file hình ảnh có định dạng .jpg, .jpeg, .png'
+            });
+        });
+
+        // $('.input-images').imageUploader({
+        //     imagesInputName: 'ProductImages',
+        //     maxFiles: 5,
+        //     maxSize: 2 * 1024 * 1024, // 2MB
+        //     preloadedInputName: 'oldImages',
+        //     preloaded: [],
+        //     label: 'Kéo và thả hình ảnh vào đây hoặc click để chọn',
+        //     extensions: ['.jpg', '.jpeg', '.png', '.gif'],
+        //     mimes: ['image/jpeg', 'image/png', 'image/gif'],
+        //     errorMessage: 'Chỉ cho phép các file hình ảnh có định dạng .jpg, .jpeg, .png, .gif'
+        // });
+
         const elementName = "#myTable";
         const url = '@Url.Action("GetProductPagination", "Products")';
         const getById = '@Url.Action("GetById", "Products", new { area = "Admin" })';
@@ -172,6 +208,11 @@
         });
 
         $(document).on("click", ".btn-edit", function () {
+             $('#formProduct').trigger("reset");
+            // Reset các trường ẩn
+            $('#Id').val('0');
+            $('#ImageData').val('');
+
             const key = $(this).closest("div").data("key");
 
             $.ajax({
@@ -243,8 +284,16 @@
 
             var formData = new FormData(this);
 
+            // Lấy tất cả các file đã upload
+            var inputImages = $('.input-images input[type="file"]')[0].files;
+            console.log("Input Images:", inputImages);
+
+            // Thêm các hình ảnh vào FormData
+            for (var i = 0; i < inputImages.length; i++) {
+                formData.append('ProductImages', inputImages[i]);
+            }
+
             var id = formData.get('Id');
-            console.log("Id: ", id);
             
             // Chuyển FormData thành object
             var object = {};
