@@ -39,6 +39,7 @@ namespace MyWebsite.Infrastructure.Configuration
         {
             services.AddTransient<IUnitOfWork, UnitOfWork>();
             services.AddTransient<ICategoryService, CategoryService>();
+            services.AddTransient<IProductService, ProductService>();
         }
 
         public static void AddAutoMapper(this IServiceCollection services)

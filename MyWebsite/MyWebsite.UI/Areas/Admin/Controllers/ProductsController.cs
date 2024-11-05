@@ -1,6 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
 using MyWebsite.Application.Abstracts;
 using MyWebsite.Application.DTOs;
 using MyWebsite.Application.DTOs.ViewModels;
@@ -14,9 +12,10 @@ namespace MyWebsite.UI.Areas.Admin.Controllers
         private readonly IProductService _productService;
         private readonly ICategoryService _categoryService;
 
-        public ProductsController(ICategoryService categoryService)
+        public ProductsController(ICategoryService categoryService, IProductService productService)
         {
             _categoryService = categoryService;
+            _productService = productService;
         }
 
         public async Task<IActionResult> Index()
@@ -43,8 +42,26 @@ namespace MyWebsite.UI.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> SaveData(ProductViewModel product, IFormFile? postFile)
         {
-            await _productService.SaveData(product, postFile);
-            return RedirectToAction("Index");
+            if (!ModelState.IsValid)
+            {
+                var errors = ModelState
+                    .Where(x => x.Value.Errors.Count > 0)
+                    .Select(x => new { Property = x.Key, Errors = x.Value.Errors.Select(e => e.ErrorMessage).ToList() })
+                    .ToList();
+
+                return Json(new { status = "Error", message = "Dữ liệu không hợp lệ", errors = errors });
+            }
+
+            try
+            {
+                await _productService.SaveData(product, postFile);
+                return Json(new { status = "Ok", message = "Lưu dữ liệu thành công" });
+            }
+            catch (Exception ex)
+            {
+                // Log the exception
+                return Json(new { status = "Error", message = "Có lỗi xảy ra khi lưu dữ liệu: " + ex.Message });
+            }
         }
 
         [HttpPost]

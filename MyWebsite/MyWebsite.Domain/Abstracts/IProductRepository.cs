@@ -17,5 +17,6 @@ namespace MyWebsite.Domain.Abstracts
         Task<IEnumerable<Product>> GetByListId(int[] ids);
         Task SaveData(Product product, IFormFile? postFile);
         Task SoftDelete(Product product);
+        Task<IEnumerable<Product>> GetAllProductWithCategory(Expression<Func<Product, bool>>? expression = null);
     }
 }

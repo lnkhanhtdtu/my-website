@@ -2,6 +2,8 @@
 using MyWebsite.Application.DTOs;
 using MyWebsite.Application.DTOs.Products;
 using MyWebsite.Application.DTOs.ViewModels;
+using MyWebsite.Domain.Entities;
+using System.Linq.Expressions;
 
 namespace MyWebsite.Application.Abstracts
 {

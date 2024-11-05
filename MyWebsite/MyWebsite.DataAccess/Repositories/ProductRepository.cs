@@ -38,6 +38,11 @@ namespace MyWebsite.DataAccess.Repositories
             return await GetAllAsync(filter);
         }
 
+        public async Task<IEnumerable<Product>> GetAllProductWithCategory(Expression<Func<Product, bool>>? expression = null)
+        {
+            return await GetAllWithIncludeAsync(expression, p => p.Category);
+        }
+
         public async Task<Product> GetById(int id)
         {
             return await GetSingleAsync(p => p.Id == id);

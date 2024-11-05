@@ -13,8 +13,8 @@ namespace MyWebsite.Domain.Abstracts
 
         ICategoryRepository CategoryRepository { get; }
 
-        IProductRepository ProductRepository { get; set; }
-        // IProductRepository ProductRepository { get; }
+        IProductRepository ProductRepository { get; }
+
         // IOrderRepository OrderRepository { get; }
         // ICartRepository CartRepository { get; }
         // IUserAddressRepository UserAddressRepository { get; }

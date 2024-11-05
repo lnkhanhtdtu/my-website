@@ -18,6 +18,10 @@ namespace MyWebsite.Application.DTOs.Products
         [Display(Name = "Loại sản phẩm")]
         public int? CategoryId { get; set; }
 
+        public string? CategoryName { get; set; }
+
+        public byte[]? CategoryImage { get; set; }
+
         [Display(Name = "Hình ảnh")]
         public byte[]? ImageData { get; set; }
 

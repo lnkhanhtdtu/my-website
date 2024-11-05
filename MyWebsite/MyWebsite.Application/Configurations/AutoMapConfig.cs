@@ -15,7 +15,10 @@ namespace MyWebsite.Application.Configurations
                 .ReverseMap();
             CreateMap<Category, CategoryViewModel>().ReverseMap();
 
-            CreateMap<Product, ProductDTO>().ReverseMap();
+            CreateMap<Product, ProductDTO>()
+                .ForMember(dest => dest.CategoryName, opt => opt.MapFrom(src => src.Category != null ? src.Category.Name : null))
+                .ForMember(dest => dest.CategoryImage, opt => opt.MapFrom(src => src.Category != null ? src.Category.ImageData : null))
+                .ReverseMap();
             CreateMap<Product, ProductViewModel>().ReverseMap();
         }
     }

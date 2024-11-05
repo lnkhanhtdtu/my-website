@@ -51,7 +51,7 @@ namespace MyWebsite.Application.Services
 
                 Expression<Func<Product, bool>> expression = entity => !entity.IsDeleted;
 
-                var products = await _unitOfWork.ProductRepository.GetAllProduct(expression);
+                var products = await _unitOfWork.ProductRepository.GetAllProductWithCategory(expression);
 
                 var productsDto = _mapper.Map<IEnumerable<ProductDTO>>(products);
 
@@ -87,7 +87,7 @@ namespace MyWebsite.Application.Services
         {
             var productEntity = _mapper.Map<Product>(productViewModel);
 
-            if (postFile != null)
+            if (postFile is { Length: > 0 })
             {
                 using (MemoryStream ms = new MemoryStream())
                 {
@@ -95,10 +95,27 @@ namespace MyWebsite.Application.Services
                     byte[] fileBytes = ms.ToArray();
                     productEntity.ImageData = fileBytes;
                 }
+
+                await _unitOfWork.ProductRepository.SaveData(productEntity, postFile);
             }
+            else if (productEntity.Id > 0) // TODO: Cần sửa lại trường hợp update data nhưng không update hình ảnh
+            {
+                var existingProduct = await _unitOfWork.ProductRepository.GetById(productEntity.Id);
+                if (existingProduct != null)
+                {
+                    existingProduct.Name = productEntity.Name;
+                    existingProduct.Description = productEntity.Description;
+                    existingProduct.CategoryId = productEntity.CategoryId;
+                    existingProduct.ImageData = existingProduct.ImageData;
+                    // existingProduct.Images = existingProduct.Images;
+                    existingProduct.IsFeatured = productEntity.IsFeatured;
+                    existingProduct.Price = productEntity.Price;
+                    existingProduct.OldPricePrice = productEntity.OldPrice;
 
-            await _unitOfWork.ProductRepository.SaveData(productEntity, postFile);
-
+                    await _unitOfWork.CategoryRepository.SaveData(existingProduct);
+                }
+            }
+            
             await _unitOfWork.Commit();
         }
 

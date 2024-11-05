@@ -1,17 +1,15 @@
 ﻿using MyWebsite.Domain.Entities;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MyWebsite.Application.DTOs.ViewModels
 {
     public class ProductViewModel
     {
         public int Id { get; set; }
+
+        [Display(Name = "Ngày tạo")]
+        public DateTime CreatedAt { get; set; } = DateTime.Now;
 
         [Display(Name = "Tên sản phẩm")]
         public string Name { get; set; }
@@ -30,7 +28,7 @@ namespace MyWebsite.Application.DTOs.ViewModels
         public List<Image>? Images { get; set; }
 
         [Display(Name = "Sản phẩm nổi bật")]
-        public bool? IsFeatured { get; set; }
+        public bool IsFeatured { get; set; }
 
         [Display(Name = "Giá")]
         public double? Price { get; set; }

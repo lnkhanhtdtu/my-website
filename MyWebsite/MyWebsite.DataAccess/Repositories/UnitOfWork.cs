@@ -9,6 +9,7 @@ namespace MyWebsite.DataAccess.Repositories
         MyWebsiteContext _context;
 
         ICategoryRepository _categoryRepository;
+        IProductRepository _productRepository;
 
         IDbContextTransaction _dbContextTransaction;
         private bool _disposedValue;
@@ -21,6 +22,7 @@ namespace MyWebsite.DataAccess.Repositories
         public DbSet<T> Table<T>() where T : class => _context.Set<T>();
 
         public ICategoryRepository CategoryRepository => _categoryRepository ??= new CategoryRepository(_context);
+        public IProductRepository ProductRepository => _productRepository ??= new ProductRepository(_context);
 
         public async Task BeginTransaction()
         {
