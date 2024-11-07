@@ -12,6 +12,7 @@ namespace MyWebsite.UI.Areas.Admin.Controllers
     {
         private readonly IProductService _productService;
         private readonly ICategoryService _categoryService;
+        private readonly IImageService _imageService;
 
         public ProductsController(ICategoryService categoryService, IProductService productService)
         {
@@ -41,7 +42,7 @@ namespace MyWebsite.UI.Areas.Admin.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> SaveData(ProductViewModel product, IFormFile? postFile, List<IFormFile> productImages)
+        public async Task<IActionResult> SaveData(ProductViewModel product, IFormFile? postFile, List<IFormFile>? productImages) // TODO: Chưa lưu được ảnh cũ
         {
             if (!ModelState.IsValid)
             {
@@ -58,18 +59,9 @@ namespace MyWebsite.UI.Areas.Admin.Controllers
                 // https://christianbayer.github.io/image-uploader/#example-1
                 // https://www.jqueryscript.net/demo/ajax-file-uploader/
                 // https://www.jqueryscript.net/demo/drag-drop-image-uploader/
-                    if (ProductImages != null && ProductImages.Count > 0)
-                        {
-                            foreach (var file in ProductImages)
-                            {
-                                // Xử lý file ở đây
-                                // Ví dụ: lưu file, thêm vào database, etc.
-                            }
-                        }
-
-                await _productService.SaveData(product, postFile);
-
-
+                
+                await _productService.SaveData(product, postFile, productImages);
+                
                 return Json(new { status = "Ok", message = "Lưu dữ liệu thành công" });
             }
             catch (Exception ex)

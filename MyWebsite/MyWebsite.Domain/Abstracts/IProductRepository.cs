@@ -15,7 +15,7 @@ namespace MyWebsite.Domain.Abstracts
         Task<IEnumerable<Product>> GetAllProduct(Expression<Func<Product, bool>> filter = null);
         Task<Product> GetById(int id);
         Task<IEnumerable<Product>> GetByListId(int[] ids);
-        Task SaveData(Product product, IFormFile? postFile);
+        Task SaveData(Product product, IFormFile? postFile, List<IFormFile>? productImages);
         Task SoftDelete(Product product);
         Task<IEnumerable<Product>> GetAllProductWithCategory(Expression<Func<Product, bool>>? expression = null);
     }

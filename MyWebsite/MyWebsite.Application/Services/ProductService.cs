@@ -80,11 +80,16 @@ namespace MyWebsite.Application.Services
         public async Task<ProductViewModel> GetById(int id)
         {
             var product = await _unitOfWork.ProductRepository.GetById(id);
-            return _mapper.Map<ProductViewModel>(product);
+            var result = _mapper.Map<ProductViewModel>(product);
+            var imageProducts = await _unitOfWork.ImageRepository.GetImagesByProductIdAsync(id);
+            result.Images = imageProducts.ToList();
+
+            return result;
         }
 
-        public async Task SaveData(ProductViewModel productViewModel, IFormFile? postFile)
+        public async Task SaveData(ProductViewModel productViewModel, IFormFile? postFile, List<IFormFile>? productImages)
         {
+            var isUpdate = false;
             var productEntity = _mapper.Map<Product>(productViewModel);
 
             if (postFile is { Length: > 0 })
@@ -96,7 +101,9 @@ namespace MyWebsite.Application.Services
                     productEntity.ImageData = fileBytes;
                 }
 
-                await _unitOfWork.ProductRepository.SaveData(productEntity, postFile);
+                await _unitOfWork.ProductRepository.SaveData(productEntity, postFile, productImages);
+
+                isUpdate = false; // Create
             }
             else if (productEntity.Id > 0) // TODO: Cần sửa lại trường hợp update data nhưng không update hình ảnh
             {
@@ -112,10 +119,16 @@ namespace MyWebsite.Application.Services
                     existingProduct.Price = productEntity.Price;
                     existingProduct.OldPrice = productEntity.OldPrice;
 
-                    await _unitOfWork.ProductRepository.SaveData(existingProduct, postFile);
+                    await _unitOfWork.ProductRepository.SaveData(existingProduct, postFile, productImages);
                 }
+
+                isUpdate = true; // Update
             }
-            
+
+            await _unitOfWork.Commit();
+
+            await _unitOfWork.ImageRepository.SaveImageProductAsync(productImages, productEntity.Id, isUpdate);
+
             await _unitOfWork.Commit();
         }
 

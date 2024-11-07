@@ -15,6 +15,8 @@ namespace MyWebsite.Domain.Abstracts
 
         IProductRepository ProductRepository { get; }
 
+        IImageRepository ImageRepository { get; }
+
         // IOrderRepository OrderRepository { get; }
         // ICartRepository CartRepository { get; }
         // IUserAddressRepository UserAddressRepository { get; }

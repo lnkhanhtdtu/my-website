@@ -82,30 +82,6 @@
     </script>
 
     <script>
-        $(function () {
-            $('.input-images').imageUploader({
-                imagesInputName: 'ProductImages',
-                preloadedInputName: 'oldImages',
-                preloaded: [],
-                label: 'Kéo và thả hình ảnh vào đây hoặc click để chọn',
-                extensions: ['.jpg', '.jpeg', '.png'],
-                mimes: ['image/jpeg', 'image/png'],
-                errorMessage: 'Chỉ cho phép các file hình ảnh có định dạng .jpg, .jpeg, .png'
-            });
-        });
-
-        // $('.input-images').imageUploader({
-        //     imagesInputName: 'ProductImages',
-        //     maxFiles: 5,
-        //     maxSize: 2 * 1024 * 1024, // 2MB
-        //     preloadedInputName: 'oldImages',
-        //     preloaded: [],
-        //     label: 'Kéo và thả hình ảnh vào đây hoặc click để chọn',
-        //     extensions: ['.jpg', '.jpeg', '.png', '.gif'],
-        //     mimes: ['image/jpeg', 'image/png', 'image/gif'],
-        //     errorMessage: 'Chỉ cho phép các file hình ảnh có định dạng .jpg, .jpeg, .png, .gif'
-        // });
-
         const elementName = "#myTable";
         const url = '@Url.Action("GetProductPagination", "Products")';
         const getById = '@Url.Action("GetById", "Products", new { area = "Admin" })';
@@ -197,16 +173,32 @@
 
         registerDataTable(elementName, columns, url);
 
+        // "Thêm Sản Phẩm"
         $(document).on("click", "#btnAddProduct", function () {
             $('#saveProductModal').modal('show');
             $('#formProduct').trigger("reset");
-            document.getElementById('previewImage').src = '/images/default-image.png';
+            $('#previewImage').src = '/images/default-image.png';
+            // document.getElementById('previewImage').src = '/images/default-image.png';
 
             // Reset các trường ẩn
             $('#Id').val('0');
             $('#ImageData').val('');
+
+            // Khởi tạo lại bộ tải hình ảnh
+            $('.input-images').empty().imageUploader({
+                imagesInputName: 'ProductImages',
+                preloadedInputName: 'oldImages',
+                preloaded: [],
+                label: 'Kéo và thả hình ảnh vào đây hoặc click để chọn',
+                extensions: ['.jpg', '.jpeg', '.png'],
+                mimes: ['image/jpeg', 'image/png'],
+                errorMessage: 'Chỉ cho phép các file hình ảnh có định dạng .jpg, .jpeg, .png',
+                maxSize: 5 * 1024 * 1024,
+                maxFiles: 10
+            });
         });
 
+        // "Sửa Sản Phẩm"
         $(document).on("click", ".btn-edit", function () {
              $('#formProduct').trigger("reset");
             // Reset các trường ẩn
@@ -227,6 +219,23 @@
                         console.log(data);
                         mapObjectToControlView(data);
 
+                        let preloaded = data.images ? data.images.map((img, index) => ({
+                            id: index + 1,
+                            src: `data:image/png;base64,${img.data}`
+                        })) : [];
+
+                        $('.input-images').empty().imageUploader({
+                            imagesInputName: 'ProductImages',
+                            preloadedInputName: 'oldImages',
+                            preloaded: preloaded,
+                            label: 'Kéo và thả hình ảnh vào đây hoặc click để chọn',
+                            extensions: ['.jpg', '.jpeg', '.png'],
+                            mimes: ['image/jpeg', 'image/png'],
+                            errorMessage: 'Chỉ cho phép các file hình ảnh có định dạng .jpg, .jpeg, .png',
+                            maxSize: 5 * 1024 * 1024,
+                            maxFiles: 10
+                        });
+
                         document.getElementById('previewImage').src = `${data.imageData ? `data:image/png;base64,${data.imageData}` : '/images/default-image.png'}`;
                     }, 100); // Đợi 100ms
                 },
@@ -236,6 +245,7 @@
             });
         });
 
+        // "Xóa"
         $(document).on("click", ".btn-delete", function () {
             const key = $(this).closest("div").data("key");
             console.log("Delete key: ", key);
@@ -292,6 +302,15 @@
             for (var i = 0; i < inputImages.length; i++) {
                 formData.append('ProductImages', inputImages[i]);
             }
+
+            // Lấy tất cả các ảnh cũ (preloaded)
+    var preloadedImages = $('.uploaded-image input[type="hidden"]');
+    console.log("Preloaded Images:", preloadedImages);
+
+    // Thêm các ảnh cũ vào FormData
+    preloadedImages.each(function(index, input) {
+        formData.append('OldImages', $(input).val());
+    });
 
             var id = formData.get('Id');
             

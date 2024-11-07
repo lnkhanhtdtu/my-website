@@ -3,11 +3,13 @@ using Microsoft.EntityFrameworkCore.Query.SqlExpressions;
 using MyWebsite.Domain.Abstracts;
 using MyWebsite.Domain.Entities;
 using System.Linq.Expressions;
+using MyWebsite.Application.Abstracts;
 
 namespace MyWebsite.DataAccess.Repositories
 {
     public class ProductRepository : GenericRepository<Product>, IProductRepository
     {
+        private readonly IImageRepository _imageRepository;
         // private readonly ISqlQueryHandler _sqlQueryHandler;
 
         // public ProductRepository(MyWebsiteContext context, ISqlQueryHandler sqlQueryHandler) : base(context)
@@ -15,8 +17,10 @@ namespace MyWebsite.DataAccess.Repositories
         //     _sqlQueryHandler = sqlQueryHandler;
         // }
 
-        public ProductRepository(MyWebsiteContext context) : base(context)
-        {  }
+        public ProductRepository(MyWebsiteContext context, IImageRepository imageRepository) : base(context)
+        {
+            _imageRepository = imageRepository;
+        }
 
         public async Task<(IEnumerable<T>, int)> GetAllProductByPagination<T>(int skipItems, int pageSize, string keyword)
         {
@@ -53,7 +57,7 @@ namespace MyWebsite.DataAccess.Repositories
             return await GetAllAsync(x => ids.Contains(x.Id));
         }
 
-        public async Task SaveData(Product product, IFormFile? postFile)
+        public async Task SaveData(Product product, IFormFile? postFile, List<IFormFile>? productImages)
         {
             if (product.Id == 0)
             {
