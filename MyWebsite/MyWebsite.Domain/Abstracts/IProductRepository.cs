@@ -1,11 +1,5 @@
 ﻿using MyWebsite.Domain.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 
 namespace MyWebsite.Domain.Abstracts
 {
@@ -15,7 +9,7 @@ namespace MyWebsite.Domain.Abstracts
         Task<IEnumerable<Product>> GetAllProduct(Expression<Func<Product, bool>> filter = null);
         Task<Product> GetById(int id);
         Task<IEnumerable<Product>> GetByListId(int[] ids);
-        Task SaveData(Product product, IFormFile? postFile, List<IFormFile>? productImages);
+        Task SaveData(Product product);
         Task SoftDelete(Product product);
         Task<IEnumerable<Product>> GetAllProductWithCategory(Expression<Func<Product, bool>>? expression = null);
     }

@@ -11,7 +11,7 @@ namespace MyWebsite.Domain.Abstracts
 {
     public interface IImageRepository
     {
-        Task SaveImageProductAsync(List<IFormFile>? imagesFiles, int productId, bool isUpdate, List<string>? oldImages);
+        Task SaveImageProductAsync(int productId, List<IFormFile>? newImages, List<string>? oldImages);
         Task<Image> GetImageByIdAsync(int imageId);
         Task<IEnumerable<Image>> GetImagesByProductIdAsync(int productId);
         Task DeleteImageAsync(int imageId);

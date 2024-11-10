@@ -15,66 +15,71 @@ namespace MyWebsite.DataAccess.Repositories
             _context = context;
         }
 
-        public async Task SaveImageProductAsync(List<IFormFile>? imagesFiles, int productId, bool isUpdate, List<string>? oldImages)
+        public async Task SaveImageProductAsync(int productId, List<IFormFile>? newImages, List<string>? oldImages)
         {
-            // Xử lý các ảnh cũ dưới dạng Base64 trong oldImages
-            if (oldImages != null && oldImages.Any())
-            {
-                foreach (var base64Image in oldImages)
-                {
-                    // Kiểm tra và tách phần tiền tố "data:image/png;base64," (nếu có)
-                    var base64Data = Regex.Replace(base64Image, "^data:image/[a-zA-Z]+;base64,", string.Empty);
+            if (productId == 0 || (newImages == null && oldImages == null))
+                return;
 
-                    // Chuyển chuỗi Base64 thành byte[]
-                    byte[] imageBytes = Convert.FromBase64String(base64Data);
+            var productImageClear = _context.ProductImages.Where(x => x.ProductId == productId && !x.IsDeleted);
+            await productImageClear.ForEachAsync(x => x.IsDeleted = true);
+            await CommitAsync();
+
+            var imageIds = new List<int>();
+
+            if (newImages != null)
+            {
+                foreach (var file in newImages)
+                {
+                    using var memoryStream = new MemoryStream();
+                    await file.CopyToAsync(memoryStream);
 
                     var image = new Image
                     {
-                        Name = "Xóa",
+                        Name = file.FileName,
+                        Data = memoryStream.ToArray()
+                    };
+
+                    await CreateAsync(image);
+                    await CommitAsync();
+
+                    imageIds.Add(image.Id);
+                }
+            }
+
+            // Xử lý các ảnh cũ dưới dạng Base64 trong oldImages
+            if (oldImages != null)
+            {
+                foreach (var base64Image in oldImages)
+                {
+                    var base64Data = Regex.Replace(base64Image, "^data:image/[a-zA-Z]+;base64,", string.Empty); // Kiểm tra và tách phần tiền tố "data:image/png;base64," (nếu có)
+                    var imageBytes = Convert.FromBase64String(base64Data); // Chuyển chuỗi Base64 thành byte[]
+
+                    var image = new Image
+                    {
+                        Name = Guid.NewGuid().ToString(),
                         Data = imageBytes
                     };
 
                     await CreateAsync(image);
-                    await _context.SaveChangesAsync();
+                    await CommitAsync();
+
+                    imageIds.Add(image.Id);
                 }
             }
 
-
-            if (imagesFiles is { Count: > 0 } && productId != 0)
+            foreach (var imageId in imageIds)
             {
-                if (isUpdate)
+                // Tạo liên kết trong bảng ProductImage
+                var productImage = new ProductImage
                 {
-                    var productImageClear = _context.ProductImages.Where(x => x.ProductId == productId && !x.IsDeleted);
-                    await productImageClear.ForEachAsync(x => x.IsDeleted = true);
-                    // _context.ProductImages.RemoveRange(productImageClear);
-                    await _context.SaveChangesAsync();
-                }
+                    ProductId = productId,
+                    ImageId = imageId
+                };
 
-                foreach (var file in imagesFiles)
-                {
-                    using (var memoryStream = new MemoryStream())
-                    {
-                        await file.CopyToAsync(memoryStream);
-                        var image = new Image
-                        {
-                            Name = file.FileName,
-                            Data = memoryStream.ToArray()
-                        };
-
-                        await CreateAsync(image);
-                        await _context.SaveChangesAsync();
-
-                        // Tạo liên kết trong bảng ProductImage
-                        var productImage = new ProductImage
-                        {
-                            ProductId = productId,
-                            ImageId = image.Id
-                        };
-                        _context.ProductImages.Add(productImage);
-                        await _context.SaveChangesAsync();
-                    }
-                }
+                _context.ProductImages.Add(productImage);
             }
+
+            await CommitAsync();
         }
 
         public async Task<Image> GetImageByIdAsync(int imageId)
@@ -85,8 +90,8 @@ namespace MyWebsite.DataAccess.Repositories
         public async Task<IEnumerable<Image>> GetImagesByProductIdAsync(int productId)
         {
             return await _context.ProductImages
-                .Where(pi => pi.ProductId == productId)
-                .Select(pi => pi.Image)
+                .Where(x => x.ProductId == productId && !x.IsDeleted)
+                .Select(x => x.Image)
                 .ToListAsync();
         }
 

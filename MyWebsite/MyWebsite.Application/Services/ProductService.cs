@@ -1,20 +1,11 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using MyWebsite.Application.Abstracts;
+using MyWebsite.Application.DTOs;
 using MyWebsite.Application.DTOs.Products;
 using MyWebsite.Application.DTOs.ViewModels;
-using MyWebsite.Application.DTOs;
 using MyWebsite.Domain.Abstracts;
 using MyWebsite.Domain.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
-using System.Text.RegularExpressions;
-using Microsoft.EntityFrameworkCore;
-using System.IO;
 
 namespace MyWebsite.Application.Services
 {
@@ -52,17 +43,15 @@ namespace MyWebsite.Application.Services
 
                 // Cách xử lý truy vấn dữ liệu từ EF Core Queryable
                 var result = new ResponseDatatable<ProductDTO>();
-
-                Expression<Func<Product, bool>> expression = entity => !entity.IsDeleted;
-
-                var products = await _unitOfWork.ProductRepository.GetAllProductWithCategory(expression);
+                var products = await _unitOfWork.ProductRepository
+                    .GetAllProductWithCategory(entity => !entity.IsDeleted); // Expression<Func<Product, bool>> expression = entity => !entity.IsDeleted;
 
                 var productsDto = _mapper.Map<IEnumerable<ProductDTO>>(products);
 
                 if (productsDto == null)
                     return result;
 
-                int totalRecords = productsDto.Count();
+                var totalRecords = productsDto.Count();
 
                 var data = productsDto.Skip(request.SkipItems).Take(request.PageSize).ToList();
 
@@ -73,7 +62,6 @@ namespace MyWebsite.Application.Services
                     RecordsFiltered = totalRecords,
                     Data = data
                 };
-
             }
             catch (Exception e)
             {
@@ -91,23 +79,20 @@ namespace MyWebsite.Application.Services
             return result;
         }
 
-        public async Task SaveData(ProductViewModel productViewModel, IFormFile? postFile, List<IFormFile>? productImages, List<string>? oldImages)
+        public async Task SaveData(ProductViewModel productViewModel, IFormFile? mainImage, List<IFormFile>? newImages, List<string>? oldImages)
         {
-            var isUpdate = false;
             var productEntity = _mapper.Map<Product>(productViewModel);
 
-            if (postFile is { Length: > 0 })
+            if (mainImage is { Length: > 0 })
             {
                 using (MemoryStream ms = new MemoryStream())
                 {
-                    postFile.CopyTo(ms);
+                    mainImage.CopyTo(ms);
                     byte[] fileBytes = ms.ToArray();
                     productEntity.ImageData = fileBytes;
                 }
 
-                await _unitOfWork.ProductRepository.SaveData(productEntity, postFile, productImages);
-
-                isUpdate = false; // Create
+                await _unitOfWork.ProductRepository.SaveData(productEntity);
             }
             else if (productEntity.Id > 0) // TODO: Cần sửa lại trường hợp update data nhưng không update hình ảnh
             {
@@ -118,21 +103,16 @@ namespace MyWebsite.Application.Services
                     existingProduct.Description = productEntity.Description;
                     existingProduct.CategoryId = productEntity.CategoryId;
                     existingProduct.ImageData = existingProduct.ImageData;
-                    // existingProduct.Images = existingProduct.Images;
                     existingProduct.IsFeatured = productEntity.IsFeatured;
                     existingProduct.Price = productEntity.Price;
                     existingProduct.OldPrice = productEntity.OldPrice;
 
-                    await _unitOfWork.ProductRepository.SaveData(existingProduct, postFile, productImages);
+                    await _unitOfWork.ProductRepository.SaveData(existingProduct);
                 }
-
-                isUpdate = true; // Update
             }
 
-            await _unitOfWork.Commit();
-
-            await _unitOfWork.ImageRepository.SaveImageProductAsync(productImages, productEntity.Id, isUpdate, oldImages);
-
+            await _unitOfWork.Commit(); // Lưu dữ liệu để lấy ProductId
+            await _unitOfWork.ImageRepository.SaveImageProductAsync(productEntity.Id, newImages, oldImages);
             await _unitOfWork.Commit();
         }
 

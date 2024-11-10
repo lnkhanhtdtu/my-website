@@ -1,0 +1,4 @@
+Plugin upload file
+https://christianbayer.github.io/image-uploader/#example-1
+https://www.jqueryscript.net/demo/ajax-file-uploader/
+https://www.jqueryscript.net/demo/drag-drop-image-uploader/

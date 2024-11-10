@@ -17,9 +17,14 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyWebsite.Domain", "MyWebsi
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyWebsite.DataAccess", "MyWebsite.DataAccess\MyWebsite.DataAccess.csproj", "{B2D84CB2-6070-454C-A39B-4ECA2841BF8B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyWebsite.Infrastructure", "MyWebsite.Infrastructure\MyWebsite.Infrastructure.csproj", "{9B611D57-FF72-4A09-B50A-7EC76A8AC8ED}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyWebsite.Infrastructure", "MyWebsite.Infrastructure\MyWebsite.Infrastructure.csproj", "{9B611D57-FF72-4A09-B50A-7EC76A8AC8ED}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyWebsite.UI", "MyWebsite.UI\MyWebsite.UI.csproj", "{1432D760-6232-4573-949D-99929C5D9961}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyWebsite.UI", "MyWebsite.UI\MyWebsite.UI.csproj", "{1432D760-6232-4573-949D-99929C5D9961}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documents", "Documents", "{84364357-0153-4DFC-82ED-2DAB872FEBC6}"
+	ProjectSection(SolutionItems) = preProject
+		Plugin.txt = Plugin.txt
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

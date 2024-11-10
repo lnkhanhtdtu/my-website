@@ -1,25 +1,19 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.EntityFrameworkCore.Query.SqlExpressions;
-using MyWebsite.Domain.Abstracts;
+﻿using MyWebsite.Domain.Abstracts;
 using MyWebsite.Domain.Entities;
 using System.Linq.Expressions;
-using MyWebsite.Application.Abstracts;
 
 namespace MyWebsite.DataAccess.Repositories
 {
     public class ProductRepository : GenericRepository<Product>, IProductRepository
     {
-        private readonly IImageRepository _imageRepository;
         // private readonly ISqlQueryHandler _sqlQueryHandler;
-
         // public ProductRepository(MyWebsiteContext context, ISqlQueryHandler sqlQueryHandler) : base(context)
         // {
         //     _sqlQueryHandler = sqlQueryHandler;
         // }
 
-        public ProductRepository(MyWebsiteContext context, IImageRepository imageRepository) : base(context)
+        public ProductRepository(MyWebsiteContext context) : base(context)
         {
-            _imageRepository = imageRepository;
         }
 
         public async Task<(IEnumerable<T>, int)> GetAllProductByPagination<T>(int skipItems, int pageSize, string keyword)
@@ -57,7 +51,7 @@ namespace MyWebsite.DataAccess.Repositories
             return await GetAllAsync(x => ids.Contains(x.Id));
         }
 
-        public async Task SaveData(Product product, IFormFile? postFile, List<IFormFile>? productImages)
+        public async Task SaveData(Product product)
         {
             if (product.Id == 0)
             {
@@ -71,13 +65,15 @@ namespace MyWebsite.DataAccess.Repositories
 
         public async Task SoftDelete(Product product)
         {
-            if (product == null)
+            if (product != null)
             {
-                throw new ArgumentNullException($"Product with id {product.Id} does not exist in the database. Please provide a valid product object.");
+                product.IsDeleted = true;
+                Update(product);
             }
-
-            product.IsDeleted = true;
-            Update(product);
+            else
+            {
+                throw new ArgumentNullException($"Product does not exist in the database. Please provide a valid product object.");
+            }
         }
     }
 }

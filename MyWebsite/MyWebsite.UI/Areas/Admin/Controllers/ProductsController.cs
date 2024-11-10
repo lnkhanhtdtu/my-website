@@ -2,7 +2,6 @@
 using MyWebsite.Application.Abstracts;
 using MyWebsite.Application.DTOs;
 using MyWebsite.Application.DTOs.ViewModels;
-using System.Text.RegularExpressions;
 
 namespace MyWebsite.UI.Areas.Admin.Controllers
 {
@@ -21,8 +20,7 @@ namespace MyWebsite.UI.Areas.Admin.Controllers
         public async Task<IActionResult> Index()
         {
             ViewData["CategoryId"] = await _categoryService.GetCategoriesForDropdownListAsync();
-            var productViewModel = new ProductViewModel();
-            return View(productViewModel);
+            return View(new ProductViewModel());
         }
 
         public async Task<IActionResult> GetById(int id)
@@ -41,10 +39,10 @@ namespace MyWebsite.UI.Areas.Admin.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> SaveData(
-            ProductViewModel product, 
-            IFormFile? postFile, 
-            List<IFormFile>? newImages, 
-            List<string>? oldImages) // TODO: Chưa lưu được ảnh cũ
+            ProductViewModel product,
+            IFormFile? postFile,
+            List<IFormFile>? newImages,
+            List<string>? oldImages)
         {
             if (!ModelState.IsValid)
             {
@@ -58,17 +56,11 @@ namespace MyWebsite.UI.Areas.Admin.Controllers
 
             try
             {
-                // https://christianbayer.github.io/image-uploader/#example-1
-                // https://www.jqueryscript.net/demo/ajax-file-uploader/
-                // https://www.jqueryscript.net/demo/drag-drop-image-uploader/
-
                 await _productService.SaveData(product, postFile, newImages, oldImages);
-
                 return Json(new { status = "Ok", message = "Lưu dữ liệu thành công" });
             }
             catch (Exception ex)
             {
-                // Log the exception
                 return Json(new { status = "Error", message = "Có lỗi xảy ra khi lưu dữ liệu: " + ex.Message });
             }
         }
