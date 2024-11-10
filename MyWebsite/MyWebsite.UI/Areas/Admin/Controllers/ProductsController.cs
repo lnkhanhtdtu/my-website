@@ -2,8 +2,6 @@
 using MyWebsite.Application.Abstracts;
 using MyWebsite.Application.DTOs;
 using MyWebsite.Application.DTOs.ViewModels;
-using MyWebsite.Domain.Entities;
-using Newtonsoft.Json;
 
 namespace MyWebsite.UI.Areas.Admin.Controllers
 {
@@ -12,12 +10,11 @@ namespace MyWebsite.UI.Areas.Admin.Controllers
     {
         private readonly IProductService _productService;
         private readonly ICategoryService _categoryService;
-        private readonly IImageService _imageService;
 
-        public ProductsController(ICategoryService categoryService, IProductService productService)
+        public ProductsController(IProductService productService, ICategoryService categoryService)
         {
-            _categoryService = categoryService;
             _productService = productService;
+            _categoryService = categoryService;
         }
 
         public async Task<IActionResult> Index()
@@ -59,9 +56,9 @@ namespace MyWebsite.UI.Areas.Admin.Controllers
                 // https://christianbayer.github.io/image-uploader/#example-1
                 // https://www.jqueryscript.net/demo/ajax-file-uploader/
                 // https://www.jqueryscript.net/demo/drag-drop-image-uploader/
-                
+
                 await _productService.SaveData(product, postFile, productImages);
-                
+
                 return Json(new { status = "Ok", message = "Lưu dữ liệu thành công" });
             }
             catch (Exception ex)

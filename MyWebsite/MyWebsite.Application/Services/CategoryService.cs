@@ -30,10 +30,7 @@ namespace MyWebsite.Application.Services
 
             try
             {
-
-                Expression<Func<Category, bool>> expression = entity => !entity.IsDeleted;
-
-                var categories = await _unitOfWork.CategoryRepository.GetAllCategory(expression);
+                var categories = await _unitOfWork.CategoryRepository.GetAllCategory(entity => !entity.IsDeleted); // Expression<Func<Category, bool>> expression = entity => !entity.IsDeleted;
 
                 var categoriesDto = _mapper.Map<IEnumerable<CategoryDTO>>(categories);
 
