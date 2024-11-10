@@ -97,17 +97,17 @@
                 data: "name", name: "name", autoWidth: true,
                 render: function (data, type, row) {
                     return `<td>
-                                <div class="d-flex align-items-center">
-                                    <div class="me-4">
-                                        <img src="${row.imageData ? `data:image/png;base64,${row.imageData}` : '/images/default-images/default-image.png'}" class="rounded-2"alt="Ảnh sản  phẩm" tyle="max-height: 75px; max-width:150px">
-                                    </div>
-                                    <div>
-                                        <h6 class="mb-0">${data}</h6>
-                                        <small>${row.price ? '<div>' + row.price.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' }) + '</div>' : ''}</small>
-                                    </div>
+                                                                <div class="d-flex align-items-center">
+                                                                    <div class="me-4">
+                                                                        <img src="${row.imageData ? `data:image/png;base64,${row.imageData}` : '/images/default-images/default-image.png'}" class="rounded-2"alt="Ảnh sản  phẩm" style="max-height: 75px; max-width:150px">
+                                                                    </div>
+                                                                    <div>
+                                                                        <h6 class="mb-0">${data}</h6>
+                                                                        <small>${row.price ? '<div>' + row.price.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' }) + '</div>' : ''}</small>
+                                                                    </div>
 
-                                </div>
-                            </td>`;
+                                                                </div>
+                                                            </td>`;
                 }
             },
             {
@@ -121,7 +121,7 @@
                                 </div>
                                 <div class="d-flex flex-column justify-content-center">
                                     <span class="text-heading fw-medium text-wrap">${data}</span>
-                                        <!--<small class="text-truncate mb-0 d-none d-sm-block">Choose from wide range of travel accessories from opular brands /small> -->
+                                        <!--<small class="text-truncate mb-0 d-none d-sm-block">Choose from wide range of travel accessories from popular brands </small> -->
                                 </div>
                             </div>`;
                 }
