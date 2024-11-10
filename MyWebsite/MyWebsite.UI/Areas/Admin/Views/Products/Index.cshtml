@@ -20,50 +20,45 @@
     <div class="table-responsive text-nowrap table-hover">
         <table id="myTable" class="table">
             <thead>
-            <tr>
-                <th>
-                    #
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.CreatedAt)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Name)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.CategoryId)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Price)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.OldPrice)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.IsFeatured)
-                </th>
-                <th></th>
-            </tr>
+                <tr>
+                    <th>
+                        #
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.CreatedAt)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Name)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.CategoryId)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Price)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.OldPrice)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.IsFeatured)
+                    </th>
+                    <th></th>
+                </tr>
             </thead>
             <tbody class="table-border-bottom-0">
-            <tr>
-                <td>No Data</td>
-                <td>No Data</td>
-                <td>No Data</td>
-                <td>No Data</td>
-                <td>No Data</td>
-                <td>No Data</td>
-                <td>No Data</td>
-            </tr>
+                <tr>
+                    <td>No Data</td>
+                    <td>No Data</td>
+                    <td>No Data</td>
+                    <td>No Data</td>
+                    <td>No Data</td>
+                    <td>No Data</td>
+                    <td>No Data</td>
+                </tr>
             </tbody>
         </table>
     </div>
 </div>
-
-@* <div class="form-group"> *@
-@*     <label for="productImages">Hình ảnh sản phẩm</label> *@
-@*     <div class="input-images" id="productImages"></div> *@
-@* </div> *@
 
 @section Styles
 {
@@ -102,33 +97,33 @@
                 data: "name", name: "name", autoWidth: true,
                 render: function (data, type, row) {
                     return `<td>
-                                <div class="d-flex align-items-center">
-                                    <div class="me-4">
-                                        <img src="${row.imageData ? `data:image/png;base64,${row.imageData}` : '/images/default-images/default-image.png'}" class="rounded-2"alt="Ảnh sản  phẩm" style="max-height: 75px; max-width:150px">
-                                    </div>
-                                    <div>
-                                        <h6 class="mb-0">${data}</h6>
-                                        <small>${row.price ? '<div>' + row.price.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' }) + '</div>' : ''}</small>
-                                    </div>
+                                                        <div class="d-flex align-items-center">
+                                                            <div class="me-4">
+                                                                <img src="${row.imageData ? `data:image/png;base64,${row.imageData}` : '/images/default-images/default-image.png'}" class="rounded-2"alt="Ảnh sản  phẩm" style="max-height: 75px; max-width:150px">
+                                                            </div>
+                                                            <div>
+                                                                <h6 class="mb-0">${data}</h6>
+                                                                <small>${row.price ? '<div>' + row.price.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' }) + '</div>' : ''}</small>
+                                                            </div>
 
-                                </div>
-                            </td>`;
+                                                        </div>
+                                                    </td>`;
                 }
-            }, 
+            },
             {
                 data: "categoryName", name: "categoryName", autoWidth: true,
                 render: function (data, type, row) {
                     return `<div class="d-flex align-items-center">
-                                <div class="avatar-wrapper me-3 rounded-2 bg-label-secondary user-name">
-                                    <div class="avatar"><img
-                                            src="${row.categoryImage ? `data:image/png;base64,${row.categoryImage}` : '/images/default-image.png'}"
-                                            alt="Product-8" class="rounded-2"></div>
-                                </div>
-                                <div class="d-flex flex-column justify-content-center">
-                                    <span class="text-heading fw-medium text-wrap">${data}</span>
-                                        <!--<small class="text-truncate mb-0 d-none d-sm-block">Choose from wide range of travel accessories from popular brands </small> -->
-                                </div>
-                            </div>`;
+                                                        <div class="avatar-wrapper me-3 rounded-2 bg-label-secondary user-name">
+                                                            <div class="avatar"><img
+                                                                    src="${row.categoryImage ? `data:image/png;base64,${row.categoryImage}` : '/images/default-image.png'}"
+                                                                    alt="Product-8" class="rounded-2"></div>
+                                                        </div>
+                                                        <div class="d-flex flex-column justify-content-center">
+                                                            <span class="text-heading fw-medium text-wrap">${data}</span>
+                                                                <!--<small class="text-truncate mb-0 d-none d-sm-block">Choose from wide range of travel accessories from popular brands </small> -->
+                                                        </div>
+                                                    </div>`;
                 }
             },
             {
@@ -173,37 +168,38 @@
 
         registerDataTable(elementName, columns, url);
 
-        // "Thêm Sản Phẩm"
-        $(document).on("click", "#btnAddProduct", function () {
-            $('#saveProductModal').modal('show');
-            $('#formProduct').trigger("reset");
-            $('#previewImage').src = '/images/default-image.png';
-            // document.getElementById('previewImage').src = '/images/default-image.png';
-
-            // Reset các trường ẩn
-            $('#Id').val('0');
-            $('#ImageData').val('');
-
-            // Khởi tạo lại bộ tải hình ảnh
-            $('.input-images').empty().imageUploader({
-                imagesInputName: 'ProductImages',
+        function InitImageUploader($inputImage, preloaded, maxSize = 5 * 1024 * 1024, maxFiles = 10) {
+            $($inputImage).empty().imageUploader({
+                imagesInputName: 'NewImages',
                 preloadedInputName: 'OldImages',
-                preloaded: [],
+                preloaded: preloaded,
                 label: 'Kéo và thả hình ảnh vào đây hoặc click để chọn',
                 extensions: ['.jpg', '.jpeg', '.png'],
                 mimes: ['image/jpeg', 'image/png'],
                 errorMessage: 'Chỉ cho phép các file hình ảnh có định dạng .jpg, .jpeg, .png',
-                maxSize: 5 * 1024 * 1024,
-                maxFiles: 10
+                maxSize: maxSize,
+                maxFiles: maxFiles
             });
+        }
+
+        // "Thêm Sản Phẩm"
+        $(document).on("click", "#btnAddProduct", function () {
+            $('#saveProductModal').modal('show');
+            $('#formProduct').trigger("reset");
+            $('#previewImage').attr('src', '/images/default-image.png');
+
+            // Reset các trường ẩn
+            $('#Id').val('0');
+
+            // Khởi tạo lại bộ tải hình ảnh
+            InitImageUploader('.input-images', [], 5 * 1024 * 1024, 10);
         });
 
         // "Sửa Sản Phẩm"
         $(document).on("click", ".btn-edit", function () {
-             $('#formProduct').trigger("reset");
+            $('#formProduct').trigger("reset");
             // Reset các trường ẩn
             $('#Id').val('0');
-            $('#ImageData').val('');
 
             const key = $(this).closest("div").data("key");
 
@@ -213,9 +209,9 @@
                 success: function (data) {
                     // Hiển thị modal trước
                     $('#saveProductModal').modal('show');
-            
+
                     // Sau đó đợi một chút để đảm bảo modal đã được render
-                    setTimeout(function() {
+                    setTimeout(function () {
                         console.log(data);
                         mapObjectToControlView(data);
 
@@ -224,22 +220,12 @@
                             src: `data:image/png;base64,${img.data}`
                         })) : [];
 
-                        $('.input-images').empty().imageUploader({
-                            imagesInputName: 'ProductImages',
-                            preloadedInputName: 'OldImages',
-                            preloaded: preloaded,
-                            label: 'Kéo và thả hình ảnh vào đây hoặc click để chọn',
-                            extensions: ['.jpg', '.jpeg', '.png'],
-                            mimes: ['image/jpeg', 'image/png'],
-                            errorMessage: 'Chỉ cho phép các file hình ảnh có định dạng .jpg, .jpeg, .png',
-                            maxSize: 5 * 1024 * 1024,
-                            maxFiles: 10
-                        });
+                        InitImageUploader('.input-images', preloaded, 5 * 1024 * 1024, 10);
 
-                        document.getElementById('previewImage').src = `${data.imageData ? `data:image/png;base64,${data.imageData}` : '/images/default-image.png'}`;
+                        $('#previewImage').attr('src', `${data.imageData ? `data:image/png;base64,${data.imageData}` : '/images/default-image.png'}`);
                     }, 100); // Đợi 100ms
                 },
-                error: function(error) {
+                error: function (error) {
                     console.error('Error fetching category data:', error);
                 }
             });
@@ -285,28 +271,6 @@
             }
         }
 
-// Lấy và in ra giá trị các hình ảnh trong input-images
-        function printImageValues() {
-            var newImages = []; // Mảng chứa các ảnh mới
-            var oldImages = []; // Mảng chứa các ảnh cũ
-
-            // Duyệt qua từng ảnh trong phần .input-images
-            $('.input-images .uploaded .uploaded-image').each(function() {
-                var imgSrc = $(this).find('img').attr('src'); // Lấy đường dẫn ảnh
-
-                // Kiểm tra xem ảnh là mới hay cũ dựa vào thuộc tính data-preloaded
-                if ($(this).data('preloaded')) {
-                    oldImages.push(imgSrc); // Ảnh cũ
-                } else {
-                    newImages.push(imgSrc); // Ảnh mới
-                }
-            });
-
-            console.log("New Images:", newImages);
-            console.log("Old Images:", oldImages);
-        }
-
-
         $('#formProduct').submit(function (e) {
 
             e.preventDefault();
@@ -316,40 +280,42 @@
 
             var formData = new FormData(this);
 
-            var newImages = []; // Mảng chứa các ảnh mới
-            var oldImages = []; // Mảng chứa các ảnh cũ
+            // Append new images (actual files) to 'NewImages'
+            var newImages = $('.input-images input[type="file"]')[0].files;
+            for (var i = 0; i < newImages.length; i++) {
+                formData.append('NewImages', newImages[i]); // Append each file
+            }
 
-            // Duyệt qua từng ảnh trong phần .input-images
-            $('.input-images .uploaded .uploaded-image').each(function() {
-                var imgSrc = $(this).find('img').attr('src'); // Lấy đường dẫn ảnh
+            var oldImages = []; // Array to store URLs of old images
 
-                // Kiểm tra xem ảnh là mới hay cũ dựa vào thuộc tính data-preloaded
+            // Iterate over each uploaded image
+            $('.input-images .uploaded .uploaded-image').each(function () {
+                var imgSrc = $(this).find('img').attr('src'); // Get the image URL
+
+                // Check if image is preloaded (old image) using data-preloaded attribute
                 if ($(this).data('preloaded')) {
-                    oldImages.push(imgSrc); // Ảnh cũ
-                } else {
-                    newImages.push(imgSrc); // Ảnh mới
+                    oldImages.push(imgSrc); // Add old image URL to the array
                 }
             });
 
-            // Thêm newImages và oldImages vào FormData
-            newImages.forEach((image, index) => {
-                formData.append(`ProductImages`, image);
-            });
-            oldImages.forEach((image, index) => {
-                formData.append(`OldImages`, image);
+            // Append old images URLs as strings
+            oldImages.forEach((image) => {
+                formData.append("OldImages", image); // Append each URL as a separate field
             });
 
+            console.log("Old images data:", oldImages);
+
             var id = formData.get('Id');
-            
+
             // Chuyển FormData thành object
             var object = {};
-            formData.forEach(function(value, key){
+            formData.forEach(function (value, key) {
                 object[key] = value;
             });
 
             // Chuyển object thành JSON
             var json = JSON.stringify(object);
-            console.log("FormData as JSON: ", json);
+            console.log("Dữ liệu JSON từ formData:\n", json);
 
             $.ajax({
                 url: $(this).attr('action'),
