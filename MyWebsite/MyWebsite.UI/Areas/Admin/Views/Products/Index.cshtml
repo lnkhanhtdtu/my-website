@@ -187,7 +187,7 @@
             // Khởi tạo lại bộ tải hình ảnh
             $('.input-images').empty().imageUploader({
                 imagesInputName: 'ProductImages',
-                preloadedInputName: 'oldImages',
+                preloadedInputName: 'OldImages',
                 preloaded: [],
                 label: 'Kéo và thả hình ảnh vào đây hoặc click để chọn',
                 extensions: ['.jpg', '.jpeg', '.png'],
@@ -226,7 +226,7 @@
 
                         $('.input-images').empty().imageUploader({
                             imagesInputName: 'ProductImages',
-                            preloadedInputName: 'oldImages',
+                            preloadedInputName: 'OldImages',
                             preloaded: preloaded,
                             label: 'Kéo và thả hình ảnh vào đây hoặc click để chọn',
                             extensions: ['.jpg', '.jpeg', '.png'],
@@ -285,6 +285,28 @@
             }
         }
 
+// Lấy và in ra giá trị các hình ảnh trong input-images
+        function printImageValues() {
+            var newImages = []; // Mảng chứa các ảnh mới
+            var oldImages = []; // Mảng chứa các ảnh cũ
+
+            // Duyệt qua từng ảnh trong phần .input-images
+            $('.input-images .uploaded .uploaded-image').each(function() {
+                var imgSrc = $(this).find('img').attr('src'); // Lấy đường dẫn ảnh
+
+                // Kiểm tra xem ảnh là mới hay cũ dựa vào thuộc tính data-preloaded
+                if ($(this).data('preloaded')) {
+                    oldImages.push(imgSrc); // Ảnh cũ
+                } else {
+                    newImages.push(imgSrc); // Ảnh mới
+                }
+            });
+
+            console.log("New Images:", newImages);
+            console.log("Old Images:", oldImages);
+        }
+
+
         $('#formProduct').submit(function (e) {
 
             e.preventDefault();
@@ -294,23 +316,28 @@
 
             var formData = new FormData(this);
 
-            // Lấy tất cả các file đã upload
-            var inputImages = $('.input-images input[type="file"]')[0].files;
-            console.log("Input Images:", inputImages);
+            var newImages = []; // Mảng chứa các ảnh mới
+            var oldImages = []; // Mảng chứa các ảnh cũ
 
-            // Thêm các hình ảnh vào FormData
-            for (var i = 0; i < inputImages.length; i++) {
-                formData.append('ProductImages', inputImages[i]);
-            }
+            // Duyệt qua từng ảnh trong phần .input-images
+            $('.input-images .uploaded .uploaded-image').each(function() {
+                var imgSrc = $(this).find('img').attr('src'); // Lấy đường dẫn ảnh
 
-            // Lấy tất cả các ảnh cũ (preloaded)
-    var preloadedImages = $('.uploaded-image input[type="hidden"]');
-    console.log("Preloaded Images:", preloadedImages);
+                // Kiểm tra xem ảnh là mới hay cũ dựa vào thuộc tính data-preloaded
+                if ($(this).data('preloaded')) {
+                    oldImages.push(imgSrc); // Ảnh cũ
+                } else {
+                    newImages.push(imgSrc); // Ảnh mới
+                }
+            });
 
-    // Thêm các ảnh cũ vào FormData
-    preloadedImages.each(function(index, input) {
-        formData.append('OldImages', $(input).val());
-    });
+            // Thêm newImages và oldImages vào FormData
+            newImages.forEach((image, index) => {
+                formData.append(`ProductImages`, image);
+            });
+            oldImages.forEach((image, index) => {
+                formData.append(`OldImages`, image);
+            });
 
             var id = formData.get('Id');
             

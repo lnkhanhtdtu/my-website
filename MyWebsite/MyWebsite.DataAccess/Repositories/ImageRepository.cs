@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using MyWebsite.Domain.Abstracts;
 using MyWebsite.Domain.Entities;
+using System.Text.RegularExpressions;
 
 namespace MyWebsite.DataAccess.Repositories
 {
@@ -14,8 +15,31 @@ namespace MyWebsite.DataAccess.Repositories
             _context = context;
         }
 
-        public async Task SaveImageProductAsync(List<IFormFile>? imagesFiles, int productId, bool isUpdate)
+        public async Task SaveImageProductAsync(List<IFormFile>? imagesFiles, int productId, bool isUpdate, List<string>? oldImages)
         {
+            // Xử lý các ảnh cũ dưới dạng Base64 trong oldImages
+            if (oldImages != null && oldImages.Any())
+            {
+                foreach (var base64Image in oldImages)
+                {
+                    // Kiểm tra và tách phần tiền tố "data:image/png;base64," (nếu có)
+                    var base64Data = Regex.Replace(base64Image, "^data:image/[a-zA-Z]+;base64,", string.Empty);
+
+                    // Chuyển chuỗi Base64 thành byte[]
+                    byte[] imageBytes = Convert.FromBase64String(base64Data);
+
+                    var image = new Image
+                    {
+                        Name = "Xóa",
+                        Data = imageBytes
+                    };
+
+                    await CreateAsync(image);
+                    await _context.SaveChangesAsync();
+                }
+            }
+
+
             if (imagesFiles is { Count: > 0 } && productId != 0)
             {
                 if (isUpdate)

@@ -2,6 +2,7 @@
 using MyWebsite.Application.Abstracts;
 using MyWebsite.Application.DTOs;
 using MyWebsite.Application.DTOs.ViewModels;
+using System.Text.RegularExpressions;
 
 namespace MyWebsite.UI.Areas.Admin.Controllers
 {
@@ -39,8 +40,10 @@ namespace MyWebsite.UI.Areas.Admin.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> SaveData(ProductViewModel product, IFormFile? postFile, List<IFormFile>? productImages) // TODO: Chưa lưu được ảnh cũ
+        public async Task<IActionResult> SaveData(ProductViewModel product, IFormFile? postFile, List<IFormFile>? productImages, List<string>? oldImages) // TODO: Chưa lưu được ảnh cũ
         {
+
+
             if (!ModelState.IsValid)
             {
                 var errors = ModelState
@@ -57,7 +60,7 @@ namespace MyWebsite.UI.Areas.Admin.Controllers
                 // https://www.jqueryscript.net/demo/ajax-file-uploader/
                 // https://www.jqueryscript.net/demo/drag-drop-image-uploader/
 
-                await _productService.SaveData(product, postFile, productImages);
+                await _productService.SaveData(product, postFile, productImages,oldImages);
 
                 return Json(new { status = "Ok", message = "Lưu dữ liệu thành công" });
             }

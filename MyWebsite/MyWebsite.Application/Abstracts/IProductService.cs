@@ -11,7 +11,7 @@ namespace MyWebsite.Application.Abstracts
     {
         Task<ResponseDatatable<ProductDTO>> GetProductPagination(RequestDataTable request);
         Task<ProductViewModel> GetById(int id);
-        Task SaveData(ProductViewModel category, IFormFile? postFile, List<IFormFile>? productImages);
+        Task SaveData(ProductViewModel category, IFormFile? postFile, List<IFormFile>? productImages, List<string>? oldImages);
         Task SoftDelete(int id);
         // Task<IEnumerable<ProductCartDTO>> GetProductsByListId(int[] ids);
     }

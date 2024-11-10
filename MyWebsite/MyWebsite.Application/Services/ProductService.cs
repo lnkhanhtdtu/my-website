@@ -12,6 +12,9 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
+using System.Text.RegularExpressions;
+using Microsoft.EntityFrameworkCore;
+using System.IO;
 
 namespace MyWebsite.Application.Services
 {
@@ -19,6 +22,7 @@ namespace MyWebsite.Application.Services
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
+
 
         public ProductService(IUnitOfWork unitOfWork, IMapper mapper)
         {
@@ -87,7 +91,7 @@ namespace MyWebsite.Application.Services
             return result;
         }
 
-        public async Task SaveData(ProductViewModel productViewModel, IFormFile? postFile, List<IFormFile>? productImages)
+        public async Task SaveData(ProductViewModel productViewModel, IFormFile? postFile, List<IFormFile>? productImages, List<string>? oldImages)
         {
             var isUpdate = false;
             var productEntity = _mapper.Map<Product>(productViewModel);
@@ -127,7 +131,7 @@ namespace MyWebsite.Application.Services
 
             await _unitOfWork.Commit();
 
-            await _unitOfWork.ImageRepository.SaveImageProductAsync(productImages, productEntity.Id, isUpdate);
+            await _unitOfWork.ImageRepository.SaveImageProductAsync(productImages, productEntity.Id, isUpdate, oldImages);
 
             await _unitOfWork.Commit();
         }

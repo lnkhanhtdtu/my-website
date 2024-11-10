@@ -14,9 +14,9 @@ namespace MyWebsite.Application.Services
             _unitOfWork = unitOfWork;
         }
 
-        public async Task SaveImageProductAsync(List<IFormFile> imagesFiles, int productId, bool isUpdate)
+        public async Task SaveImageProductAsync(List<IFormFile> imagesFiles, int productId, bool isUpdate, List<string>? oldImages)
         {
-            await _unitOfWork.ImageRepository.SaveImageProductAsync(imagesFiles, productId, isUpdate);
+            await _unitOfWork.ImageRepository.SaveImageProductAsync(imagesFiles, productId, isUpdate, oldImages);
         }
 
         public async Task<Image> GetImageByIdAsync(int imageId)
