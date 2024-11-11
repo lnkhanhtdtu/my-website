@@ -1,5 +1,3 @@
-using Microsoft.AspNetCore.Builder;
-using Microsoft.EntityFrameworkCore;
 using MyWebsite.DataAccess.Configuration;
 using MyWebsite.Infrastructure.Configuration;
 
@@ -17,15 +15,19 @@ builder.Services.AddAutoMapper();
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
+// Thêm cấu hình Authorization cho tất cả các trang trong admin
+// builder.Services.AddAuthorizationGlobal();
+
+builder.Services.AddSession(options =>
+{
+    options.IdleTimeout = TimeSpan.FromMinutes(30);
+});
+
 var app = builder.Build();
 
 // Cấu hình auto migration của Entity Framework Core
-using (var scope = app.Services.CreateScope())
-{
-    var appContext = scope.ServiceProvider.GetRequiredService<MyWebsiteContext>();
-
-    appContext.Database.MigrateAsync().Wait();
-}
+app.AutoMigration();
+app.SeedData().GetAwaiter().GetResult();
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
@@ -41,6 +43,8 @@ app.UseStaticFiles();
 app.UseRouting();
 
 app.UseAuthorization();
+
+app.UseSession();
 
 // Cấu hình Area Routing
 app.UseEndpoints(endpoints =>

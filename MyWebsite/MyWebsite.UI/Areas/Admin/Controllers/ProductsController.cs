@@ -5,8 +5,7 @@ using MyWebsite.Application.DTOs.ViewModels;
 
 namespace MyWebsite.UI.Areas.Admin.Controllers
 {
-    [Area("Admin")]
-    public class ProductsController : Controller
+    public class ProductsController : BaseController
     {
         private readonly IProductService _productService;
         private readonly ICategoryService _categoryService;

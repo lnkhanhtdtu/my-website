@@ -1,10 +1,11 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using MyWebsite.Domain.Entities;
 
-public class MyWebsiteContext : DbContext
+public class MyWebsiteContext : IdentityDbContext<ApplicationUser, IdentityRole, string>
 {
-    public MyWebsiteContext(DbContextOptions<MyWebsiteContext> options)
-        : base(options)
+    public MyWebsiteContext(DbContextOptions<MyWebsiteContext> options) : base(options)
     {
     }
 
@@ -23,4 +24,18 @@ public class MyWebsiteContext : DbContext
     public DbSet<ProductAttributeValue> ProductAttributeValues { get; set; } = default!;
 
     public DbSet<ProductImage> ProductImages { get; set; } = default!;
+
+    protected override void OnModelCreating(ModelBuilder builder)
+    {
+        base.OnModelCreating(builder);
+
+        // AspNetUser
+        // builder.Entity<ApplicationUser>().ToTable("Users");
+        builder.Entity<IdentityRole>().ToTable("Roles");
+        builder.Entity<IdentityUserRole<string>>().ToTable("UserRoles");
+        builder.Entity<IdentityUserClaim<string>>().ToTable("UserClaims");
+        builder.Entity<IdentityUserLogin<string>>().ToTable("UserLogins");
+        builder.Entity<IdentityUserToken<string>>().ToTable("UserTokens");
+        builder.Entity<IdentityRoleClaim<string>>().ToTable("RoleClaims");
+    }
 }

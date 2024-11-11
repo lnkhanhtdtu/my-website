@@ -5,8 +5,7 @@ using MyWebsite.Application.DTOs.ViewModels;
 
 namespace MyWebsite.UI.Areas.Admin.Controllers
 {
-    [Area("Admin")]
-    public class CategoriesController : Controller
+    public class CategoriesController : BaseController
     {
         private readonly ICategoryService _categoryService;
 
