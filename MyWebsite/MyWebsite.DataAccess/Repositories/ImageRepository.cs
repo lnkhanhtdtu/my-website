@@ -20,9 +20,8 @@ namespace MyWebsite.DataAccess.Repositories
             if (productId == 0 || (newImages == null && oldImages == null))
                 return;
 
-            var productImageClear = _context.ProductImages.Where(x => x.ProductId == productId && !x.IsDeleted);
-            await productImageClear.ForEachAsync(x => x.IsDeleted = true);
-            await CommitAsync();
+            var productImageClear = await _context.ProductImages.Where(x => x.ProductId == productId && !x.IsDeleted).ToListAsync();
+            productImageClear.ForEach(x => x.IsDeleted = true);
 
             var imageIds = new List<int>();
 
@@ -33,16 +32,7 @@ namespace MyWebsite.DataAccess.Repositories
                     using var memoryStream = new MemoryStream();
                     await file.CopyToAsync(memoryStream);
 
-                    var image = new Image
-                    {
-                        Name = file.FileName,
-                        Data = memoryStream.ToArray()
-                    };
-
-                    await CreateAsync(image);
-                    await CommitAsync();
-
-                    imageIds.Add(image.Id);
+                    imageIds.Add(await SaveImage(file.FileName, memoryStream.ToArray()));
                 }
             }
 
@@ -54,16 +44,7 @@ namespace MyWebsite.DataAccess.Repositories
                     var base64Data = Regex.Replace(base64Image, "^data:image/[a-zA-Z]+;base64,", string.Empty); // Kiểm tra và tách phần tiền tố "data:image/png;base64," (nếu có)
                     var imageBytes = Convert.FromBase64String(base64Data); // Chuyển chuỗi Base64 thành byte[]
 
-                    var image = new Image
-                    {
-                        Name = Guid.NewGuid().ToString(),
-                        Data = imageBytes
-                    };
-
-                    await CreateAsync(image);
-                    await CommitAsync();
-
-                    imageIds.Add(image.Id);
+                    imageIds.Add(await SaveImage(Guid.NewGuid().ToString(), imageBytes));
                 }
             }
 
@@ -80,6 +61,20 @@ namespace MyWebsite.DataAccess.Repositories
             }
 
             await CommitAsync();
+        }
+
+        private async Task<int> SaveImage(string name, byte[] imageBytes)
+        {
+            var image = new Image
+            {
+                Name = name,
+                Data = imageBytes
+            };
+
+            await CreateAsync(image);
+            await CommitAsync();
+
+            return image.Id;
         }
 
         public async Task<Image> GetImageByIdAsync(int imageId)

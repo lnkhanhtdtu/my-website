@@ -85,9 +85,9 @@ namespace MyWebsite.Application.Services
 
             if (mainImage is { Length: > 0 })
             {
-                using (MemoryStream ms = new MemoryStream())
+                using (var ms = new MemoryStream())
                 {
-                    mainImage.CopyTo(ms);
+                    await mainImage.CopyToAsync(ms);
                     byte[] fileBytes = ms.ToArray();
                     productEntity.ImageData = fileBytes;
                 }
