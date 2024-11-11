@@ -16,7 +16,7 @@ namespace MyWebsite.UI.Areas.Admin.Controllers
         // GET: Admin/CompanyInfoes
         public async Task<IActionResult> Index()
         {
-            return View(await _context.CompanyInfo.ToListAsync());
+            return View(await _context.CompanyInfo.OrderBy(x => x.Id).LastOrDefaultAsync());
         }
 
         // GET: Admin/CompanyInfoes/Details/5
