@@ -1,8 +1,11 @@
-﻿@model MyWebsite.Domain.Entities.CompanyInfo
+﻿@model MyWebsite.Application.DTOs.ViewModels.CompanyViewModel
 
 @{
     ViewData["Title"] = "Thông tin công ty";
 }
+
+<!-- Modal -->
+@await Html.PartialAsync("_SaveModal", Model)
 
 <!-- Header -->
 <div class="row">
@@ -21,7 +24,7 @@
                             <h4 class="mb-2 mt-lg-6">@Model.Name</h4>
                             <ul class="list-inline mb-0 d-flex align-items-center flex-wrap justify-content-sm-start justify-content-center gap-4">
                                 <li class="list-inline-item">
-                                    <i class="ri-palette-line me-2 ri-24px"></i><span class="fw-medium">@Model.</span>
+                                    <i class="ri-palette-line me-2 ri-24px"></i><span class="fw-medium">@Model.BusinessField</span>
                                 </li>
                                 <li class="list-inline-item">
                                     <i class="ri-map-pin-line me-2 ri-24px"></i><span class="fw-medium">@Model.HeadquartersAddress</span>
@@ -31,9 +34,9 @@
                                 </li>
                             </ul>
                         </div>
-                        @*             <a href="javascript:void(0)" class="btn btn-primary waves-effect waves-light">
-                        <i class="ri-user-follow-line ri-16px me-1_5"></i>Connected
-                        </a> *@
+                        <a href="javascript:void(0)" class="btn btn-primary waves-effect waves-light btn-edit">
+                            <i class="ri-edit-box-line ri-16px me-1_5"></i>Sửa Công ty
+                        </a>
                     </div>
                 </div>
             </div>
@@ -526,5 +529,34 @@
     <script>
         // Khởi tạo Description
         tinyMCEInit("#BusinessField");
+
+        $(document).on("click", ".btn-edit", function () {
+            // Hiển thị modal trước
+            $('#saveModal').modal('show');
+
+            // const key = $(this).closest("div").data("key");
+
+            // $.ajax({
+            //     url: `${getById}/${key}`,
+            //     method: "GET",
+            //     success: function (data) {
+            //         // Hiển thị modal trước
+            //         $('#saveModal').modal('show');
+            
+            //         // Sau đó đợi một chút để đảm bảo modal đã được render
+            //         setTimeout(function() {
+            //             console.log(data);
+            //             mapObjectToControlView(data);
+
+            //             document.getElementById('previewImage').src = `${data.imageData ? `data:image/png;base64,${data.imageData}` : '/images/default-image.png'}`;
+            //         }, 100); // Đợi 100ms
+            //     },
+            //     error: function(error) {
+            //         console.error('Error fetching category data:', error);
+            //     }
+            // });
+        });
     </script>
+
+
 }

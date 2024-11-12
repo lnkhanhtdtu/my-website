@@ -20,6 +20,8 @@ namespace MyWebsite.Application.Configurations
                 .ForMember(dest => dest.CategoryImage, opt => opt.MapFrom(src => src.Category != null ? src.Category.ImageData : null))
                 .ReverseMap();
             CreateMap<Product, ProductViewModel>().ReverseMap();
+
+            CreateMap<CompanyInfo, CompanyViewModel>().ReverseMap();
         }
     }
 }

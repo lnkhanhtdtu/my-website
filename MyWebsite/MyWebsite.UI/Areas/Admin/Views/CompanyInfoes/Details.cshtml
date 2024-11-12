@@ -1,4 +1,4 @@
-﻿@model MyWebsite.Domain.Entities.CompanyInfo
+﻿@model MyWebsite.Application.DTOs.ViewModels.CompanyViewModel
 
 @{
     ViewData["Title"] = "Details";
@@ -21,7 +21,7 @@
               <h4 class="mb-2 mt-lg-6">@Model.Name</h4>
               <ul class="list-inline mb-0 d-flex align-items-center flex-wrap justify-content-sm-start justify-content-center gap-4">
                 <li class="list-inline-item">
-                  <i class="ri-palette-line me-2 ri-24px"></i><span class="fw-medium">@Model.</span>
+                  <i class="ri-palette-line me-2 ri-24px"></i><span class="fw-medium">@Model.BusinessField</span>
                 </li>
                 <li class="list-inline-item">
                   <i class="ri-map-pin-line me-2 ri-24px"></i><span class="fw-medium">@Model.HeadquartersAddress</span>
@@ -31,9 +31,9 @@
                                 </li>
               </ul>
             </div>
-@*             <a href="javascript:void(0)" class="btn btn-primary waves-effect waves-light">
-              <i class="ri-user-follow-line ri-16px me-1_5"></i>Connected
-            </a> *@
+            <button class="btn btn-primary waves-effect waves-light">
+                            <i class="ri-edit-box-line ri-16px me-1_5"></i>Sửa Công ty
+            </button>
           </div>
         </div>
       </div>

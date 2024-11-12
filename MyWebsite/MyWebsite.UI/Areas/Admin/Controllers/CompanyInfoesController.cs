@@ -1,5 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using MyWebsite.Application.DTOs.ViewModels;
 using MyWebsite.Domain.Entities;
 
 namespace MyWebsite.UI.Areas.Admin.Controllers
@@ -7,16 +9,19 @@ namespace MyWebsite.UI.Areas.Admin.Controllers
     public class CompanyInfoesController : BaseController
     {
         private readonly MyWebsiteContext _context;
+        private readonly IMapper _mapper;
 
-        public CompanyInfoesController(MyWebsiteContext context)
+        public CompanyInfoesController(MyWebsiteContext context, IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
 
         // GET: Admin/CompanyInfoes
         public async Task<IActionResult> Index()
         {
-            return View(await _context.CompanyInfo.OrderBy(x => x.Id).LastOrDefaultAsync());
+            var company = await _context.CompanyInfo.OrderBy(x => x.Id).LastOrDefaultAsync();
+            return View(_mapper.Map<CompanyViewModel>(company));
         }
 
         // GET: Admin/CompanyInfoes/Details/5
