@@ -1,4 +1,6 @@
-﻿namespace MyWebsite.Application.DTOs.Categories
+﻿using System.Collections;
+
+namespace MyWebsite.Application.DTOs.Categories
 {
     public class CategorySiteDTO
     {
@@ -10,6 +12,6 @@
 
         public int? ParentId { get; set; }
 
-        public int TotalBooks { get; set; }
+        public int TotalProducts { get; set; }
     }
 }

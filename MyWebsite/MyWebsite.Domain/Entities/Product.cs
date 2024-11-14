@@ -1,3 +1,4 @@
+using System.Collections;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -35,6 +36,7 @@ public class Product : BaseEntity
 
     public virtual Category? Category { get; set; }
 
+    // TODO: Chuyển sang Attribute
     //[Display(Name = "Kích thước")]
     //public string? Size { get; set; }
 
@@ -49,4 +51,13 @@ public class Product : BaseEntity
 
     //[Display(Name = "Ứng dụng")]
     //public string? Application { get; set; }
+
+    //[Display(Name = "Nguồn gốc")]
+    //public string? Origin { get; set; }
+
+    //[Display(Name = "Khối lượng")]
+    //public string? Weight { get; set; }
+
+    //[Display(Name = "Trạng thái")]
+    //public string? Condition { get; set; }
 }

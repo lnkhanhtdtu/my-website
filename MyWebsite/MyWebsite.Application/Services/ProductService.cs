@@ -73,8 +73,10 @@ namespace MyWebsite.Application.Services
         {
             var product = await _unitOfWork.ProductRepository.GetById(id);
             var result = _mapper.Map<ProductViewModel>(product);
+            var categoryProduct = await _unitOfWork.CategoryRepository.GetById(id);
             var imageProducts = await _unitOfWork.ImageRepository.GetImagesByProductIdAsync(id);
             result.Images = imageProducts.ToList();
+            result.Category = categoryProduct;
 
             return result;
         }

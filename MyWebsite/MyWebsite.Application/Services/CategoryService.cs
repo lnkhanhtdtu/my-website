@@ -120,7 +120,7 @@ namespace MyWebsite.Application.Services
                 Id = x.Id,
                 Name = x.Name,
                 ImageData = x.ImageData,
-                TotalBooks = 0
+                TotalProducts = x.Products.Count(x => !x.IsDeleted)
             });
 
             return result;

@@ -19,6 +19,7 @@ namespace MyWebsite.Domain.Entities
         public virtual Category? ParentCategory { get; set; }
 
         public virtual ICollection<Category>? ChildCategories { get; set; }
-        // public ICollection<Product>? Products { get; set; }
+
+        public ICollection<Product>? Products { get; set; }
     }
 }

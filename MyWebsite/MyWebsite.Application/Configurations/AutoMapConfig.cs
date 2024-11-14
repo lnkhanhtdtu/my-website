@@ -22,6 +22,8 @@ namespace MyWebsite.Application.Configurations
             CreateMap<Product, ProductViewModel>().ReverseMap();
 
             CreateMap<CompanyInfo, CompanyViewModel>().ReverseMap();
+
+            CreateMap<Quotation, QuotationViewModel>().ReverseMap();
         }
     }
 }

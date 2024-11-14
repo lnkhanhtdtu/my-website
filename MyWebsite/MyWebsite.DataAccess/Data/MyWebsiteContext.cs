@@ -25,6 +25,8 @@ public class MyWebsiteContext : IdentityDbContext<ApplicationUser, IdentityRole,
 
     public DbSet<ProductImage> ProductImages { get; set; } = default!;
 
+    public DbSet<Quotation> Quotations { get; set; } = default!;
+
     protected override void OnModelCreating(ModelBuilder builder)
     {
         base.OnModelCreating(builder);

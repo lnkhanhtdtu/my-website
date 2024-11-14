@@ -39,5 +39,7 @@ namespace MyWebsite.Application.DTOs.ViewModels
 
         [Display(Name = "Giá cũ")]
         public double? OldPrice { get; set; }
+        
+        public virtual Category? Category { get; set; }
     }
 }
