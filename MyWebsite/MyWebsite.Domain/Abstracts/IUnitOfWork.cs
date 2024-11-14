@@ -17,6 +17,8 @@ namespace MyWebsite.Domain.Abstracts
 
         IImageRepository ImageRepository { get; }
 
+        IQuotationRepository QuotationRepository { get; }
+
         // IOrderRepository OrderRepository { get; }
         // ICartRepository CartRepository { get; }
         // IUserAddressRepository UserAddressRepository { get; }

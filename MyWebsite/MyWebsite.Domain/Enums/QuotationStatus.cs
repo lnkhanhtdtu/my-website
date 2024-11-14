@@ -2,9 +2,9 @@
 {
     public enum QuotationStatus
     {
-        Pending,
-        Approved,
-        Rejected,
-        Completed
+        Pending, // Đang chờ
+        Approved, // Đã duyệt
+        Rejected, // Từ chối
+        Completed // Hoàn thành
     }
 }

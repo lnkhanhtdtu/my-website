@@ -11,6 +11,7 @@ namespace MyWebsite.DataAccess.Repositories
         ICategoryRepository _categoryRepository;
         IProductRepository _productRepository;
         IImageRepository _imageRepository;
+        private IQuotationRepository _quotationRepository;
 
         IDbContextTransaction _dbContextTransaction;
         private bool _disposedValue;
@@ -25,6 +26,7 @@ namespace MyWebsite.DataAccess.Repositories
         public ICategoryRepository CategoryRepository => _categoryRepository ??= new CategoryRepository(_context);
         public IProductRepository ProductRepository => _productRepository ??= new ProductRepository(_context);
         public IImageRepository ImageRepository => _imageRepository ??= new ImageRepository(_context);
+        public IQuotationRepository QuotationRepository => _quotationRepository ??= new QuotationRepository(_context);
 
         public async Task BeginTransaction()
         {
