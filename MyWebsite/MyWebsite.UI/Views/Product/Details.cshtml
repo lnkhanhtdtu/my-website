@@ -11,7 +11,7 @@
             <div class="row d-flex justify-content-center text-center">
                 <div class="col-lg-8">
                     <h1>@title</h1>
-                    <p class="mb-0">Odio et unde deleniti. Deserunt numquam exercitationem. Officiis quo odio sint voluptas consequatur ut a odio voluptatem. Sit dolorum debitis veritatis natus dolores. Quasi ratione sint. Sit quaerat ipsum dolorem.</p>
+                    @* <p class="mb-0">Odio et unde deleniti. Deserunt numquam exercitationem. Officiis quo odio sint voluptas consequatur ut a odio voluptatem. Sit dolorum debitis veritatis natus dolores. Quasi ratione sint. Sit quaerat ipsum dolorem.</p> *@
                 </div>
             </div>
         </div>
@@ -53,6 +53,14 @@
 
                     <div class="swiper-wrapper align-items-center">
 
+                        @{
+                            var imgSrcMain = MyWebsite.UI.Utilities.ImageHelper.GetImageSource(Model.ImageData, "client/assets/img/portfolio/app-1.jpg");
+                        }
+
+                        <div class="swiper-slide">
+                            <img src="@imgSrcMain" alt="">
+                        </div>
+
                         @foreach(var item in Model.Images)
                         {
                             try
@@ -93,6 +101,7 @@
             <div class="col-lg-6">
                 <div class="portfolio-info" data-aos="fade-up" data-aos-delay="200">
                     <h3>Thông tin sản phẩm</h3>
+                    <p class="mb-0">@Model.Summary</p>
                     <ul>
                         <li><strong>Loại sản phẩm</strong>: @Model.Category?.Name</li>
                         

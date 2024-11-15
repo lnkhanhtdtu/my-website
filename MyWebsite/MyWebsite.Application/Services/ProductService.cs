@@ -102,6 +102,7 @@ namespace MyWebsite.Application.Services
                 if (existingProduct != null)
                 {
                     existingProduct.Name = productEntity.Name;
+                    existingProduct.Summary = productEntity.Summary;
                     existingProduct.Description = productEntity.Description;
                     existingProduct.CategoryId = productEntity.CategoryId;
                     existingProduct.ImageData = existingProduct.ImageData;
@@ -138,12 +139,16 @@ namespace MyWebsite.Application.Services
             return new List<ProductViewModel>(); // Hàm này chưa hoàn thiện
         }
 
-        //public async Task<IEnumerable<ProductCartDTO>> GetProductsByListId(int[] ids)
-        //{
-        //    var products = await _unitOfWork.ProductRepository.GetByListId(ids);
-        //    return _mapper.Map<IEnumerable<ProductCartDTO>>(products);
-        //}
+        public async Task<IEnumerable<Product>> GetAllProducts()
+        {
+            return await _unitOfWork.ProductRepository.GetAllProductWithCategory(x => !x.IsDeleted);
+        }
 
+        public async Task<IEnumerable<Product>> GetAllFeaturedProducts()
+        {
+            return await _unitOfWork.ProductRepository.GetAllProductWithCategory(x => !x.IsDeleted && x.IsFeatured == true);
+        }
+        
         #endregion
     }
 }

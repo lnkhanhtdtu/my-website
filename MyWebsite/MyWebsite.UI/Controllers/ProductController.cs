@@ -25,9 +25,9 @@ namespace MyWebsite.UI.Controllers
         public async Task<IActionResult> Index()
         {
             ViewBag.Categories = _categoryService.GetCategoriesListForSiteAsync();
+            ViewBag.FeaturedProducts = await _productService.GetAllFeaturedProducts();
 
-            // TODO: Chuyển vào Service
-            var products = await _context.Products.Include(x => x.Category).Where(x => !x.IsDeleted).ToListAsync();
+            var products = await _productService.GetAllProducts();
             return View(products);
         }
 

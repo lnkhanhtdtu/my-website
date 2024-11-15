@@ -1,4 +1,3 @@
-using System.Collections;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -11,6 +10,9 @@ public class Product : BaseEntity
 {
     [Display(Name = "Tên sản phẩm")]
     public string Name { get; set; }
+
+    [Display(Name = "Mô tả tóm tắt")]
+    public string Summary { get; set; }
 
     [Display(Name = "Mô tả")]
     public string Description { get; set; }

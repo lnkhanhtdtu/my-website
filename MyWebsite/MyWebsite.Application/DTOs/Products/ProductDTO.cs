@@ -11,6 +11,9 @@ namespace MyWebsite.Application.DTOs.Products
         [Display(Name = "Tên sản phẩm")]
         public string Name { get; set; }
 
+        [Display(Name = "Mô tả tóm tắt")]
+        public string Summary { get; set; }
+
         [Display(Name = "Mô tả")]
         public string Description { get; set; }
 

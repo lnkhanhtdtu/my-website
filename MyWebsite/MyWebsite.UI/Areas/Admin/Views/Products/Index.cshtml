@@ -33,12 +33,8 @@
                     <th>
                         @Html.DisplayNameFor(model => model.CategoryId)
                     </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Price)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.OldPrice)
-                    </th>
+                    @* <th>@Html.DisplayNameFor(model => model.Price)</th>
+                    <th>@Html.DisplayNameFor(model => model.OldPrice)</th> *@
                     <th>
                         @Html.DisplayNameFor(model => model.IsFeatured)
                     </th>
@@ -50,8 +46,8 @@
                     <td>No Data</td>
                     <td>No Data</td>
                     <td>No Data</td>
-                    <td>No Data</td>
-                    <td>No Data</td>
+                    @* <td>No Data</td>
+                    <td>No Data</td> *@
                     <td>No Data</td>
                     <td>No Data</td>
                 </tr>
@@ -78,10 +74,11 @@
     <script>
         const elementName = "#myTable";
         const url = '@Url.Action("GetProductPagination", "Products")';
+        const viewUrl = '@Url.Action("Details", "Product", new {area = ""})';
         const getById = '@Url.Action("GetById", "Products", new { area = "Admin" })';
         const editUrl = '@Url.Action("SaveData", "Products", new { area = "Admin" })';
         const deleteUrl = '@Url.Action("SoftDelete", "Products", new { area = "Admin" })';
-
+            
         const columns = [
             // STT
             {
@@ -93,7 +90,7 @@
                 render: data => moment(data).format("DD/MM/YYYY")
             },
             {
-                data: "name", name: "name", autoWidth: true,
+                data: "name", name: "name", width: 100,
                 render: function (data, type, row) {
                     return `<td>
                                                                 <div class="d-flex align-items-center">
@@ -102,7 +99,8 @@
                                                                     </div>
                                                                     <div>
                                                                         <h6 class="mb-0">${data}</h6>
-                                                                        <small>${row.price ? '<div>' + row.price.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' }) + '</div>' : ''}</small>
+                                                                                        <!--<small>${row.price ? '<div>' + row.price.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' }) + '</div>' : ''}</small>-->
+<small class="text-truncate mb-0 d-none d-sm-block">${row.summary}</small>
                                                                     </div>
 
                                                                 </div>
@@ -119,24 +117,23 @@
                                             alt="Product-8" class="rounded-2"></div>
                                 </div>
                                 <div class="d-flex flex-column justify-content-center">
-                                    <span class="text-heading fw-medium text-wrap">${data}</span>
-                                        <!--<small class="text-truncate mb-0 d-none d-sm-block">Choose from wide range of travel accessories from popular brands </small> -->
+                                    <span class="text-heading fw-medium text-wrap">${data}</span>                                    
                                 </div>
                             </div>`;
                 }
             },
-            {
-                data: "price", name: "price", autoWidth: true,
-                render: function (data, type, row) {
-                    return data ? '<div class="text-end">' + data.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' }) + '</div>' : '';
-                }
-            },
-            {
-                data: "oldPrice", name: "oldPrice", autoWidth: true,
-                render: function (data, type, row) {
-                    return data ? '<div class="text-end">' + data.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' }) + '</div>' : '';
-                }
-            },
+            // {
+            //     data: "price", name: "price", autoWidth: true,
+            //     render: function (data, type, row) {
+            //         return data ? '<div class="text-end">' + data.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' }) + '</div>' : '';
+            //     }
+            // },
+            // {
+            //     data: "oldPrice", name: "oldPrice", autoWidth: true,
+            //     render: function (data, type, row) {
+            //         return data ? '<div class="text-end">' + data.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' }) + '</div>' : '';
+            //     }
+            // },
             {
                 data: "isFeatured", name: "isFeatured", width: "30",
                 render: function (data, type, row) {
@@ -152,6 +149,9 @@
                                     <i class="ri-more-2-line"></i>
                                 </button>
                                 <div class="dropdown-menu" data-key="${key}">
+                                    <a class="dropdown-item btn-view" href="${viewUrl}/${key}">
+                                        <i class="ri-eye-line me-1 text-info"></i> Xem
+                                    </a>
                                     <a class="dropdown-item btn-edit" href="#" >
                                         <i class="ri-pencil-line me-1 text-warning"></i> Sửa
                                     </a>

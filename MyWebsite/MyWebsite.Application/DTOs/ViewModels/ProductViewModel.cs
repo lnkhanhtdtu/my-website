@@ -7,9 +7,6 @@ namespace MyWebsite.Application.DTOs.ViewModels
 {
     public class ProductViewModel
     {
-        public List<IFormFile>? ProductImages { get; set; }
-        public List<string>? OldImages { get; set; }
-
         public int Id { get; set; }
 
         [Display(Name = "Ngày tạo")]
@@ -17,6 +14,9 @@ namespace MyWebsite.Application.DTOs.ViewModels
 
         [Display(Name = "Tên sản phẩm")]
         public string Name { get; set; }
+
+        [Display(Name = "Mô tả tóm tắt")]
+        public string Summary { get; set; }
 
         [Display(Name = "Mô tả")]
         public string Description { get; set; }

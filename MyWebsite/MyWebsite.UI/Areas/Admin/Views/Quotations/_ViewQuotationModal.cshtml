@@ -1,0 +1,48 @@
+﻿@using Microsoft.AspNetCore.Mvc.TagHelpers
+
+<!-- Vertically Centered Modal -->
+<div class="col-lg-4 col-md-6">
+    <div class="mt-4">
+        <!-- Modal -->
+        <div class="modal modal-lg fade" id="viewModal" tabindex="-1" aria-hidden="true" data-backdrop="static">
+            <form asp-action="SaveData" asp-controller="Categories" asp-area="Admin" method="post" id="formCategory" enctype="multipart/form-data" class="needs-validation" novalidate>
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="saveModalTitle">Báo giá</h5>
+                            <button type="button"
+                                    class="btn-close"
+                                    data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+
+                            <div class="row">
+                                <div> <strong>Tên khách hàng</strong>: <span id="CustomerName"></span></div>
+                                <div><strong>Số điện thoại</strong>: <span id="CustomerEmail"></span></div>
+                                <div><strong>Email</strong>: <span id="CustomerPhone"></span></div>
+                                <div><strong>Nội dung</strong>: <span id="Content"></span></div>
+                                <div><strong>Trạng thái</strong>: <span id="Status"></span></div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <a class="btn btn-change-status" href="#" data-status="1">
+                                <i class="ri-check-line me-1 text-success"></i> Chấp nhận
+                            </a>
+                            <a class="btn btn-change-status" href="#" data-status="2">
+                                <i class="ri-close-line me-1 text-danger"></i> Từ chối
+                            </a>
+                            <a class="btn btn-change-status" href="#" data-status="3">
+                                <i class="ri-checkbox-circle-line me-1 text-primary"></i> Hoàn thành
+                            </a>
+                            @* <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal"> *@
+                            @*     Đóng *@
+                            @* </button> *@
+                            @* <button type="submit" class="btn btn-primary">Lưu</button> *@
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

@@ -18,7 +18,7 @@
                         <div class="modal-body">
                             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                             <input type="hidden" asp-for="Id" />
-                            <input type="hidden" asp-for="ImageData"/>
+                            <input type="hidden" asp-for="ImageData" />
 
                             <div class="row">
                                 <div class="d-flex align-items-start align-items-sm-center gap-6">
@@ -40,20 +40,29 @@
                             </div>
 
                             <div class="row">
-                                <input type="hidden" name="ProductImages" id="ProductImages" />
-                                <div class="form-group">
-                                    <label for="productImages">Hình ảnh sản phẩm</label>
-                                    <div class="input-images" id="productImages"></div>
+                                <div class="col mb-6 mt-2">
+                                    <input type="hidden" name="ProductImages" id="ProductImages" />
+                                    <div class="form-group">
+                                        <label for="productImages">Hình ảnh sản phẩm</label>
+                                        <div class="input-images" id="productImages"></div>
+                                    </div>
                                 </div>
                             </div>
 
                             <div class="row">
                                 <div class="col mb-6 mt-2">
                                     <div class="form-floating form-floating-outline">
-                                        <input type="text" asp-for="Name" class="form-control" placeholder="Nhập tên sản phẩm" required/>
+                                        <input type="text" asp-for="Name" class="form-control" placeholder="Nhập tên sản phẩm" required />
                                         <label asp-for="Name"></label>
                                         <div class="invalid-feedback">Vui lòng nhập tên sản phẩm!</div>
                                     </div>
+                                </div>
+
+                                <div class="col mb-6 mt-2">
+                                    <label class="form-check m-0">
+                                        <input type="checkbox" class="form-check-input" asp-for="IsFeatured">
+                                        <span class="form-check-label">@Html.DisplayNameFor(model => model.IsFeatured)</span>
+                                    </label>
                                 </div>
                             </div>
 
@@ -69,36 +78,35 @@
 
                             <div class="row">
                                 <div class="col mb-6 mt-2">
+                                    <label asp-for="Summary" class="form-label"></label>
+                                    <input type="text" asp-for="Summary" class="form-control" required />
+                                    <div class="invalid-feedback">Vui lòng nhập mô tả tóm tắt!</div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col mb-6 mt-2">
                                     <label asp-for="Description" class="form-label"></label>
-                                    <input type="text" asp-for="Description" class="form-control" required/>
+                                    <input type="text" asp-for="Description" class="form-control" required />
                                     <div class="invalid-feedback">Vui lòng nhập mô tả!</div>
                                 </div>
                             </div>
 
-                            <div class="row">
-                                <div class="col mb-6 mt-2">
-                                    <div class="form-floating form-floating-outline">
-                                        <input type="number" asp-for="Price" class="form-control" placeholder="Nhập giá sản phẩm" />
-                                        <label asp-for="Price"></label>
-                                    </div>
-                                </div>
-
-                                <div class="col mb-6 mt-2">
-                                    <div class="form-floating form-floating-outline">
-                                        <input type="number" asp-for="OldPrice" class="form-control" placeholder="Nhập giá sản phẩm" />
-                                        <label asp-for="OldPrice"></label>
-                                    </div>
-                                </div>
+                            @* <div class="row">
+                            <div class="col mb-6 mt-2">
+                            <div class="form-floating form-floating-outline">
+                            <input type="number" asp-for="Price" class="form-control" placeholder="Nhập giá sản phẩm" />
+                            <label asp-for="Price"></label>
+                            </div>
                             </div>
 
-                            <div class="row">
-                                <div class="col mb-6 mt-2">
-                                    <label class="form-check m-0">
-                                        <input type="checkbox" class="form-check-input" asp-for="IsFeatured">
-                                        <span class="form-check-label">@Html.DisplayNameFor(model => model.IsFeatured)</span>
-                                    </label>
-                                </div>
+                            <div class="col mb-6 mt-2">
+                            <div class="form-floating form-floating-outline">
+                            <input type="number" asp-for="OldPrice" class="form-control" placeholder="Nhập giá sản phẩm" />
+                            <label asp-for="OldPrice"></label>
                             </div>
+                            </div>
+                            </div> *@
 
                         </div>
                         <div class="modal-footer">
