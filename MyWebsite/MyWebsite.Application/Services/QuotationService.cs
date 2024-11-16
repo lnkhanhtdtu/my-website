@@ -1,8 +1,6 @@
 ﻿using AutoMapper;
-using Microsoft.AspNetCore.Http;
 using MyWebsite.Application.Abstracts;
 using MyWebsite.Application.DTOs;
-using MyWebsite.Application.DTOs.Products;
 using MyWebsite.Application.DTOs.ViewModels;
 using MyWebsite.Domain.Abstracts;
 using MyWebsite.Domain.Entities;
@@ -81,6 +79,13 @@ namespace MyWebsite.Application.Services
 
             await _unitOfWork.QuotationRepository.ChangeStatus(quotation, status);
 
+            await _unitOfWork.Commit();
+        }
+
+        public async Task SaveData(QuotationViewModel quotationViewModel)
+        {
+            var quotation = _mapper.Map<Quotation>(quotationViewModel);
+            await _unitOfWork.QuotationRepository.SaveData(quotation);
             await _unitOfWork.Commit();
         }
 

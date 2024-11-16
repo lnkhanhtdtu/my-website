@@ -1,8 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using MyWebsite.Application.DTOs.ViewModels;
-using MyWebsite.Application.DTOs;
 using MyWebsite.Application.Abstracts;
-using MyWebsite.Application.Services;
+using MyWebsite.Application.DTOs;
+using MyWebsite.Application.DTOs.ViewModels;
 using MyWebsite.Domain.Enums;
 
 namespace MyWebsite.UI.Areas.Admin.Controllers

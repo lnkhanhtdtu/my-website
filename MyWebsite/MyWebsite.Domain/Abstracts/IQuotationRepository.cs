@@ -15,5 +15,7 @@ namespace MyWebsite.Domain.Abstracts
         Task SoftDelete(Quotation quotation);
 
         Task ChangeStatus(Quotation quotation, QuotationStatus status);
+
+        Task SaveData(Quotation quotation);
     }
 }

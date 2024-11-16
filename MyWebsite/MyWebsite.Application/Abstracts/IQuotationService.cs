@@ -1,5 +1,4 @@
 ﻿using MyWebsite.Application.DTOs;
-using MyWebsite.Application.DTOs.Products;
 using MyWebsite.Application.DTOs.ViewModels;
 using MyWebsite.Domain.Enums;
 
@@ -11,5 +10,6 @@ namespace MyWebsite.Application.Abstracts
         Task<QuotationViewModel> GetById(int id);
         Task SoftDelete(int id);
         Task ChangeStatus(int id, QuotationStatus status);
+        Task SaveData(QuotationViewModel quotationViewModel);
     }
 }

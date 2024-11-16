@@ -8,6 +8,7 @@ using MyWebsite.Application.Services;
 using MyWebsite.DataAccess.Repositories;
 using MyWebsite.Domain.Abstracts;
 using MyWebsite.Domain.Entities;
+using MyWebsite.Infrastructure.Services;
 
 namespace MyWebsite.Infrastructure.Configuration
 {
@@ -47,6 +48,8 @@ namespace MyWebsite.Infrastructure.Configuration
 
             services.AddTransient<PasswordHasher<ApplicationUser>>();
             services.AddTransient<IAuthenticationService, AuthenticationService>();
+
+            services.AddTransient<IEmailService, EmailService>();
         }
 
         public static void AddAutoMapper(this IServiceCollection services)

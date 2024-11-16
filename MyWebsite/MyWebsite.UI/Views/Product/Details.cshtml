@@ -105,11 +105,11 @@
                     <ul>
                         <li><strong>Loại sản phẩm</strong>: @Model.Category?.Name</li>
                         
-                        <li><strong>Nguồn gốc</strong>: @Model.Category?.Name</li>
+@*                         <li><strong>Nguồn gốc</strong>: @Model.Category?.Name</li>
                         <li><strong>Khối lượng</strong>: @Model.Category?.Name</li>
                         <li><strong>Màu</strong>: @Model.Category?.Name</li>
                         <li><strong>Chất liệu</strong>: @Model.Category?.Name</li>
-                        <li><strong>Kích thước</strong>: @Model.Category?.Name</li>
+                        <li><strong>Kích thước</strong>: @Model.Category?.Name</li> *@
                         @* Nguồn gốc	Việt Nam *@
                         @* Khối lượng	900g *@
                         @* Trạng thái	Mới *@
@@ -139,14 +139,13 @@
                             </div>
 
                             <div class="col-md-12">
-                                <textarea class="form-control" name="content" rows="2" placeholder="Nội dung"></textarea>
+                                <textarea class="form-control" name="content" rows="2" placeholder="Nội dung" required></textarea>
                             </div>
 
                             <div class="col-md-12 text-center">
                                 <div id="message"></div>
                                 <button type="submit">Gửi</button>
                             </div>
-
                         </div>
                     </form>
                 </div>

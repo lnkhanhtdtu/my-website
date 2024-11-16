@@ -24,7 +24,7 @@ namespace MyWebsite.Application.DTOs.ViewModels
         public string? Content { get; set; }
 
         [Display(Name = "Trạng thái")]
-        public QuotationStatus? Status { get; set; }
+        public QuotationStatus? Status { get; set; } = QuotationStatus.Pending;
 
         [Display(Name = "Ngày phản hồi")]
         public DateTime? ResponseDate { get; set; }

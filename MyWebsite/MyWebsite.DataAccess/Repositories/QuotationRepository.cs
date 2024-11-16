@@ -26,16 +26,16 @@ namespace MyWebsite.DataAccess.Repositories
             return await GetSingleAsync(x => x.Id == id);
         }
 
-        public async Task SaveData(Quotation category)
+        public async Task SaveData(Quotation quotation)
         {
-            if (category.Id == 0)
+            if (quotation.Id == 0)
             {
-                await CreateAsync(category);
+                await CreateAsync(quotation);
             }
             else
             {
-                category.UpdatedAt = DateTime.Now;
-                Update(category);
+                quotation.UpdatedAt = DateTime.Now;
+                Update(quotation);
             }
         }
 

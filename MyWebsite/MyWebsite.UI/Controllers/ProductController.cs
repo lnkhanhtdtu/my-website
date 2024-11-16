@@ -1,26 +1,25 @@
-﻿using AutoMapper;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Mvc;
 using MyWebsite.Application.Abstracts;
 using MyWebsite.Application.DTOs.ViewModels;
-using MyWebsite.Domain.Entities;
+using MyWebsite.Domain.Settings;
+using MyWebsite.Infrastructure.Services;
 
 namespace MyWebsite.UI.Controllers
 {
     [Route("san-pham")]
     public class ProductController : Controller
     {
-        private readonly MyWebsiteContext _context;
-        private readonly IMapper _mapper;
         private readonly IProductService _productService;
         private readonly ICategoryService _categoryService;
+        private readonly IQuotationService _quotationService;
+        private readonly IEmailService _emailService;
 
-        public ProductController(IProductService productService, ICategoryService categoryService, MyWebsiteContext context, IMapper mapper)
+        public ProductController(IProductService productService, ICategoryService categoryService, IQuotationService quotationService, IEmailService emailService)
         {
             _productService = productService;
             _categoryService = categoryService;
-            _context = context;
-            _mapper = mapper;
+            _quotationService = quotationService;
+            _emailService = emailService;
         }
 
         [HttpGet("")]
@@ -44,9 +43,27 @@ namespace MyWebsite.UI.Controllers
         [HttpPost]
         public async Task<IActionResult> SaveQuotation(QuotationViewModel quotationViewModel)
         {
-            var quotation = _mapper.Map<Quotation>(quotationViewModel);
-            _context.Quotations.Add(quotation);
-            await _context.SaveChangesAsync();
+            await _quotationService.SaveData(quotationViewModel);
+
+            // TODO: Cần thay đổi
+            var subject = $"Yêu cầu tư vấn báo giá mới từ {quotationViewModel.CustomerName}";
+            var content = $@"
+                <h2>Có yêu cầu tư vấn báo giá mới</h2>
+                <p><strong>Tên khách hàng:</strong> {quotationViewModel.CustomerName}</p>
+                <p><strong>Email:</strong> {quotationViewModel.CustomerEmail}</p>
+                <p><strong>Số điện thoại:</strong> {quotationViewModel.CustomerPhone}</p>
+                <p><strong>Nội dung:</strong> {quotationViewModel.Content}</p>
+            ";
+
+            var emailInfo = new EmailSetting()
+            {
+                Name = "Hỗ trợ",
+                To = "lnkhanhtdtu@gmail.com",
+                Subject = subject,
+                Content = content
+            };
+
+            await _emailService.Send(emailInfo);
 
             return Json(new { Message = "Ok" });
         }

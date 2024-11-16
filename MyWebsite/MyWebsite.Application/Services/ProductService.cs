@@ -13,8 +13,7 @@ namespace MyWebsite.Application.Services
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
-
-
+        
         public ProductService(IUnitOfWork unitOfWork, IMapper mapper)
         {
             _unitOfWork = unitOfWork;
@@ -134,8 +133,6 @@ namespace MyWebsite.Application.Services
 
         public async Task<IEnumerable<ProductViewModel>> GetProductsForSiteAsync(string search = "", int pageNumber = 1, int pageSize = 9, int category = 0, int priceMin = -1, int priceMax = -1)
         {
-
-
             return new List<ProductViewModel>(); // Hàm này chưa hoàn thiện
         }
 
@@ -148,7 +145,7 @@ namespace MyWebsite.Application.Services
         {
             return await _unitOfWork.ProductRepository.GetAllProductWithCategory(x => !x.IsDeleted && x.IsFeatured == true);
         }
-        
+
         #endregion
     }
 }
