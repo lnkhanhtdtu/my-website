@@ -7,6 +7,7 @@ using MyWebsite.Domain.Entities;
 
 namespace MyWebsite.UI.Controllers
 {
+    [Route("san-pham")]
     public class ProductController : Controller
     {
         private readonly MyWebsiteContext _context;
@@ -22,15 +23,18 @@ namespace MyWebsite.UI.Controllers
             _mapper = mapper;
         }
 
+        [HttpGet("")]
         public async Task<IActionResult> Index()
         {
             ViewBag.Categories = _categoryService.GetCategoriesListForSiteAsync();
             ViewBag.FeaturedProducts = await _productService.GetAllFeaturedProducts();
 
             var products = await _productService.GetAllProducts();
+
             return View(products);
         }
 
+        [HttpGet("chi-tiet/{id}")]
         public async Task<IActionResult> Details(int id)
         {
             var product = await _productService.GetById(id);
@@ -48,3 +52,4 @@ namespace MyWebsite.UI.Controllers
         }
     }
 }
+

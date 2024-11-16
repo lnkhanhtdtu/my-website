@@ -1,4 +1,11 @@
-﻿<header id="header" class="header d-flex align-items-center sticky-top">
+﻿@{
+    bool IsActive(string controller)
+    {
+        return ViewContext.RouteData.Values["Controller"].ToString() == controller;
+    }
+}
+
+<header id="header" class="header d-flex align-items-center sticky-top">
     <div class="container-fluid container-xl position-relative d-flex align-items-center">
 
         <a asp-controller="CompanyInfoes" asp-action="Index" class="logo d-flex align-items-center me-auto">
@@ -34,10 +41,10 @@
                     </ul>
                 </li>
                 <li><a href="#contact">Liên hệ</a></li> *@
-                <li><a asp-controller="Home" asp-action="Index" class="active">Trang chủ</a></li>
-                <li><a asp-controller="About" asp-action="Index">Giới thiệu</a></li>
-                <li><a asp-controller="Product" asp-action="Index">Sản phẩm</a></li>
-                <li><a asp-controller="Contact" asp-action="Index">Liên hệ</a></li>
+                <li><a asp-controller="Home" asp-action="Index" class="@(IsActive("Home") ? "active" : "")">Trang chủ</a></li>
+                <li><a asp-controller="About" asp-action="Index" class="@(IsActive("About") ? "active" : "")">Giới thiệu</a></li>
+                <li><a asp-controller="Product" asp-action="Index" class="@(IsActive("Product") ? "active" : "")">Sản phẩm</a></li>
+                <li><a asp-controller="Contact" asp-action="Index" class="@(IsActive("Contact") ? "active" : "")">Liên hệ</a></li>
             </ul>
             <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
         </nav>
