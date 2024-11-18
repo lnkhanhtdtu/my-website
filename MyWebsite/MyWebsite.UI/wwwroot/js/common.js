@@ -5,13 +5,22 @@
  * @param {*} text
  * @param {*} timeOut
  */
+//function showToaster(type, text, timeOut = 5000) {
+//    $.toast({
+//        heading: type,
+//        text: text,
+//        position: "top-right",
+//        icon: type === "Infomation" ? "info" : type.toLowerCase(),
+//        hideAfter: timeOut,
+//    });
+//}
+
 function showToaster(type, text, timeOut = 5000) {
     $.toast({
-        heading: type,
-        text: text,
-        position: "top-right",
-        icon: type === "Infomation" ? "info" : type.toLowerCase(),
-        hideAfter: timeOut,
+        title: type + "!",
+        message: text,
+        type: type === "Infomation" ? "info" : type.toLowerCase(),
+        duration: timeOut
     });
 }
 

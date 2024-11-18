@@ -57,6 +57,13 @@ namespace MyWebsite.Application.Services
             }
         }
 
+        public async Task<IEnumerable<BannerViewModel>> GetAll()
+        {
+            var banners = await _unitOfWork.BannerRepository.GetAllBanner(entity => !entity.IsDeleted);
+            var result = _mapper.Map<IEnumerable<BannerViewModel>>(banners).OrderBy(x => x.InOrder).ToList();
+            return result;
+        }
+
         public async Task<BannerViewModel> GetById(int id)
         {
             var banner = await _unitOfWork.BannerRepository.GetById(id);

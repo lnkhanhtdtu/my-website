@@ -25,7 +25,11 @@ namespace MyWebsite.UI.Areas.Admin.Controllers
         public async Task<IActionResult> Index()
         {
             var company = await _context.CompanyInfo.OrderBy(x => x.Id).LastOrDefaultAsync();
-            return View(_mapper.Map<CompanyViewModel>(company));
+            var companyViewModel = company != null
+                ? _mapper.Map<CompanyViewModel>(company)
+                : _mapper.Map<CompanyViewModel>(new CompanyViewModel());
+
+            return View(companyViewModel);
         }
 
         public async Task<IActionResult> GetById(int id)

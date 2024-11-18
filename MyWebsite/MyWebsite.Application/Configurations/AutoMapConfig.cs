@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using MyWebsite.Application.DTOs;
+using MyWebsite.Application.DTOs.Banners;
 using MyWebsite.Application.DTOs.Categories;
 using MyWebsite.Application.DTOs.Products;
 using MyWebsite.Application.DTOs.ViewModels;
@@ -26,6 +27,9 @@ namespace MyWebsite.Application.Configurations
 
             CreateMap<Quotation, QuotationDTO>().ReverseMap();
             CreateMap<Quotation, QuotationViewModel>().ReverseMap();
+
+            CreateMap<Banner, BannerDTO>().ReverseMap();
+            CreateMap<Banner, BannerViewModel>().ReverseMap();
         }
     }
 }

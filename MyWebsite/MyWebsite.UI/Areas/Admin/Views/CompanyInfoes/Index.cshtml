@@ -590,9 +590,9 @@
 
                     if (response.status !== 'Error') {
                         $('#saveModal').modal('hide');
-                        showToaster("Success", "Cập nhật thành công");
+                        showToaster("success", "Cập nhật thành công");
                     } else {
-                        showToaster("Error", "Cập nhật thất bại");
+                        showToaster("error", "Cập nhật thất bại");
                     }
                 },
                 error: function (response) {

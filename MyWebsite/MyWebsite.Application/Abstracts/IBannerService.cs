@@ -9,6 +9,7 @@ namespace MyWebsite.Application.Abstracts
     public interface IBannerService
     {
         Task<ResponseDatatable<BannerDTO>> GetBannerPagination(RequestDataTable request);
+        Task<IEnumerable<BannerViewModel>> GetAll();
         Task<BannerViewModel> GetById(int id);
         Task SaveData(BannerViewModel banner, IFormFile? postFile);
         Task SoftDelete(int id);

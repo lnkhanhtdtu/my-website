@@ -5,7 +5,7 @@
 }
 
 <!-- Modal -->
-@* @await Html.PartialAsync("_SaveModal", Model) *@
+@await Html.PartialAsync("_SaveModal", Model)
 
 <!-- Banners Table -->
 <div class="card">
@@ -23,13 +23,7 @@
                 <tr>
                     <th>#</th>
                     <th>
-                        @Html.DisplayNameFor(model => model.ImageData)
-                    </th>
-                    <th>
                         @Html.DisplayNameFor(model => model.Title)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Description)
                     </th>
                     <th>
                         @Html.DisplayNameFor(model => model.InOrder)
@@ -43,8 +37,6 @@
             <tbody class="table-border-bottom-0">
                 <tr>
                     <td>0</td>
-                    <td>No data</td>
-                    <td>No data</td>
                     <td>No data</td>
                     <td>No data</td>
                     <td>No data</td>
@@ -89,32 +81,23 @@
                 data: null, name: "stt", autoWidth: true,
                 render: function (data, type, row, meta) { return meta.row + 1; }
             },
-            // {
-            //     data: "name", name: "name", autoWidth: true,
-            //     render: function (data, type, row) {
-            //         return `<td>
-            //                             <div class="d-flex align-items-center">
-            //                                 <div class="avatar-wrapper me-3 rounded-2 bg-label-secondary user-name">
-            //                                     <div class="avatar"><img
-            //                                             src="${row.imageData ? `data:image/png;base64,${row.imageData}` : '/images/default-image.png'}"
-            //                                             alt="Product-8" class="rounded-2"></div>
-            //                                 </div>
-            //                                 <div class="d-flex flex-column justify-content-center">
-            //                                     <span class="text-heading fw-medium text-wrap">${data}</span>
-            //                                         <!--<small class="text-truncate mb-0 d-none d-sm-block">Choose from wide range of travel accessories from popular brands </small> -->
-            //                                 </div>
-            //                             </div>
-            //                         </td>`;
-            //     }
-            // },
             {
-                data: "imageData", name: "imageData", autoWidth: true
-            },
-            {
-                data: "title", name: "title", autoWidth: true
-            },
-            {
-                data: "description", name: "description", autoWidth: true
+                data: "title", name: "title", width: "200px",
+                render: function (data, type, row) {
+                    return `<td>
+                                        <div class="d-flex align-items-center">
+                                            <div class="avatar-wrapper me-3 rounded-2 bg-label-secondary user-name">
+                                                <div class="avatar" style='width: 10rem !important; height: auto !important;'><img
+                                                        src="${row.imageData ? `data:image/png;base64,${row.imageData}` : '/images/default-image.png'}"
+                                                        alt="Product-8" class="rounded-2"></div>
+                                            </div>
+                                            <div class="d-flex flex-column justify-content-center">
+                                                <span class="text-heading fw-medium text-wrap">${data}</span>
+                                                        <small class="text-truncate mb-0 d-none d-sm-block">${row.description}</small>
+                                            </div>
+                                        </div>
+                                    </td>`;
+                }
             },
             {
                 data: "inOrder", name: "inOrder", autoWidth: true

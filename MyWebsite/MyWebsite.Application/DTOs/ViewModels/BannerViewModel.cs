@@ -14,7 +14,7 @@ namespace MyWebsite.Application.DTOs.ViewModels
         public string Description { get; set; }
 
         [Display(Name = "Hình ảnh")]
-        public byte[] ImageData { get; set; }
+        public byte[]? ImageData { get; set; }
 
         [Display(Name = "Thứ tự hiển thị")]
         public int InOrder { get; set; } = 0;

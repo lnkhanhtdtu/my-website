@@ -48,10 +48,17 @@
 
         <li class="menu-header mt-7"><span class="menu-header-text">Thiết lập</span></li>
         
-        <li class="menu-item">
+        <li class="menu-item @(IsActive("CompanyInfoes") ? "active" : "")">
             <a class="menu-link" asp-area="Admin" asp-controller="CompanyInfoes" asp-action="Index">
                 <i class="menu-icon tf-icons ri-building-line"></i>
                 <div data-i18n="Basic">Thông tin công ty</div>
+            </a>
+        </li>
+
+        <li class="menu-item @(IsActive("Banners") ? "active" : "")">
+            <a class="menu-link" asp-area="Admin" asp-controller="Banners" asp-action="Index">
+                <i class="menu-icon tf-icons ri-flag-line"></i>
+                <div data-i18n="Basic">Banner</div>
             </a>
         </li>
 
@@ -64,13 +71,6 @@
         
         <li class="menu-header mt-7"><span class="menu-header-text">Quản lý sản phẩm</span></li>
         
-@*         <li class="menu-item @(IsActive("Banners") ? "active" : "")">
-            <a class="menu-link" asp-area="Admin" asp-controller="Banners" asp-action="Index">
-                <i class="menu-icon tf-icons ri-flag-line"></i>
-                <div data-i18n="Basic">Banner</div>
-            </a>
-        </li> *@
-
         <li class="menu-item @(IsActive("Categories") ? "active" : "")">
             <a class="menu-link" asp-area="Admin" asp-controller="Categories" asp-action="Index">
                 <i class="menu-icon tf-icons ri-file-list-line"></i>
