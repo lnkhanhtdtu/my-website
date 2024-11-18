@@ -19,6 +19,10 @@ namespace MyWebsite.Domain.Abstracts
 
         IQuotationRepository QuotationRepository { get; }
 
+        ICompanyRepository CompanyRepository { get; }
+
+        IBannerRepository BannerRepository { get; }
+
         // IOrderRepository OrderRepository { get; }
         // ICartRepository CartRepository { get; }
         // IUserAddressRepository UserAddressRepository { get; }

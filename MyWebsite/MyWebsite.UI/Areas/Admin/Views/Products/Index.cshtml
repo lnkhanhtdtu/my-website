@@ -38,7 +38,7 @@
                     <th>
                         @Html.DisplayNameFor(model => model.IsFeatured)
                     </th>
-                    <th></th>
+                    <th>Thao tác</th>
                 </tr>
             </thead>
             <tbody class="table-border-bottom-0">
@@ -56,14 +56,8 @@
     </div>
 </div>
 
-@section Styles
-{
-    <link href="~/admin/libs/image-uploader/dist/image-uploader.min.css" rel="stylesheet" />
-}
-
 <!--/ Basic Bootstrap Table -->
 @section Scripts {
-    <script src="~/admin/libs/image-uploader/dist/image-uploader.min.js"></script>
     <script src="~/js/registerDataTable.js"></script>
     
     <script>
@@ -166,6 +160,7 @@
 
         registerDataTable(elementName, columns, url);
 
+        // TODO: Đưa vào hàm sử dụng chung
         function InitImageUploader($inputImage, preloaded, maxSize = 5 * 1024 * 1024, maxFiles = 10) {
             $($inputImage).empty().imageUploader({
                 imagesInputName: 'NewImages',

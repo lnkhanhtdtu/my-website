@@ -1,4 +1,16 @@
-﻿<!DOCTYPE html>
+﻿@using MyWebsite.Domain.Entities
+@{
+    var companyInfo = Context.Items["CompanyInfo"] as CompanyInfo;
+    var welcomeMessage = "Rất vui khi được hỗ trợ bạn!";
+    var zaloOAId = "316520014385834928";
+    string logoBase64 = null;
+    if (companyInfo?.Logo != null)
+    {
+        logoBase64 = $"data:image/png;base64,{Convert.ToBase64String(companyInfo.Logo)}";
+    }
+}
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -8,8 +20,21 @@
     <meta name="keywords" content="">
 
     <!-- Favicons -->
-    <link href="~/client/assets/img/favicon.png" rel="icon">
-    <link href="~/client/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+    @if (!string.IsNullOrEmpty(logoBase64))
+    {
+        <link id="dynamic-favicon" rel="icon" href="data:;base64,iVBORw0KGgo=">
+        <script>
+            (function() {
+                var link = document.getElementById('dynamic-favicon');
+                link.href = '@Html.Raw(logoBase64)';
+            })();
+        </script>
+    }
+    else
+    {
+        <link href="~/client/assets/img/favicon.png" rel="icon">
+        <link href="~/client/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+    }
 
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com" rel="preconnect">
@@ -25,25 +50,65 @@
 
     <!-- Main CSS File -->
     <link href="~/client/assets/css/main.css" rel="stylesheet">
-
-    <!-- =======================================================
-    * Template Name: Multi
-    * Template URL: https://bootstrapmade.com/multi-responsive-bootstrap-template/
-    * Updated: Aug 07 2024 with Bootstrap v5.3.3
-    * Author: BootstrapMade.com
-    * License: https://bootstrapmade.com/license/
-    ======================================================== -->
 </head>
 <body class="index-page">
 
-    @await Html.PartialAsync("_Header")
+    @await Html.PartialAsync("_Header", companyInfo)
     <main class="main">
         @RenderBody()
     </main>
-    @await Html.PartialAsync("_Footer")
+    @await Html.PartialAsync("_Footer", companyInfo)
 
     <!-- Scroll Top -->
     <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+    <!-- WhatsApp: https://www.delightchat.io/whatsapp-chat-button-widget -->
+    <script async src='https://d2mpatx37cqexb.cloudfront.net/delightchat-whatsapp-widget/embeds/embed.min.js'></script>
+    <script>
+        var wa_btnSetting = {
+            "btnColor": "#16BE45",
+            "ctaText": "",
+            "cornerRadius": 40,
+            "marginBottom": 120,
+            "marginLeft": 20,
+            "marginRight": 15,
+            "btnPosition": "right",
+            "whatsAppNumber": "84818597397",
+            "welcomeMessage": "Rất vui khi được hỗ trợ bạn!",
+            "zIndex": 999999,
+            "btnColorScheme": "light"
+        };
+        var wa_widgetSetting = {
+            "title": "KT Vina Group",
+            "subTitle": "Chuyên sản xuất bao bì sản phẩm",
+            "headerBackgroundColor": "#16BE45",
+            "headerColorScheme": "dark",
+            "greetingText": "Rất vui khi được hỗ trợ bạn!",
+            "ctaText": "Bắt đầu trò chuyện!",
+            "btnColor": "#1A1A1A",
+            "cornerRadius": 40,
+            "welcomeMessage": "Rất vui khi được hỗ trợ bạn!",
+            "btnColorScheme": "light",
+            "brandImage": "https://s160-ava-talk.zadn.vn/5/d/f/1/2/160/fd93f80d4c2ad61cb1607944541b24d0.jpg",
+            "darkHeaderColorScheme": {
+                "title": "#333333",
+                "subTitle": "#4F4F4F"
+            }
+        };
+        window.onload = () => {
+            _waEmbed(wa_btnSetting, wa_widgetSetting);
+        };
+    </script>
+
+    <!-- Zalo: https://developers.zalo.me/docs/social/zalo-chat-widget -->
+    <div class="zalo-chat-widget" data-oaid=@zaloOAId data-welcome-message=@welcomeMessage data-autopopup="0" data-width="" data-height=""></div>
+    <style>
+        .zalo-chat-widget{  
+            bottom: 60px !important;
+            right: 10px !important;
+        } 
+    </style>
+    <script src="https://sp.zalo.me/plugins/sdk.js"></script>
 
     <!-- Preloader -->
     <div id="preloader">

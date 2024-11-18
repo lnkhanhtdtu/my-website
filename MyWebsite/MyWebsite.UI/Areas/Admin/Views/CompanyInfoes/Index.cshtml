@@ -16,8 +16,12 @@
             </div>
             <div class="user-profile-header d-flex flex-column flex-lg-row text-sm-start text-center mb-4">
                 <div class="flex-shrink-0 mt-n2 mx-sm-0 mx-auto">
-                    <img src="~/admin/assets/img/avatars/1.png" alt="user image" class="d-block h-auto ms-0 ms-sm-5 rounded user-profile-img">
-                </div>
+                    @{
+                        var imgSrc = MyWebsite.UI.Utilities.ImageHelper.GetImageSource(Model.Logo, "admin/assets/img/avatars/1.png");
+                    }
+
+                    <img src="@imgSrc" alt="user image" class="d-block h-auto ms-0 ms-sm-5 rounded user-profile-img">
+                                                                                                                                                                                   </div>
                 <div class="flex-grow-1 mt-3 mt-lg-5">
                     <div class="d-flex align-items-md-end align-items-sm-start align-items-center justify-content-md-between justify-content-start mx-5 flex-md-row flex-column gap-4">
                         <div class="user-profile-info">
@@ -60,31 +64,25 @@
 <!--/ Navbar pills -->
 <!-- User Profile Content -->
 <div class="row">
-    <div class="col-xl-5 col-lg-6 col-md-6">
+    <div class="col-xl-8 col-lg-8 col-md-6">
         <!-- About User -->
         <div class="card mb-6">
             <div class="card-body">
-                <small class="card-text text-uppercase text-muted small">About</small>
+                <small class="card-text text-uppercase text-muted small">Thông tin công ty</small>
                 <ul class="list-unstyled my-3 py-1">
-                    <li class="d-flex align-items-center mb-4"><i class="ri-community-line ri-24px"></i><span class="fw-medium mx-2">Tên công ty:</span> <span>@Model.Name</span></li>
-                    <li class="d-flex align-items-center mb-4"><i class="ri-hashtag ri-24px"></i><span class="fw-medium mx-2">Mã số thuế:</span> <span>@Model.TaxCode</span></li>
-                    <li class="d-flex align-items-center mb-4"><i class="ri-map-pin-line ri-24px"></i><span class="fw-medium mx-2">Địa chỉ:</span> <span>@Model.HeadquartersAddress</span></li>
-                    <li class="d-flex align-items-center mb-4"><i class="ri-group-3-fill ri-24px"></i><span class="fw-medium mx-2">Quản lý bởi:</span> <span>Chi cục Thuế Quận 1</span></li>
-                    <li class="d-flex align-items-center mb-4"><i class="ri-building-line ri-24px"></i><span class="fw-medium mx-2">Loại hình DN:</span> <span>Công ty trách nhiệm hữu hạn ngoài NN</span></li>
-                    <li class="d-flex align-items-center mb-4"><i class="ri-info-i ri-24px"></i><span class="fw-medium mx-2">Tình trạng:</span> <span>Đang hoạt động (đã được cấp GCN ĐKT)</span></li>
+                    <li class="align-items-center mb-4"><i class="ri-community-line ri-24px"></i><span class="fw-medium mx-2">Tên công ty:</span> <span>@Model.Name</span></li>
+                    <li class="align-items-center mb-4"><i class="ri-hashtag ri-24px"></i><span class="fw-medium mx-2">Mã số thuế:</span> <span>@Model.TaxCode</span></li>
+                    <li class="align-items-center mb-4"><i class="ri-map-pin-line ri-24px"></i><span class="fw-medium mx-2">Địa chỉ:</span> <span>@Model.HeadquartersAddress</span></li>
+                    <li class="align-items-center mb-4"><i class="ri-group-3-fill ri-24px"></i><span class="fw-medium mx-2">Quản lý bởi:</span> <span>Chi cục Thuế Quận 1</span></li>
+                    <li class="align-items-center mb-4"><i class="ri-building-line ri-24px"></i><span class="fw-medium mx-2">Loại hình DN:</span> <span>Công ty trách nhiệm hữu hạn ngoài NN</span></li>
+                    <li class="align-items-center mb-4"><i class="ri-info-i ri-24px"></i><span class="fw-medium mx-2">Tình trạng:</span> <span>Đang hoạt động (đã được cấp GCN ĐKT)</span></li>
                     @* <li class="d-flex align-items-center mb-4"><i class="ri-user-3-line ri-24px"></i><span class="fw-medium mx-2">Full Name:</span> <span>John Doe</span></li>
                     <li class="d-flex align-items-center mb-4"><i class="ri-check-line ri-24px"></i><span class="fw-medium mx-2">Status:</span> <span>Active</span></li>
                     <li class="d-flex align-items-center mb-4"><i class="ri-star-smile-line ri-24px"></i><span class="fw-medium mx-2">Role:</span> <span>Developer</span></li>
                     <li class="d-flex align-items-center mb-4"><i class="ri-flag-2-line ri-24px"></i><span class="fw-medium mx-2">Country:</span> <span>USA</span></li>
                     <li class="d-flex align-items-center mb-2"><i class="ri-translate-2 ri-24px"></i><span class="fw-medium mx-2">Languages:</span> <span>English</span></li> *@
                 </ul>
-                <small class="card-text text-uppercase text-muted small">Liên hệ</small>
-                <ul class="list-unstyled my-3 py-1">
-                    <li class="d-flex align-items-center mb-4"><i class="ri-phone-line ri-24px"></i><span class="fw-medium mx-2">Điện thoại:</span> <span>@Model.PhoneNumber</span></li>
-                    <li class="d-flex align-items-center mb-4"><i class="ri-wechat-line ri-24px"></i><span class="fw-medium mx-2">Zalo:</span> <span>@Model.PhoneNumber</span></li>
-                    <li class="d-flex align-items-center mb-4"><i class="ri-whatsapp-line ri-24px"></i><span class="fw-medium mx-2">Whatsapp:</span> <span>@Model.PhoneNumber</span></li>
-                    <li class="d-flex align-items-center mb-2"><i class="ri-mail-open-line ri-24px"></i><span class="fw-medium mx-2">Email:</span> <span>@Model.Email</span></li>
-                </ul>
+
                 @*         <small class="card-text text-uppercase text-muted small">Teams</small>
                 <ul class="list-unstyled mb-0 mt-3 pt-1">
                 <li class="d-flex align-items-center mb-4"><i class="ri-github-line ri-24px text-body me-2"></i>
@@ -96,28 +94,18 @@
                 </ul> *@
             </div>
         </div>
-        <!--/ About User -->
-        <!-- Profile Overview -->
-        @*     <div class="card mb-6">
-        <div class="card-body">
-        <small class="card-text text-uppercase text-muted small">Overview</small>
-        <ul class="list-unstyled mb-0 mt-3 pt-1">
-        <li class="d-flex align-items-center mb-4"><i class="ri-check-line ri-24px"></i><span class="fw-medium mx-2">Task Compiled:</span> <span>13.5k</span></li>
-        <li class="d-flex align-items-center mb-4"><i class="ri-user-3-line ri-24px"></i><span class="fw-medium mx-2">Projects Compiled:</span> <span>146</span></li>
-        <li class="d-flex align-items-center"><i class="ri-star-smile-line ri-24px"></i><span class="fw-medium mx-2">Connections:</span> <span>897</span></li>
-        </ul>
-        </div>
-        </div> *@
-        <!--/ Profile Overview -->
     </div>
-    <div class="col-xl-7 col-lg-6 col-md-6">
+    <div class="col-xl-4 col-lg-4 col-md-6">
         <!-- Activity Timeline -->
-        <div class="card card-action mb-6">
-            <div class="card-header align-items-center">
-                <h5 class="card-action-title mb-0"><i class="ri-bar-chart-2-line ri-24px text-body me-4"></i>Activity Timeline</h5>
-            </div>
+        <div class="card mb-6">
             <div class="card-body pt-3">
-                <input type="text" asp-for="BusinessField" class="form-control" />
+                <small class="card-text text-uppercase text-muted small">Liên hệ</small>
+                <ul class="list-unstyled my-3 py-1">
+                    <li class="d-flex align-items-center mb-4"><i class="ri-phone-line ri-24px"></i><span class="fw-medium mx-2">Điện thoại:</span> <span>@Model.PhoneNumber</span></li>
+                    <li class="d-flex align-items-center mb-4"><i class="ri-wechat-line ri-24px"></i><span class="fw-medium mx-2">Zalo:</span> <span>@Model.PhoneNumber</span></li>
+                    <li class="d-flex align-items-center mb-4"><i class="ri-whatsapp-line ri-24px"></i><span class="fw-medium mx-2">Whatsapp:</span> <span>@Model.PhoneNumber</span></li>
+                    <li class="d-flex align-items-center mb-2"><i class="ri-mail-open-line ri-24px"></i><span class="fw-medium mx-2">Email:</span> <span>@Model.Email</span></li>
+                </ul>
             </div>
         </div>
         <!--/ Activity Timeline -->
@@ -528,35 +516,89 @@
 {
     <script>
         // Khởi tạo Description
-        tinyMCEInit("#BusinessField");
+//        tinyMCEInit("#BusinessField");
+        const getById = '@Url.Action("GetById", "CompanyInfoes", new { area = "Admin" })';
 
         $(document).on("click", ".btn-edit", function () {
             // Hiển thị modal trước
-            $('#saveModal').modal('show');
+            // $('#saveModal').modal('show');
+            // $('#previewImage').innerHTML = '';
+            // $('#previewImage').attr('src', '@imgSrc');
 
-            // const key = $(this).closest("div").data("key");
+            const key = '@Model.Id';
 
-            // $.ajax({
-            //     url: `${getById}/${key}`,
-            //     method: "GET",
-            //     success: function (data) {
-            //         // Hiển thị modal trước
-            //         $('#saveModal').modal('show');
+            $.ajax({
+                url: `${getById}/${key}`,
+                method: "GET",
+                success: function (data) {
+                    // Hiển thị modal trước
+                    $('#saveModal').modal('show');
             
-            //         // Sau đó đợi một chút để đảm bảo modal đã được render
-            //         setTimeout(function() {
-            //             console.log(data);
-            //             mapObjectToControlView(data);
+                    // Sau đó đợi một chút để đảm bảo modal đã được render
+                    setTimeout(function() {
+                        console.log(data);
+                        mapObjectToControlView(data);
 
-            //             document.getElementById('previewImage').src = `${data.imageData ? `data:image/png;base64,${data.imageData}` : '/images/default-image.png'}`;
-            //         }, 100); // Đợi 100ms
-            //     },
-            //     error: function(error) {
-            //         console.error('Error fetching category data:', error);
-            //     }
-            // });
+                        $('#previewImage').attr('src', `${data.logo ? `data:image/png;base64,${data.logo}` : '/admin/assets/img/avatars/1.png'}`);
+                    }, 100); // Đợi 100ms
+                },
+                error: function(error) {
+                    console.error('Error fetching category data:', error);
+                }
+            });
+        });
+
+        function previewMainImage(input) {
+            var preview = document.getElementById('previewMainImage');
+            preview.innerHTML = ''; // Xóa các hình ảnh trước đó để cập nhật hình ảnh mới
+
+            if (input.files) {
+                var filesAmount = input.files.length;
+
+                for (var i = 0; i < filesAmount; i++) {
+                    var reader = new FileReader();
+
+                    reader.onload = function (event) {
+                        var image = document.createElement('img');
+                        image.id = 'previewImage';
+                        image.className = 'img-thumbnail mr-3 mb-2';
+                        image.style.maxHeight = '200px';
+                        image.style.maxWidth = '300px';
+                        image.src = event.target.result;
+                        preview.appendChild(image);
+                    }
+
+                    reader.readAsDataURL(input.files[i]);
+                }
+            }
+        }
+
+        $('#formCompany').submit(function (e) {
+
+            e.preventDefault();
+
+            var formData = new FormData(this);
+
+            $.ajax({
+                url: $(this).attr('action'),
+                type: $(this).attr('method'),
+                data: formData,
+                contentType: false, // Important: Do not set content type
+                processData: false, // Important: Do not process data
+                success: function (response) {
+                    console.log(response);
+
+                    if (response.status !== 'Error') {
+                        $('#saveModal').modal('hide');
+                        showToaster("Success", "Cập nhật thành công");
+                    } else {
+                        showToaster("Error", "Cập nhật thất bại");
+                    }
+                },
+                error: function (response) {
+                    console.log(response);
+                }
+            });
         });
     </script>
-
-
 }

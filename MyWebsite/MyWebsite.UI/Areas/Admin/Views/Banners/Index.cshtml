@@ -1,78 +1,252 @@
-﻿@model IEnumerable<MyWebsite.Domain.Entities.Banner>
+﻿@model MyWebsite.Application.DTOs.ViewModels.BannerViewModel
 
 @{
-    ViewData["Title"] = "Index";
-    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Danh sách Banner";
 }
 
-<h1>Index</h1>
+<!-- Modal -->
+@* @await Html.PartialAsync("_SaveModal", Model) *@
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Title)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Description)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ImageData)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.InOrder)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IsActive)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IsDeleted)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CreatedAt)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.UpdatedAt)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Title)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ImageData)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.InOrder)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IsActive)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IsDeleted)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CreatedAt)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.UpdatedAt)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
+<!-- Banners Table -->
+<div class="card">
+    <h5 class="card-header">
+        <!-- Button trigger modal -->
+        <button type="button" class="btn" id="btnAdd">
+            <i class="ri-add-circle-fill"></i>
+        </button>
+        Danh mục sản phẩm
+    </h5>
+
+    <div class="table-responsive text-nowrap table-hover">
+        <table id="myTable" class="table">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ImageData)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Title)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Description)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.InOrder)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.IsActive)
+                    </th>
+                    <th>Thao tác</th>
+                </tr>
+            </thead>
+            <tbody class="table-border-bottom-0">
+                <tr>
+                    <td>0</td>
+                    <td>No data</td>
+                    <td>No data</td>
+                    <td>No data</td>
+                    <td>No data</td>
+                    <td>No data</td>
+                    <td>
+                        <div class="dropdown">
+                            <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
+                                <i class="ri-more-2-line"></i>
+                            </button>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item" asp-action="SaveData" asp-controller="Banners"
+                                   asp-area="Admin" asp-route-id="${key}">
+                                    <i class="ri-pencil-line me-1"></i> Sửa
+                                </a>
+                                <a class="dropdown-item" asp-action="SoftDelete" asp-controller="Banners"
+                                   asp-area="Admin" asp-route-id="${key}">
+                                    <i class="ri-delete-bin-6-line me-1"></i> Xóa
+                                </a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!--/ Banners Table -->
+@section Scripts
+{
+    <script src="~/js/registerDataTable.js"></script>
+
+    <script>
+        const elementName = "#myTable";
+        const url = '@Url.Action("GetBannerPagination", "Banners")';
+        const getById = '@Url.Action("GetById", "Banners", new { area = "Admin" })';
+        const editUrl = '@Url.Action("SaveData", "Banners", new { area = "Admin" })';
+        const deleteUrl = '@Url.Action("SoftDelete", "Banners", new { area = "Admin" })';
+
+        const columns = [
+            // STT
+            {
+                data: null, name: "stt", autoWidth: true,
+                render: function (data, type, row, meta) { return meta.row + 1; }
+            },
+            // {
+            //     data: "name", name: "name", autoWidth: true,
+            //     render: function (data, type, row) {
+            //         return `<td>
+            //                             <div class="d-flex align-items-center">
+            //                                 <div class="avatar-wrapper me-3 rounded-2 bg-label-secondary user-name">
+            //                                     <div class="avatar"><img
+            //                                             src="${row.imageData ? `data:image/png;base64,${row.imageData}` : '/images/default-image.png'}"
+            //                                             alt="Product-8" class="rounded-2"></div>
+            //                                 </div>
+            //                                 <div class="d-flex flex-column justify-content-center">
+            //                                     <span class="text-heading fw-medium text-wrap">${data}</span>
+            //                                         <!--<small class="text-truncate mb-0 d-none d-sm-block">Choose from wide range of travel accessories from popular brands </small> -->
+            //                                 </div>
+            //                             </div>
+            //                         </td>`;
+            //     }
+            // },
+            {
+                data: "imageData", name: "imageData", autoWidth: true
+            },
+            {
+                data: "title", name: "title", autoWidth: true
+            },
+            {
+                data: "description", name: "description", autoWidth: true
+            },
+            {
+                data: "inOrder", name: "inOrder", autoWidth: true
+            },
+            {
+                data: "isActive", name: "isActive", autoWidth: true
+            },
+            // Action Edit, Delete
+            {
+                data: "id", name: "id", width: "20",
+                render: function (key) {
+                    return `<div class="dropdown">
+                                        <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
+                                            <i class="ri-more-2-line"></i>
+                                        </button>
+                                        <div class="dropdown-menu" data-key="${key}">
+                                            <a class="dropdown-item btn-edit" href="#" >
+                                                <i class="ri-pencil-line me-1 text-warning"></i> Sửa
+                                            </a>
+                                            <a class="dropdown-item btn-delete" href="#">
+                                                <i class="ri-delete-bin-6-line me-1 text-danger"></i> Xóa
+                                            </a>
+                                        </div>
+                                    </div>`;
+                }
+            }
+        ];
+
+        registerDataTable(elementName, columns, url);
+
+        $(document).on("click", "#btnAdd", function () {
+            $('#saveModal').modal('show');
+            $('#formBanner').trigger("reset");
+            document.getElementById('previewImage').src = '/images/default-image.png';
+
+            // Reset các trường ẩn
+            $('#Id').val('0');
+            $('#ImageData').val('');
+        });
+
+        $(document).on("click", ".btn-edit", function () {
+            const key = $(this).closest("div").data("key");
+
+            $.ajax({
+                url: `${getById}/${key}`,
+                method: "GET",
+                success: function (data) {
+                    // Hiển thị modal trước
+                    $('#saveModal').modal('show');
+
+                    // Sau đó đợi một chút để đảm bảo modal đã được render
+                    setTimeout(function() {
+                        console.log(data);
+                        mapObjectToControlView(data);
+
+                        document.getElementById('previewImage').src = `${data.imageData ? `data:image/png;base64,${data.imageData}` : '/images/default-image.png'}`;
+                    }, 100); // Đợi 100ms
+                },
+                error: function(error) {
+                    console.error('Error fetching banner data:', error);
+                }
+            });
+        });
+
+        $(document).on("click", ".btn-delete", function () {
+            const key = $(this).closest("div").data("key");
+            console.log("Delete key: ", key);
+            $.ajax({
+                url: `${deleteUrl}/${key}`,
+                method: "POST",
+                success: function (data) {
+                    $(elementName).DataTable().ajax.reload();
+                    showToaster("Success", "Xóa thành công");
+                    console.log(data);
+                }
+            });
+        });
+
+        function previewMainImage(input) {
+            var preview = document.getElementById('previewMainImage');
+            preview.innerHTML = ''; // Xóa các hình ảnh trước đó để cập nhật hình ảnh mới
+
+            if (input.files) {
+                var filesAmount = input.files.length;
+
+                for (var i = 0; i < filesAmount; i++) {
+                    var reader = new FileReader();
+
+                    reader.onload = function (event) {
+                        var image = document.createElement('img');
+                        image.id = 'previewImage';
+                        image.className = 'img-thumbnail mr-3 mb-2';
+                        image.style.maxHeight = '200px';
+                        image.style.maxWidth = '300px';
+                        image.src = event.target.result;
+                        preview.appendChild(image);
+                    }
+
+                    reader.readAsDataURL(input.files[i]);
+                }
+            }
+        }
+
+        $('#formBanner').submit(function (e) {
+
+            e.preventDefault();
+
+            var formData = new FormData(this);
+            var id = formData.get('Id');
+            console.log("Id: ", id);
+
+            $.ajax({
+                url: $(this).attr('action'),
+                type: $(this).attr('method'),
+                data: formData,
+                contentType: false, // Important: Do not set content type
+                processData: false, // Important: Do not process data
+                success: function (response) {
+                    console.log(response);
+
+                    if (response.status !== 'Error') {
+                        $('#saveModal').modal('hide');
+                        $(elementName).DataTable().ajax.reload();
+                        showToaster("Success", id === 0 ? "Tạo thành công" : "Cập nhật thành công");
+                    } else {
+                        showToaster("Error", id === 0 ? "Tạo thất bại" : "Cập nhật thất bại");
+                    }
+                },
+                error: function (response) {
+                    console.log(response);
+                }
+            });
+        });
+    </script>
 }
-    </tbody>
-</table>

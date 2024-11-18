@@ -15,7 +15,7 @@ namespace MyWebsite.Application.DTOs.ViewModels
         public string Name { get; set; }
 
         [Display(Name = "Logo")]
-        public byte[]? ImageData { get; set; }
+        public byte[]? Logo { get; set; }
 
         [Display(Name = "Lĩnh vực hoạt động")]
         public string? BusinessField { get; set; }

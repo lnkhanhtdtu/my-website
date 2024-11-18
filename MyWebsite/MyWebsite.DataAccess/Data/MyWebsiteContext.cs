@@ -27,6 +27,8 @@ public class MyWebsiteContext : IdentityDbContext<ApplicationUser, IdentityRole,
 
     public DbSet<Quotation> Quotations { get; set; } = default!;
 
+    public DbSet<ApplicationConfiguration> ApplicationConfigurations { get; set; } = default!;
+
     protected override void OnModelCreating(ModelBuilder builder)
     {
         base.OnModelCreating(builder);

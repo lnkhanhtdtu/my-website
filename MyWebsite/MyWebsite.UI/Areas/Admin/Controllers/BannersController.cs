@@ -1,151 +1,72 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using MyWebsite.Application.Abstracts;
+using MyWebsite.Application.DTOs.ViewModels;
+using MyWebsite.Application.DTOs;
+using MyWebsite.Application.DTOs.Banners;
 using MyWebsite.Domain.Entities;
 
 namespace MyWebsite.UI.Areas.Admin.Controllers
 {
     public class BannersController : BaseController
     {
-        private readonly MyWebsiteContext _context;
+        private readonly IBannerService _bannerService;
 
-        public BannersController(MyWebsiteContext context)
+        public BannersController(IBannerService bannerService)
         {
-            _context = context;
+            _bannerService = bannerService;
         }
 
-        // GET: Admin/Banners
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Banners.ToListAsync());
+            var bannerViewModel = new BannerViewModel();
+            return View(bannerViewModel);
         }
 
-        // GET: Admin/Banners/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public async Task<IActionResult> GetById(int id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var banner = await _context.Banners
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (banner == null)
-            {
-                return NotFound();
-            }
-
-            return View(banner);
+            var banner = await _bannerService.GetById(id);
+            return Json(banner);
         }
 
-        // GET: Admin/Banners/Create
-        public IActionResult Create()
+        [HttpPost]
+        public async Task<IActionResult> GetBannerPagination(RequestDataTable request)
         {
-            return View();
+            var result = await _bannerService.GetBannerPagination(request);
+            return Json(result);
         }
 
-        // POST: Admin/Banners/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Title,Description,ImageData,InOrder,IsActive,Id,IsDeleted,CreatedAt,UpdatedAt")] Banner banner)
+        public async Task<IActionResult> SaveData(BannerViewModel banner, IFormFile? postFile)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                _context.Add(banner);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                var errors = ModelState
+                    .Where(x => x.Value.Errors.Count > 0)
+                    .Select(x => new { Property = x.Key, Errors = x.Value.Errors.Select(e => e.ErrorMessage).ToList() })
+                    .ToList();
+
+                return Json(new { status = "Error", message = "Dữ liệu không hợp lệ", errors = errors });
             }
-            return View(banner);
+
+            try
+            {
+                await _bannerService.SaveData(banner, postFile);
+                return Json(new { status = "Ok", message = "Lưu dữ liệu thành công" });
+            }
+            catch (Exception ex)
+            {
+                // Log the exception
+                return Json(new { status = "Error", message = "Có lỗi xảy ra khi lưu dữ liệu: " + ex.Message });
+            }
         }
 
-        // GET: Admin/Banners/Edit/5
-        public async Task<IActionResult> Edit(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var banner = await _context.Banners.FindAsync(id);
-            if (banner == null)
-            {
-                return NotFound();
-            }
-            return View(banner);
-        }
-
-        // POST: Admin/Banners/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Title,Description,ImageData,InOrder,IsActive,Id,IsDeleted,CreatedAt,UpdatedAt")] Banner banner)
+        public async Task<IActionResult> SoftDelete(int id)
         {
-            if (id != banner.Id)
-            {
-                return NotFound();
-            }
-
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(banner);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!BannerExists(banner.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
-            }
-            return View(banner);
-        }
-
-        // GET: Admin/Banners/Delete/5
-        public async Task<IActionResult> Delete(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var banner = await _context.Banners
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (banner == null)
-            {
-                return NotFound();
-            }
-
-            return View(banner);
-        }
-
-        // POST: Admin/Banners/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
-        {
-            var banner = await _context.Banners.FindAsync(id);
-            if (banner != null)
-            {
-                _context.Banners.Remove(banner);
-            }
-
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
-        }
-
-        private bool BannerExists(int id)
-        {
-            return _context.Banners.Any(e => e.Id == id);
+            await _bannerService.SoftDelete(id);
+            return Json(new { status = "Ok" });
         }
     }
 }

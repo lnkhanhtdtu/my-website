@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using MyWebsite.Application.Abstracts;
 using MyWebsite.Application.DTOs.ViewModels;
 using MyWebsite.Domain.Settings;
@@ -13,13 +14,16 @@ namespace MyWebsite.UI.Controllers
         private readonly ICategoryService _categoryService;
         private readonly IQuotationService _quotationService;
         private readonly IEmailService _emailService;
-
-        public ProductController(IProductService productService, ICategoryService categoryService, IQuotationService quotationService, IEmailService emailService)
+        
+        private readonly MyWebsiteContext _context;
+        
+        public ProductController(IProductService productService, ICategoryService categoryService, IQuotationService quotationService, IEmailService emailService, MyWebsiteContext context)
         {
             _productService = productService;
             _categoryService = categoryService;
             _quotationService = quotationService;
             _emailService = emailService;
+            _context = context;
         }
 
         [HttpGet("")]
@@ -36,6 +40,14 @@ namespace MyWebsite.UI.Controllers
         [HttpGet("chi-tiet/{id}")]
         public async Task<IActionResult> Details(int id)
         {
+            var attributes = await _context.ProductAttributeValues
+                .Include(x => x.Product)
+                .Include(x => x.ProductAttribute)
+                .Where(x => !x.IsDeleted && x.ProductId == id)
+                .ToListAsync();
+
+            ViewBag.ProductAttributes = attributes;
+
             var product = await _productService.GetById(id);
             return View(product);
         }
@@ -44,24 +56,8 @@ namespace MyWebsite.UI.Controllers
         public async Task<IActionResult> SaveQuotation(QuotationViewModel quotationViewModel)
         {
             await _quotationService.SaveData(quotationViewModel);
-
-            // TODO: Cần thay đổi
-            var subject = $"Yêu cầu tư vấn báo giá mới từ {quotationViewModel.CustomerName}";
-            var content = $@"
-                <h2>Có yêu cầu tư vấn báo giá mới</h2>
-                <p><strong>Tên khách hàng:</strong> {quotationViewModel.CustomerName}</p>
-                <p><strong>Email:</strong> {quotationViewModel.CustomerEmail}</p>
-                <p><strong>Số điện thoại:</strong> {quotationViewModel.CustomerPhone}</p>
-                <p><strong>Nội dung:</strong> {quotationViewModel.Content}</p>
-            ";
-
-            var emailInfo = new EmailSetting()
-            {
-                Name = "Hỗ trợ",
-                To = "lnkhanhtdtu@gmail.com",
-                Subject = subject,
-                Content = content
-            };
+            
+            var emailInfo = Utilities.EmailHelper.EmailTemplateForQuotationNotification(quotationViewModel);
 
             await _emailService.Send(emailInfo);
 

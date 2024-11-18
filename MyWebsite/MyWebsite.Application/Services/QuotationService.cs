@@ -67,18 +67,13 @@ namespace MyWebsite.Application.Services
         public async Task SoftDelete(int id)
         {
             var quotation = await _unitOfWork.QuotationRepository.GetById(id);
-
             await _unitOfWork.QuotationRepository.SoftDelete(quotation);
-
-            await _unitOfWork.Commit();
-        }
+            await _unitOfWork.Commit(); }
 
         public async Task ChangeStatus(int id, QuotationStatus status)
         {
             var quotation = await _unitOfWork.QuotationRepository.GetById(id);
-
             await _unitOfWork.QuotationRepository.ChangeStatus(quotation, status);
-
             await _unitOfWork.Commit();
         }
 

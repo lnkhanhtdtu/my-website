@@ -97,9 +97,7 @@ namespace MyWebsite.Application.Services
         public async Task SoftDelete(int id)
         {
             var category = await _unitOfWork.CategoryRepository.GetById(id);
-
             await _unitOfWork.CategoryRepository.SoftDelete(category);
-
             await _unitOfWork.Commit();
         }
 

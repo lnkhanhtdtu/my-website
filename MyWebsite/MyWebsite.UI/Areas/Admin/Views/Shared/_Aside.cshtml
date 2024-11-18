@@ -1,17 +1,20 @@
 ﻿@using Microsoft.AspNetCore.Mvc.TagHelpers
+@model MyWebsite.Domain.Entities.CompanyInfo
 
 @{
     bool IsActive(string controller)
     {
         return ViewContext.RouteData.Values["Controller"].ToString() == controller;
     }
+
+    var imgSrc = MyWebsite.UI.Utilities.ImageHelper.GetImageSource(Model.Logo, "client/assets/img/logo.png");
 }
 
 <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
     <div class="app-brand demo">
-        <a href="/admin/homeadmin" class="app-brand-link">
+        <a asp-area="Admin" asp-controller="Home" asp-action="Index" class="app-brand-link">
             <span class="app-brand-logo demo me-1">
-                <img src="~/assets/img/logo.png" alt="Logo" class="rounded-3">
+                <img src="@imgSrc" alt="Logo" class="rounded-3" style="max-height: 100px;">
             </span>
             @* <span class="app-brand-text demo menu-text fw-semibold ms-2">Scar Auto</span> *@
         </a>
@@ -25,8 +28,8 @@
 
     <ul class="menu-inner py-1">
         <!-- Dashboards -->
-        <li class="menu-item active open">
-            <a href="/admin/homeadmin" class="menu-link menu-toggle">
+        <li class="menu-item active d-none">
+            <a asp-area="Admin" asp-controller="Home" asp-action="Index" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons ri-home-smile-line"></i>
                 <div data-i18n="Dashboards">Dashboards</div>
                 <div class="badge bg-danger rounded-pill ms-auto">5</div>

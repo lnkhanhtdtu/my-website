@@ -1,5 +1,6 @@
 using MyWebsite.DataAccess.Configuration;
 using MyWebsite.Infrastructure.Configuration;
+using MyWebsite.UI.Utilities;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,7 +14,10 @@ builder.Services.AddDependencyInjection();
 builder.Services.AddAutoMapper();
 
 // Add services to the container.
-builder.Services.AddControllersWithViews();
+builder.Services.AddControllersWithViews(options =>
+{
+    options.Filters.Add<CompanyInfoFilter>();
+});
 
 // Thêm cấu hình Authorization cho tất cả các trang trong admin
 // builder.Services.AddAuthorizationGlobal();

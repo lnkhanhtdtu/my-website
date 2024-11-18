@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using MyWebsite.Domain.Settings;
 using sib_api_v3_sdk.Api;
 using sib_api_v3_sdk.Model;
@@ -7,12 +8,14 @@ namespace MyWebsite.Infrastructure.Services
 {
     public class EmailService : IEmailService
     {
+        private readonly MyWebsiteContext _context;
         private readonly string _senderEmail;
         private readonly string _senderName;
         private readonly string _key;
 
-        public EmailService(IConfiguration configuration)
+        public EmailService(IConfiguration configuration, MyWebsiteContext context)
         {
+            _context = context;
             var config = configuration.GetSection("EmailBrevo");
             _senderEmail = config["Sender:Email"];
             _senderName = config["Sender:Name"];
@@ -28,6 +31,12 @@ namespace MyWebsite.Infrastructure.Services
         {
             try
             {
+                var appConfig = await _context.ApplicationConfigurations.FirstOrDefaultAsync();
+                if (appConfig != null && appConfig.EnableQuotationNotification != true)
+                {
+                    return false;
+                }
+
                 var transaction = new TransactionalEmailsApi();
 
                 var sender = new SendSmtpEmailSender(_senderName, _senderEmail);

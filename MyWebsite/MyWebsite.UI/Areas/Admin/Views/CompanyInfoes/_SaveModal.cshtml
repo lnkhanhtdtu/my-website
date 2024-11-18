@@ -6,7 +6,7 @@
         <!-- Modal -->
         <!-- Modal -->
         <div class="modal fade" id="saveModal" tabindex="-1" aria-hidden="true" data-backdrop="static">
-            <form asp-action="SaveData" asp-controller="CompanyInfoes" asp-area="Admin" method="post" id="formProduct" enctype="multipart/form-data" class="needs-validation" novalidate>
+            <form asp-action="SaveData" asp-controller="CompanyInfoes" asp-area="Admin" method="post" id="formCompany" enctype="multipart/form-data" class="needs-validation" novalidate>
                 <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -21,12 +21,13 @@
                             <input type="hidden" asp-for="Id" />
 
                             <div class="row">
+                                
                                 <div class="d-flex align-items-start align-items-sm-center gap-6">
                                     @* Hiển thị hình ảnh khi load img *@
                                     <div id="previewMainImage" class="mb-2">
                                         <img id="previewImage" class="img-thumbnail" alt="Ảnh sản phẩm" style="max-height: 150px">
                                     </div>
-
+                                
                                     <div class="button-wrapper">
                                         <label class="btn btn-sm btn-primary me-3 mb-4" tabindex="0">
                                             <span class="d-none d-sm-block">Cập nhật ảnh mới</span>
@@ -35,15 +36,7 @@
                                         </label>
                                         <div>Chấp nhận file JPG hoặc PNG</div>
                                     </div>
-
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <input type="hidden" name="ProductImages" id="ProductImages" />
-                                <div class="form-group">
-                                    <label for="productImages">Hình ảnh sản phẩm</label>
-                                    <div class="input-images" id="productImages"></div>
+                                
                                 </div>
                             </div>
 
@@ -127,49 +120,6 @@
                                     </div>
                                 </div>
                             </div>
-
-                            @* <div class="row">
-                                <div class="col mb-6 mt-2">
-                                    <div class="form-floating form-floating-outline">
-                                        <select asp-for="CategoryId" class="form-control" asp-items="ViewBag.CategoryId" required></select>
-                                        <label asp-for="CategoryId"></label>
-                                        <div class="invalid-feedback">Vui lòng chọn tên danh mục!</div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col mb-6 mt-2">
-                                    <label asp-for="Description" class="form-label"></label>
-                                    <input type="text" asp-for="Description" class="form-control" required />
-                                    <div class="invalid-feedback">Vui lòng nhập mô tả!</div>
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col mb-6 mt-2">
-                                    <div class="form-floating form-floating-outline">
-                                        <input type="number" asp-for="Price" class="form-control" placeholder="Nhập giá sản phẩm" />
-                                        <label asp-for="Price"></label>
-                                    </div>
-                                </div>
-
-                                <div class="col mb-6 mt-2">
-                                    <div class="form-floating form-floating-outline">
-                                        <input type="number" asp-for="OldPrice" class="form-control" placeholder="Nhập giá sản phẩm" />
-                                        <label asp-for="OldPrice"></label>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col mb-6 mt-2">
-                                    <label class="form-check m-0">
-                                        <input type="checkbox" class="form-check-input" asp-for="IsFeatured">
-                                        <span class="form-check-label">@Html.DisplayNameFor(model => model.IsFeatured)</span>
-                                    </label>
-                                </div>
-                            </div> *@
 
                         </div>
                         <div class="modal-footer">

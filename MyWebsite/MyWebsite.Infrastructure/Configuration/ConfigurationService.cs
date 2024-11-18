@@ -45,6 +45,8 @@ namespace MyWebsite.Infrastructure.Configuration
             services.AddTransient<ICategoryService, CategoryService>();
             services.AddTransient<IProductService, ProductService>();
             services.AddTransient<IQuotationService, QuotationService>();
+            services.AddTransient<ICompanyService, CompanyService>();
+            services.AddTransient<IBannerService, BannerService>();
 
             services.AddTransient<PasswordHasher<ApplicationUser>>();
             services.AddTransient<IAuthenticationService, AuthenticationService>();

@@ -23,7 +23,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyWebsite.UI", "MyWebsite.U
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documents", "Documents", "{84364357-0153-4DFC-82ED-2DAB872FEBC6}"
 	ProjectSection(SolutionItems) = preProject
-		Plugin.txt = Plugin.txt
+		Documents\Plugin.txt = Documents\Plugin.txt
 	EndProjectSection
 EndProject
 Global

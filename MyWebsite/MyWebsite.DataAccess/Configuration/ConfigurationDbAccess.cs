@@ -23,6 +23,7 @@ namespace MyWebsite.DataAccess.Configuration
             using var scope = webApplication.Services.CreateScope();
             var userManager = scope.ServiceProvider.GetRequiredService<UserManager<ApplicationUser>>();
             var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+            var context = scope.ServiceProvider.GetRequiredService<MyWebsiteContext>();
 
             // Tạo role
             var isAdminRoleExist = await roleManager.RoleExistsAsync("Admin");
@@ -46,6 +47,14 @@ namespace MyWebsite.DataAccess.Configuration
             if (identityResult.Succeeded)
             {
                 await userManager.AddToRoleAsync(adminUser, "Admin");
+            }
+
+            // Khởi tạo ApplicationConfiguration nếu không tồn tại
+            if (!await context.ApplicationConfigurations.AnyAsync())
+            {
+                var initialConfig = new ApplicationConfiguration();
+                context.ApplicationConfigurations.Add(initialConfig);
+                await context.SaveChangesAsync();
             }
         }
     }

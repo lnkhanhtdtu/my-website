@@ -1,7 +1,9 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using MyWebsite.Application.Abstracts;
 using MyWebsite.Application.DTOs.ViewModels;
+using MyWebsite.Application.Services;
 using MyWebsite.Domain.Entities;
 
 namespace MyWebsite.UI.Areas.Admin.Controllers
@@ -10,11 +12,13 @@ namespace MyWebsite.UI.Areas.Admin.Controllers
     {
         private readonly MyWebsiteContext _context;
         private readonly IMapper _mapper;
+        private readonly ICompanyService _companyService;
 
-        public CompanyInfoesController(MyWebsiteContext context, IMapper mapper)
+        public CompanyInfoesController(MyWebsiteContext context, IMapper mapper, ICompanyService companyService)
         {
             _context = context;
             _mapper = mapper;
+            _companyService = companyService;
         }
 
         // GET: Admin/CompanyInfoes
@@ -24,133 +28,37 @@ namespace MyWebsite.UI.Areas.Admin.Controllers
             return View(_mapper.Map<CompanyViewModel>(company));
         }
 
-        // GET: Admin/CompanyInfoes/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public async Task<IActionResult> GetById(int id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var companyInfo = await _context.CompanyInfo
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (companyInfo == null)
-            {
-                return NotFound();
-            }
-
-            return View(companyInfo);
+            var company = await _companyService.GetById(id);
+            return Json(company);
         }
 
-        // GET: Admin/CompanyInfoes/Create
-        public IActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: Admin/CompanyInfoes/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Name,Logo,BusinessField,Slogan,TaxCode,FoundationYear,HeadquartersAddress,PhoneNumber,Email,Website,Id,IsDeleted,CreatedAt,UpdatedAt")] CompanyInfo companyInfo)
+        public async Task<IActionResult> SaveData(CompanyViewModel companyViewModel, IFormFile? postFile)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                _context.Add(companyInfo);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                var errors = ModelState
+                    .Where(x => x.Value.Errors.Count > 0)
+                    .Select(x => new { Property = x.Key, Errors = x.Value.Errors.Select(e => e.ErrorMessage).ToList() })
+                    .ToList();
+
+                return Json(new { status = "Error", message = "Dữ liệu không hợp lệ", errors = errors });
             }
-            return View(companyInfo);
+
+            try
+            {
+                await _companyService.SaveData(companyViewModel, postFile);
+                return Json(new { status = "Ok", message = "Lưu dữ liệu thành công" });
+            }
+            catch (Exception ex)
+            {
+                // Log the exception
+                return Json(new { status = "Error", message = "Có lỗi xảy ra khi lưu dữ liệu: " + ex.Message });
+            }
         }
 
-        // GET: Admin/CompanyInfoes/Edit/5
-        public async Task<IActionResult> Edit(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var companyInfo = await _context.CompanyInfo.FindAsync(id);
-            if (companyInfo == null)
-            {
-                return NotFound();
-            }
-            return View(companyInfo);
-        }
-
-        // POST: Admin/CompanyInfoes/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Name,Logo,BusinessField,Slogan,TaxCode,FoundationYear,HeadquartersAddress,PhoneNumber,Email,Website,Id,IsDeleted,CreatedAt,UpdatedAt")] CompanyInfo companyInfo)
-        {
-            if (id != companyInfo.Id)
-            {
-                return NotFound();
-            }
-
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(companyInfo);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!CompanyInfoExists(companyInfo.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
-            }
-            return View(companyInfo);
-        }
-
-        // GET: Admin/CompanyInfoes/Delete/5
-        public async Task<IActionResult> Delete(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var companyInfo = await _context.CompanyInfo
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (companyInfo == null)
-            {
-                return NotFound();
-            }
-
-            return View(companyInfo);
-        }
-
-        // POST: Admin/CompanyInfoes/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
-        {
-            var companyInfo = await _context.CompanyInfo.FindAsync(id);
-            if (companyInfo != null)
-            {
-                _context.CompanyInfo.Remove(companyInfo);
-            }
-
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
-        }
-
-        private bool CompanyInfoExists(int id)
-        {
-            return _context.CompanyInfo.Any(e => e.Id == id);
-        }
     }
 }
