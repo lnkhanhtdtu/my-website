@@ -1,15 +1,9 @@
 ﻿using AutoMapper;
-using MyWebsite.Application.Abstracts;
-using MyWebsite.Domain.Abstracts;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using MyWebsite.Application.DTOs.ViewModels;
-using MyWebsite.Domain.Entities;
 using Microsoft.AspNetCore.Http;
-using static System.Runtime.CompilerServices.RuntimeHelpers;
+using MyWebsite.Application.Abstracts;
+using MyWebsite.Application.DTOs.ViewModels;
+using MyWebsite.Domain.Abstracts;
+using MyWebsite.Domain.Entities;
 
 namespace MyWebsite.Application.Services
 {
@@ -40,6 +34,7 @@ namespace MyWebsite.Application.Services
         {
             var existingCompany = companyViewModel.Id != 0 ? await _unitOfWork.CompanyRepository.GetById(companyViewModel.Id) : new CompanyInfo();
             existingCompany.Name = companyViewModel.Name;
+            existingCompany.ShortName = companyViewModel.ShortName;
             existingCompany.BusinessField = companyViewModel.BusinessField;
             existingCompany.Slogan = companyViewModel.Slogan;
             existingCompany.TaxCode = companyViewModel.TaxCode;

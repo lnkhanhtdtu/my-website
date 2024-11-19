@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using MyWebsite.Application.Abstracts;
 using MyWebsite.Application.DTOs;
 using MyWebsite.Application.DTOs.Banners;
@@ -92,8 +91,8 @@ namespace MyWebsite.Application.Services
                 {
                     existingBanner.Title = bannerEntity.Title;
                     existingBanner.Description = bannerEntity.Description;
-                    existingBanner.InOrder = existingBanner.InOrder;
-                    existingBanner.IsActive = existingBanner.IsActive;
+                    existingBanner.InOrder = bannerEntity.InOrder;
+                    existingBanner.IsActive = bannerEntity.IsActive;
 
                     await _unitOfWork.BannerRepository.SaveData(existingBanner);
                 }

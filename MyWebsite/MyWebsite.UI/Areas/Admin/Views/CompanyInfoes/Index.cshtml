@@ -25,7 +25,7 @@
                 <div class="flex-grow-1 mt-3 mt-lg-5">
                     <div class="d-flex align-items-md-end align-items-sm-start align-items-center justify-content-md-between justify-content-start mx-5 flex-md-row flex-column gap-4">
                         <div class="user-profile-info">
-                            <h4 class="mb-2 mt-lg-6">@Model.Name</h4>
+                            <h4 class="mb-2 mt-lg-6">@Model.ShortName</h4>
                             <ul class="list-inline mb-0 d-flex align-items-center flex-wrap justify-content-sm-start justify-content-center gap-4">
                                 <li class="list-inline-item">
                                     <i class="ri-palette-line me-2 ri-24px"></i><span class="fw-medium">@Model.BusinessField</span>
@@ -71,11 +71,12 @@
                 <small class="card-text text-uppercase text-muted small">Thông tin công ty</small>
                 <ul class="list-unstyled my-3 py-1">
                     <li class="align-items-center mb-4"><i class="ri-community-line ri-24px"></i><span class="fw-medium mx-2">Tên công ty:</span> <span>@Model.Name</span></li>
+                    <li class="align-items-center mb-4"><i class="ri-community-line ri-24px"></i><span class="fw-medium mx-2">Tên viết tắt:</span> <span>@Model.ShortName</span></li>
                     <li class="align-items-center mb-4"><i class="ri-hashtag ri-24px"></i><span class="fw-medium mx-2">Mã số thuế:</span> <span>@Model.TaxCode</span></li>
                     <li class="align-items-center mb-4"><i class="ri-map-pin-line ri-24px"></i><span class="fw-medium mx-2">Địa chỉ:</span> <span>@Model.HeadquartersAddress</span></li>
-                    <li class="align-items-center mb-4"><i class="ri-group-3-fill ri-24px"></i><span class="fw-medium mx-2">Quản lý bởi:</span> <span>Chi cục Thuế Quận 1</span></li>
+                    @* <li class="align-items-center mb-4"><i class="ri-group-3-fill ri-24px"></i><span class="fw-medium mx-2">Quản lý bởi:</span> <span>Chi cục Thuế Quận 1</span></li>
                     <li class="align-items-center mb-4"><i class="ri-building-line ri-24px"></i><span class="fw-medium mx-2">Loại hình DN:</span> <span>Công ty trách nhiệm hữu hạn ngoài NN</span></li>
-                    <li class="align-items-center mb-4"><i class="ri-info-i ri-24px"></i><span class="fw-medium mx-2">Tình trạng:</span> <span>Đang hoạt động (đã được cấp GCN ĐKT)</span></li>
+                    <li class="align-items-center mb-4"><i class="ri-info-i ri-24px"></i><span class="fw-medium mx-2">Tình trạng:</span> <span>Đang hoạt động (đã được cấp GCN ĐKT)</span></li> *@
                     @* <li class="d-flex align-items-center mb-4"><i class="ri-user-3-line ri-24px"></i><span class="fw-medium mx-2">Full Name:</span> <span>John Doe</span></li>
                     <li class="d-flex align-items-center mb-4"><i class="ri-check-line ri-24px"></i><span class="fw-medium mx-2">Status:</span> <span>Active</span></li>
                     <li class="d-flex align-items-center mb-4"><i class="ri-star-smile-line ri-24px"></i><span class="fw-medium mx-2">Role:</span> <span>Developer</span></li>

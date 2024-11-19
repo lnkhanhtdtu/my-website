@@ -2,7 +2,6 @@
 using Microsoft.EntityFrameworkCore;
 using MyWebsite.Application.Abstracts;
 using MyWebsite.Application.DTOs.ViewModels;
-using MyWebsite.Domain.Settings;
 using MyWebsite.Infrastructure.Services;
 
 namespace MyWebsite.UI.Controllers

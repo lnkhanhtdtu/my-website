@@ -73,9 +73,10 @@ function mapObjectToControlView(modelView) {
 
         if (!$element.length) continue;
 
-        if ($element.is('img') || property.toLowerCase().includes('image')) {
-            handleImageElement(value);
-        } else if ($element.attr('type') === 'date') {
+        //if ($element.is('img') || property.toLowerCase().includes('image')) {
+        //    handleImageElement(value);
+        //} else
+        if ($element.attr('type') === 'date') {
             handleDateElement($element, value);
         } else if (typeof tinymce !== 'undefined' && tinymce.get(capitalText)) {
             handleTinyMCEElement(capitalText, value);

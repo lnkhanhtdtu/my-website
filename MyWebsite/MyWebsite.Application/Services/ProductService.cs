@@ -131,11 +131,6 @@ namespace MyWebsite.Application.Services
 
         #region Client
 
-        public async Task<IEnumerable<ProductViewModel>> GetProductsForSiteAsync(string search = "", int pageNumber = 1, int pageSize = 9, int category = 0, int priceMin = -1, int priceMax = -1)
-        {
-            return new List<ProductViewModel>(); // Hàm này chưa hoàn thiện
-        }
-
         public async Task<IEnumerable<Product>> GetAllProducts()
         {
             return await _unitOfWork.ProductRepository.GetAllProductWithCategory(x => !x.IsDeleted);

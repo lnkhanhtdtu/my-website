@@ -9,6 +9,9 @@ namespace MyWebsite.Domain.Entities
         [Display(Name = "Tên công ty")]
         public string Name { get; set; }
 
+        [Display(Name = "Tên viết tắt")]
+        public string ShortName { get; set; }
+
         [Display(Name = "Logo")]
         public byte[]? Logo { get; set; }
 

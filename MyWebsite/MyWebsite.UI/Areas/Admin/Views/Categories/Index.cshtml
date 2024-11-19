@@ -1,7 +1,8 @@
 ﻿@model MyWebsite.Application.DTOs.ViewModels.CategoryViewModel
 
 @{
-    ViewData["Title"] = "Danh mục sản phẩm";
+    var title = "Danh mục sản phẩm";
+    ViewData["Title"] = @title;
 }
 
 <!-- Modal -->
@@ -14,21 +15,20 @@
         <button type="button" class="btn" id="btnAdd">
             <i class="ri-add-circle-fill"></i>
         </button>
-        Danh mục sản phẩm
+        @title
     </h5>
 
     <div class="table-responsive text-nowrap table-hover">
         <table id="myTable" class="table">
             <thead>
                 <tr>
-                    <th>#</th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Name)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.ParentId)
-                    </th>
-                    <th>Thao tác</th>
+                    @foreach (var column in new[] { "#",
+                                  Html.DisplayNameFor(model => model.Name),
+                                  Html.DisplayNameFor(model => model.ParentId),
+                                  "Thao tác" })
+                    {
+                        <th>@column</th>
+                    }
                 </tr>
             </thead>
             <tbody class="table-border-bottom-0">
@@ -36,23 +36,7 @@
                     <td>0</td>
                     <td>No data</td>
                     <td>No data</td>
-                    <td>
-                        <div class="dropdown">
-                            <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
-                                <i class="ri-more-2-line"></i>
-                            </button>
-                            <div class="dropdown-menu">
-                                <a class="dropdown-item" asp-action="SaveData" asp-controller="Categories"
-                                   asp-area="Admin" asp-route-id="${key}">
-                                    <i class="ri-pencil-line me-1"></i> Sửa
-                                </a>
-                                <a class="dropdown-item" asp-action="SoftDelete" asp-controller="Categories"
-                                   asp-area="Admin" asp-route-id="${key}">
-                                    <i class="ri-delete-bin-6-line me-1"></i> Xóa
-                                </a>
-                            </div>
-                        </div>
-                    </td>
+                    <td>Actions</td>
                 </tr>
             </tbody>
         </table>
@@ -63,6 +47,60 @@
 @section Scripts
 {
     <script src="~/js/registerDataTable.js"></script>
+    <script>
+        function handleImage(value, defaultValue = '/images/default-image.png') {
+            return `${value ? `data:image/png;base64,${value}` : defaultValue}`;
+        }
+
+        function reloadTable() {
+            $(elementName).DataTable().ajax.reload();
+        }
+
+        function submitForm(formElement) {
+            const formData = new FormData(formElement);
+
+            $.ajax({
+                url: formElement.action,
+                type: formElement.method,
+                data: formData,
+                contentType: false,
+                processData: false,
+                success: function (response) {
+                    if (response.status !== 'Error') {
+                        $('#saveModal').modal('hide');
+                        reloadTable();
+                        showToaster("Success", formData.get('Id') === "0" ? "Thêm thành công" : "Cập nhật thành công");
+                    } else {
+                        showToaster("Error", formData.get('Id') === "0" ? "Thêm thất bại" : "Cập nhật thất bại");
+                    }
+                },
+                error: function (error) {
+                    console.error('Form submission error:', error);
+                }
+            });
+        }
+
+        function previewMainImage(input) {
+            const preview = $('#previewMainImage');
+            preview.empty(); // Xóa hình ảnh cũ
+
+            if (input.files) {
+                Array.from(input.files).forEach(file => {
+                    const reader = new FileReader();
+                    reader.onload = (event) => {
+                        $('<img>', {
+                            src: event.target.result,
+                            id: 'previewImage',
+                            class: 'img-thumbnail mr-3 mb-2',
+                            style: 'max-height: 200px; max-width: 300px;'
+                        }).appendTo(preview);
+                    };
+                    reader.readAsDataURL(file);
+                });
+            }
+        }
+
+    </script>
 
     <script>
         const elementName = "#myTable";
@@ -122,13 +160,11 @@
         registerDataTable(elementName, columns, url);
 
         $(document).on("click", "#btnAdd", function () {
+            $('#saveModalTitle').text("Thêm mới Danh mục");
             $('#saveModal').modal('show');
             $('#formCategory').trigger("reset");
-            document.getElementById('previewImage').src = '/images/default-image.png';
-
-            // Reset các trường ẩn
+            $('#previewImage').prop('src', '/images/default-image.png');
             $('#Id').val('0');
-            $('#ImageData').val('');
         });
 
         $(document).on("click", ".btn-edit", function () {
@@ -138,19 +174,24 @@
                 url: `${getById}/${key}`,
                 method: "GET",
                 success: function (data) {
-                    // Hiển thị modal trước
-                    $('#saveModal').modal('show');
-            
-                    // Sau đó đợi một chút để đảm bảo modal đã được render
-                    setTimeout(function() {
-                        console.log(data);
-                        mapObjectToControlView(data);
+                    console.log(data);
 
-                        document.getElementById('previewImage').src = `${data.imageData ? `data:image/png;base64,${data.imageData}` : '/images/default-image.png'}`;
+                    // Hiển thị modal trước
+                    $('#saveModalTitle').text("Chỉnh sửa Danh mục");
+                    $('#saveModal').modal('show');
+                    $('#formCategory').trigger("reset");
+                    $('#previewImage').empty();
+                    $('#Id').val('0');
+
+                    // Sau đó đợi một chút để đảm bảo modal đã được render
+                    setTimeout(function () {
+                        mapObjectToControlView(data);
+                        $('#previewImage').prop("src", handleImage(data.imageData, '/images/default-image.png'));
+
                     }, 100); // Đợi 100ms
                 },
-                error: function(error) {
-                    console.error('Error fetching category data:', error);
+                error: function (error) {
+                    console.error('Error fetching banner data:', error);
                 }
             });
         });
@@ -169,60 +210,9 @@
             });
         });
 
-        function previewMainImage(input) {
-            var preview = document.getElementById('previewMainImage');
-            preview.innerHTML = ''; // Xóa các hình ảnh trước đó để cập nhật hình ảnh mới
-
-            if (input.files) {
-                var filesAmount = input.files.length;
-
-                for (var i = 0; i < filesAmount; i++) {
-                    var reader = new FileReader();
-
-                    reader.onload = function (event) {
-                        var image = document.createElement('img');
-                        image.id = 'previewImage';
-                        image.className = 'img-thumbnail mr-3 mb-2';
-                        image.style.maxHeight = '200px';
-                        image.style.maxWidth = '300px';
-                        image.src = event.target.result;
-                        preview.appendChild(image);
-                    }
-
-                    reader.readAsDataURL(input.files[i]);
-                }
-            }
-        }
-
-        $('#formCategory').submit(function (e) {
-
+        $('#formCategory').on("submit", function (e) {
             e.preventDefault();
-
-            var formData = new FormData(this);
-            var id = formData.get('Id');
-            console.log("Id: ", id);
-
-            $.ajax({
-                url: $(this).attr('action'),
-                type: $(this).attr('method'),
-                data: formData,
-                contentType: false, // Important: Do not set content type
-                processData: false, // Important: Do not process data
-                success: function (response) {
-                    console.log(response);
-
-                    if (response.status !== 'Error') {
-                        $('#saveModal').modal('hide');
-                        $(elementName).DataTable().ajax.reload();
-                        showToaster("Success", id === 0 ? "Tạo thành công" : "Cập nhật thành công");
-                    } else {
-                        showToaster("Error", id === 0 ? "Tạo thất bại" : "Cập nhật thất bại");
-                    }
-                },
-                error: function (response) {
-                    console.log(response);
-                }
-            });
+            submitForm(this);
         });
     </script>
 }

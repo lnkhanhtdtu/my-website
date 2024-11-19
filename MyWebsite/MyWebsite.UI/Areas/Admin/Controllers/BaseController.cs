@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace MyWebsite.UI.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    // [Authorize]
+    [Authorize]
     public class BaseController : Controller
     { }
 }

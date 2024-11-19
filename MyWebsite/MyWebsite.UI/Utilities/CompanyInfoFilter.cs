@@ -15,12 +15,9 @@ namespace MyWebsite.UI.Utilities
         public void OnActionExecuting(ActionExecutingContext context)
         {
             var companyInfo = _context.CompanyInfo.FirstOrDefault();
-
             context.HttpContext.Items["CompanyInfo"] = companyInfo ?? new CompanyInfo();
         }
 
-        public void OnActionExecuted(ActionExecutedContext context)
-        {
-        }
+        public void OnActionExecuted(ActionExecutedContext context) { }
     }
 }

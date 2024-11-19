@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace MyWebsite.Application.DTOs.ViewModels
 {
@@ -13,6 +8,9 @@ namespace MyWebsite.Application.DTOs.ViewModels
 
         [Display(Name = "Tên công ty")]
         public string Name { get; set; }
+
+        [Display(Name = "Tên viết tắt")]
+        public string ShortName { get; set; }
 
         [Display(Name = "Logo")]
         public byte[]? Logo { get; set; }

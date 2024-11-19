@@ -1,7 +1,8 @@
 ﻿@model MyWebsite.Application.DTOs.ViewModels.BannerViewModel
 
 @{
-    ViewData["Title"] = "Danh sách Banner";
+    var title = "Danh sách Banner";
+    ViewData["Title"] = title;
 }
 
 <!-- Modal -->
@@ -14,24 +15,21 @@
         <button type="button" class="btn" id="btnAdd">
             <i class="ri-add-circle-fill"></i>
         </button>
-        Danh mục sản phẩm
+        @title
     </h5>
 
     <div class="table-responsive text-nowrap table-hover">
         <table id="myTable" class="table">
             <thead>
                 <tr>
-                    <th>#</th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Title)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.InOrder)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.IsActive)
-                    </th>
-                    <th>Thao tác</th>
+                    @foreach (var column in new[] { "#", 
+                                  Html.DisplayNameFor(model => model.Title), 
+                                  Html.DisplayNameFor(model => model.InOrder), 
+                                  Html.DisplayNameFor(model => model.IsActive), 
+                                  "Thao tác" })
+                    {
+                        <th>@column</th>
+                    }
                 </tr>
             </thead>
             <tbody class="table-border-bottom-0">
@@ -40,23 +38,7 @@
                     <td>No data</td>
                     <td>No data</td>
                     <td>No data</td>
-                    <td>
-                        <div class="dropdown">
-                            <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
-                                <i class="ri-more-2-line"></i>
-                            </button>
-                            <div class="dropdown-menu">
-                                <a class="dropdown-item" asp-action="SaveData" asp-controller="Banners"
-                                   asp-area="Admin" asp-route-id="${key}">
-                                    <i class="ri-pencil-line me-1"></i> Sửa
-                                </a>
-                                <a class="dropdown-item" asp-action="SoftDelete" asp-controller="Banners"
-                                   asp-area="Admin" asp-route-id="${key}">
-                                    <i class="ri-delete-bin-6-line me-1"></i> Xóa
-                                </a>
-                            </div>
-                        </div>
-                    </td>
+                    <td>Actions</td>
                 </tr>
             </tbody>
         </table>
@@ -67,6 +49,60 @@
 @section Scripts
 {
     <script src="~/js/registerDataTable.js"></script>
+    <script>
+        function handleImage(value, defaultValue = '/images/default-image.png') {
+            return `${value ? `data:image/png;base64,${value}` : defaultValue}`;
+        }
+        
+        function reloadTable() {
+            $(elementName).DataTable().ajax.reload();
+        }
+        
+        function submitForm(formElement) {
+            const formData = new FormData(formElement);
+
+            $.ajax({
+                url: formElement.action,
+                type: formElement.method,
+                data: formData,
+                contentType: false,
+                processData: false,
+                success: function (response) {
+                    if (response.status !== 'Error') {
+                        $('#saveModal').modal('hide');
+                        reloadTable();
+                        showToaster("Success", formData.get('Id') === "0" ? "Thêm thành công" : "Cập nhật thành công");
+                    } else {
+                        showToaster("Error", formData.get('Id') === "0" ? "Thêm thất bại" : "Cập nhật thất bại");
+                    }
+                },
+                error: function (error) {
+                    console.error('Form submission error:', error);
+                }
+            });
+        }
+        
+        function previewMainImage(input) {
+            const preview = $('#previewMainImage');
+            preview.empty(); // Xóa hình ảnh cũ
+
+            if (input.files) {
+                Array.from(input.files).forEach(file => {
+                    const reader = new FileReader();
+                    reader.onload = (event) => {
+                        $('<img>', {
+                            src: event.target.result,
+                            id: 'previewImage',
+                            class: 'img-thumbnail mr-3 mb-2',
+                            style: 'max-height: 200px; max-width: 300px;'
+                        }).appendTo(preview);
+                    };
+                    reader.readAsDataURL(file);
+                });
+            }
+        }
+
+    </script>
 
     <script>
         const elementName = "#myTable";
@@ -76,66 +112,49 @@
         const deleteUrl = '@Url.Action("SoftDelete", "Banners", new { area = "Admin" })';
 
         const columns = [
-            // STT
+            { data: null, name: "stt", autoWidth: true, render: (_, __, ___, meta) => meta.row + 1 },
             {
-                data: null, name: "stt", autoWidth: true,
-                render: function (data, type, row, meta) { return meta.row + 1; }
-            },
+                data: "title", name: "title", width: "200px", render: (data, _, row) => `
+                                    <td>
+                                       <div class="d-flex align-items-center">
+                                           <div class="avatar-wrapper me-3 rounded-2 bg-label-secondary user-name">
+                                               <div class="avatar" style='width: 10rem !important; height: auto !important;'>
+                                                   <img src="${handleImage(row.imageData)}" alt="Banner" class="rounded-2">
+                                               </div>
+                                           </div>
+                                           <div class="d-flex flex-column justify-content-center">
+                                               <span class="text-heading fw-medium text-wrap">${data}</span>
+                                               <!--/ <small class="text-truncate mb-0 d-none d-sm-block">${row.description}</small> -->
+                                           </div>
+                                       </div>
+                                   </td>` },
+            { data: "inOrder", name: "inOrder" },
+            { data: "isActive", name: "isActive", render: (data) => `<input type="checkbox" ${data ? 'checked' : ''} disabled>` },
             {
-                data: "title", name: "title", width: "200px",
-                render: function (data, type, row) {
-                    return `<td>
-                                        <div class="d-flex align-items-center">
-                                            <div class="avatar-wrapper me-3 rounded-2 bg-label-secondary user-name">
-                                                <div class="avatar" style='width: 10rem !important; height: auto !important;'><img
-                                                        src="${row.imageData ? `data:image/png;base64,${row.imageData}` : '/images/default-image.png'}"
-                                                        alt="Product-8" class="rounded-2"></div>
-                                            </div>
-                                            <div class="d-flex flex-column justify-content-center">
-                                                <span class="text-heading fw-medium text-wrap">${data}</span>
-                                                        <small class="text-truncate mb-0 d-none d-sm-block">${row.description}</small>
-                                            </div>
-                                        </div>
-                                    </td>`;
-                }
-            },
-            {
-                data: "inOrder", name: "inOrder", autoWidth: true
-            },
-            {
-                data: "isActive", name: "isActive", autoWidth: true
-            },
-            // Action Edit, Delete
-            {
-                data: "id", name: "id", width: "20",
-                render: function (key) {
-                    return `<div class="dropdown">
-                                        <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
-                                            <i class="ri-more-2-line"></i>
-                                        </button>
-                                        <div class="dropdown-menu" data-key="${key}">
-                                            <a class="dropdown-item btn-edit" href="#" >
-                                                <i class="ri-pencil-line me-1 text-warning"></i> Sửa
-                                            </a>
-                                            <a class="dropdown-item btn-delete" href="#">
-                                                <i class="ri-delete-bin-6-line me-1 text-danger"></i> Xóa
-                                            </a>
-                                        </div>
-                                    </div>`;
-                }
-            }
+                data: "id", name: "id", render: (key) => `
+                                    <div class="dropdown">
+                                       <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
+                                           <i class="ri-more-2-line"></i>
+                                       </button>
+                                       <div class="dropdown-menu" data-key="${key}">
+                                           <a class="dropdown-item btn-edit" href="#" >
+                                               <i class="ri-pencil-line me-1 text-warning"></i> Sửa
+                                           </a>
+                                           <a class="dropdown-item btn-delete" href="#">
+                                               <i class="ri-delete-bin-6-line me-1 text-danger"></i> Xóa
+                                           </a>
+                                       </div>
+                                   </div>` }
         ];
 
         registerDataTable(elementName, columns, url);
 
         $(document).on("click", "#btnAdd", function () {
+            $('#saveModalTitle').text("Thêm mới Banner");
             $('#saveModal').modal('show');
             $('#formBanner').trigger("reset");
-            document.getElementById('previewImage').src = '/images/default-image.png';
-
-            // Reset các trường ẩn
+            $('#previewImage').prop('src', '/images/default-image.png');
             $('#Id').val('0');
-            $('#ImageData').val('');
         });
 
         $(document).on("click", ".btn-edit", function () {
@@ -145,18 +164,23 @@
                 url: `${getById}/${key}`,
                 method: "GET",
                 success: function (data) {
+                    console.log(data);
+
                     // Hiển thị modal trước
+                    $('#saveModalTitle').text("Chỉnh sửa Banner");
                     $('#saveModal').modal('show');
+                    $('#formBanner').trigger("reset");
+                    $('#previewImage').empty();
+                    $('#Id').val('0');
 
                     // Sau đó đợi một chút để đảm bảo modal đã được render
-                    setTimeout(function() {
-                        console.log(data);
+                    setTimeout(function () {
                         mapObjectToControlView(data);
+                        $('#previewImage').prop("src", handleImage(data.imageData, '/images/default-image.png'));
 
-                        document.getElementById('previewImage').src = `${data.imageData ? `data:image/png;base64,${data.imageData}` : '/images/default-image.png'}`;
                     }, 100); // Đợi 100ms
                 },
-                error: function(error) {
+                error: function (error) {
                     console.error('Error fetching banner data:', error);
                 }
             });
@@ -169,67 +193,16 @@
                 url: `${deleteUrl}/${key}`,
                 method: "POST",
                 success: function (data) {
-                    $(elementName).DataTable().ajax.reload();
+                    reloadTable();
                     showToaster("Success", "Xóa thành công");
                     console.log(data);
                 }
             });
         });
 
-        function previewMainImage(input) {
-            var preview = document.getElementById('previewMainImage');
-            preview.innerHTML = ''; // Xóa các hình ảnh trước đó để cập nhật hình ảnh mới
-
-            if (input.files) {
-                var filesAmount = input.files.length;
-
-                for (var i = 0; i < filesAmount; i++) {
-                    var reader = new FileReader();
-
-                    reader.onload = function (event) {
-                        var image = document.createElement('img');
-                        image.id = 'previewImage';
-                        image.className = 'img-thumbnail mr-3 mb-2';
-                        image.style.maxHeight = '200px';
-                        image.style.maxWidth = '300px';
-                        image.src = event.target.result;
-                        preview.appendChild(image);
-                    }
-
-                    reader.readAsDataURL(input.files[i]);
-                }
-            }
-        }
-
-        $('#formBanner').submit(function (e) {
-
+        $('#formBanner').on("submit", function (e) {
             e.preventDefault();
-
-            var formData = new FormData(this);
-            var id = formData.get('Id');
-            console.log("Id: ", id);
-
-            $.ajax({
-                url: $(this).attr('action'),
-                type: $(this).attr('method'),
-                data: formData,
-                contentType: false, // Important: Do not set content type
-                processData: false, // Important: Do not process data
-                success: function (response) {
-                    console.log(response);
-
-                    if (response.status !== 'Error') {
-                        $('#saveModal').modal('hide');
-                        $(elementName).DataTable().ajax.reload();
-                        showToaster("Success", id === 0 ? "Tạo thành công" : "Cập nhật thành công");
-                    } else {
-                        showToaster("Error", id === 0 ? "Tạo thất bại" : "Cập nhật thất bại");
-                    }
-                },
-                error: function (response) {
-                    console.log(response);
-                }
-            });
+            submitForm(this);
         });
     </script>
 }

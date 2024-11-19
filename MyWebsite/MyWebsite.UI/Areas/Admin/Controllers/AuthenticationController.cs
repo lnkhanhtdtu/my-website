@@ -34,7 +34,7 @@ namespace MyWebsite.UI.Areas.Admin.Controllers
                 var result = await _authenticationService.CheckLogin(model.Username, model.Password, model.RememberMe);
                 if (result.Status)
                 {
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Index", "Home", new { area = "Admin" });
                 }
                 TempData["ErrorMessage"] = result.Message;
             }

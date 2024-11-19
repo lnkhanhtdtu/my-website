@@ -3,8 +3,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MyWebsite.Application.Abstracts;
 using MyWebsite.Application.DTOs.ViewModels;
-using MyWebsite.Application.Services;
-using MyWebsite.Domain.Entities;
 
 namespace MyWebsite.UI.Areas.Admin.Controllers
 {

@@ -19,15 +19,6 @@
                             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                             <input type="hidden" asp-for="Id" />
 
-                            @if (Model.ImageData != null)
-                            {
-                                <input type="hidden" asp-for="ImageData" value="@Convert.ToBase64String(Model.ImageData)" />
-                            }
-                            else{
-                                <input type="hidden" asp-for="ImageData" />
-                            }
-                            
-
                             <div class="row">
                                 <div class="d-flex align-items-start align-items-sm-center gap-6">
                                     @* Hiển thị hình ảnh khi load img *@
@@ -59,7 +50,7 @@
                             <div class="row">
                                 <div class="col mb-6 mt-2">
                                     <div class="form-floating form-floating-outline">
-                                        <textarea type="text" asp-for="Description" class="form-control" placeholder="Nhập Mô tả" rows="3" required ></textarea>
+                                        <textarea type="text" asp-for="Description" class="form-control" placeholder="Nhập Mô tả" rows="3" required></textarea>
                                         <label asp-for="Description">Mô tả</label>
                                     </div>
                                 </div>
@@ -76,10 +67,9 @@
 
                             <div class="row">
                                 <div class="col mb-6 mt-2">
-                                    <div class="form-floating form-floating-outline">
-                                        <label asp-for="IsActive">Hiển thị</label>
-                                        <input type="checkbox" asp-for="IsActive" class="form-control" />
-                                        
+                                    <div class="form-check mb-0">
+                                        <input class="form-check-input" type="checkbox" asp-for="IsActive" />
+                                        <label class="form-check-label">Hiển thị</label>
                                     </div>
                                 </div>
                             </div>

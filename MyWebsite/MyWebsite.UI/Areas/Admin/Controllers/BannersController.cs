@@ -1,10 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using MyWebsite.Application.Abstracts;
-using MyWebsite.Application.DTOs.ViewModels;
 using MyWebsite.Application.DTOs;
-using MyWebsite.Application.DTOs.Banners;
-using MyWebsite.Domain.Entities;
+using MyWebsite.Application.DTOs.ViewModels;
 
 namespace MyWebsite.UI.Areas.Admin.Controllers
 {
