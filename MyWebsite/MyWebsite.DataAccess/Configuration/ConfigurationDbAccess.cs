@@ -17,7 +17,7 @@ namespace MyWebsite.DataAccess.Configuration
                 appContext.Database.MigrateAsync().Wait();
             }
         }
-        
+
         public static async Task SeedData(this WebApplication webApplication)
         {
             using var scope = webApplication.Services.CreateScope();
@@ -54,6 +54,29 @@ namespace MyWebsite.DataAccess.Configuration
             {
                 var initialConfig = new ApplicationConfiguration();
                 context.ApplicationConfigurations.Add(initialConfig);
+                await context.SaveChangesAsync();
+            }
+
+            if (!await context.CompanyInfo.AnyAsync())
+            {
+                var company = new CompanyInfo()
+                {
+                    Name = "CÔNG TY CỔ PHẦN BAO BÌ NÔNG SẢN MIỀN NAM",
+                    ShortName = "SAGRIBAGS",
+                    BusinessField = "(1) Sản xuất các loại hàng dệt khác chưa được phân vào đâu\r\nChi tiết: sản xuất bao bì đay",
+                    Slogan = "",
+                    TaxCode = "3701716622",
+                    FoundationYear = 2010, // 2010-05-11
+                    HeadquartersAddress = "Lô D-1N-CN, 1Q-CN, Khu công nghiệp Mỹ Phước 3, Phường Thới Hòa, Thị xã Bến Cát, Tỉnh Bình Dương, Việt Nam",
+                    PhoneNumber = "0977781184",
+                    Email = "baobinongsan.miennam@gmail.com",
+                    Website = "",
+                    // Quản lý bởi    Chi cục Thuế khu vực Bến Cát
+                    // Loại hình DN   Công ty cổ phần ngoài NN
+                    // Tình trạng Đang hoạt động(đã được cấp GCN ĐKT)
+                };
+
+                context.CompanyInfo.Add(company);
                 await context.SaveChangesAsync();
             }
         }
