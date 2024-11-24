@@ -12,14 +12,14 @@ namespace MyWebsite.Application.DTOs.ViewModels
         [Display(Name = "Ngày tạo")]
         public DateTime CreatedAt { get; set; } = DateTime.Now;
 
-        [Display(Name = "Tên sản phẩm")]
+        [Display(Name = "Tên sản phẩm (*)")]
         public string Name { get; set; }
 
-        [Display(Name = "Mô tả tóm tắt")]
+        [Display(Name = "Mô tả tóm tắt (*)")]
         public string Summary { get; set; }
 
-        [Display(Name = "Mô tả")]
-        public string Description { get; set; }
+        [Display(Name = "Mô tả (*)")]
+        public string? Description { get; set; }
 
         [ForeignKey("Category")]
         [Display(Name = "Loại sản phẩm")]
@@ -31,7 +31,7 @@ namespace MyWebsite.Application.DTOs.ViewModels
         [Display(Name = "Danh sách hình ảnh")]
         public List<Image>? Images { get; set; }
 
-        [Display(Name = "Sản phẩm nổi bật")]
+        [Display(Name = "Sản phẩm nổi bật (*)")]
         public bool IsFeatured { get; set; }
 
         [Display(Name = "Giá")]

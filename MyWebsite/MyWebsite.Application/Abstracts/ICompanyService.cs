@@ -8,6 +8,7 @@ namespace MyWebsite.Application.Abstracts
     public interface ICompanyService
     {
         Task<CompanyViewModel> GetById(int id);
+        Task<CompanyViewModel> GetFirst();
         Task SoftDelete(int id);
         Task SaveData(CompanyViewModel companyViewModel, IFormFile? postFile);
     }

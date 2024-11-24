@@ -1,9 +1,27 @@
 ﻿@using MyWebsite.Domain.Entities
 @model MyWebsite.Application.DTOs.ViewModels.ProductViewModel
 @{
+    var companyInfo = Context.Items["CompanyInfo"] as CompanyInfo;
     var title = "Chi tiết sản phẩm";
     ViewData["Title"] = title;
 }
+
+<style>
+    .product-image-slide {
+        height: 0;
+        padding-bottom: 100%; /* 75%; /* Điều chỉnh tỷ lệ khung hình ở đây, ví dụ 4:3 */
+        position: relative;
+    }
+
+    .product-image-slide img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+</style>
 
 <!-- Page Title -->
 <div class="page-title" data-aos="fade">
@@ -12,7 +30,6 @@
             <div class="row d-flex justify-content-center text-center">
                 <div class="col-lg-8">
                     <h1>@title</h1>
-                    @* <p class="mb-0">Odio et unde deleniti. Deserunt numquam exercitationem. Officiis quo odio sint voluptas consequatur ut a odio voluptatem. Sit dolorum debitis veritatis natus dolores. Quasi ratione sint. Sit quaerat ipsum dolorem.</p> *@
                 </div>
             </div>
         </div>
@@ -58,8 +75,8 @@
                             var imgSrcMain = MyWebsite.UI.Utilities.ImageHelper.GetImageSource(Model.ImageData, "client/assets/img/portfolio/app-1.jpg");
                         }
 
-                        <div class="swiper-slide">
-                            <img src="@imgSrcMain" alt="">
+                        <div class="swiper-slide product-image-slide">
+                            <img src="@imgSrcMain" />
                         </div>
 
                         @foreach(var item in Model.Images)
@@ -68,8 +85,8 @@
                             {
                                 var imgSrc = MyWebsite.UI.Utilities.ImageHelper.GetImageSource(item.Data, "client/assets/img/portfolio/app-1.jpg");
 
-                                <div class="swiper-slide">
-                                    <img src="@imgSrc" alt="">
+                                <div class="swiper-slide product-image-slide">
+                                    <img src="@imgSrc" alt="" />
                                 </div>
                             }
                             catch (Exception e)
@@ -77,22 +94,6 @@
                                 Console.WriteLine(e);
                             }
                         }
-
-@*                         <div class="swiper-slide">
-                            <img src="~/client/assets/img/portfolio/app-1.jpg" alt="">
-                        </div>
-
-                        <div class="swiper-slide">
-                            <img src="~/client/assets/img/portfolio/product-1.jpg" alt="">
-                        </div>
-
-                        <div class="swiper-slide">
-                            <img src="~/client/assets/img/portfolio/branding-1.jpg" alt="">
-                        </div>
-
-                        <div class="swiper-slide">
-                            <img src="~/client/assets/img/portfolio/books-1.jpg" alt="">
-                        </div> *@
 
                     </div>
                     <div class="swiper-pagination"></div>
@@ -112,22 +113,12 @@
                             <li><strong>@item.ProductAttribute?.Name</strong>: @item.Value</li> 
                         } *@
 
-@*                         <li><strong>Nguồn gốc</strong>: @Model.Category?.Name</li>
-                        <li><strong>Khối lượng</strong>: @Model.Category?.Name</li>
-                        <li><strong>Màu</strong>: @Model.Category?.Name</li>
-                        <li><strong>Chất liệu</strong>: @Model.Category?.Name</li>
-                        <li><strong>Kích thước</strong>: @Model.Category?.Name</li> *@
                         @* Nguồn gốc	Việt Nam *@
                         @* Khối lượng	900g *@
                         @* Trạng thái	Mới *@
                         @* Màu	Nâu *@
                         @* Chất liệu	Sợi đay *@
                         @* Kích thước	65×100 *@
-@*                         <li><strong>Client</strong>: ASU Company</li>
-                        <li><strong>Project date</strong>: 01 March, 2020</li>
-                        <li><strong>Project URL</strong>: <a href="#">www.example.com</a></li> *@
-
-
                     </ul>
 
                     <form asp-action="SaveQuotation" asp-controller="Product" method="post" id="formQuotation" enctype="multipart/form-data" class="php-email-form" data-aos="fade-up" data-aos-delay="500">

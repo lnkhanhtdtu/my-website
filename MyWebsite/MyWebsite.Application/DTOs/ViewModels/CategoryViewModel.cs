@@ -9,7 +9,7 @@ namespace MyWebsite.Application.DTOs.ViewModels
         [Display(Name = "Hình ảnh")]
         public byte[]? ImageData { get; set; }
 
-        [Display(Name = "Tên danh mục")]
+        [Display(Name = "Tên danh mục (*)")]
         public string Name { get; set; }
 
         [Display(Name = "Danh mục cha")]

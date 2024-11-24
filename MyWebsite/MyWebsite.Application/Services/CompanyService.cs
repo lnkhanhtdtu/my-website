@@ -23,6 +23,12 @@ namespace MyWebsite.Application.Services
             return _mapper.Map<CompanyViewModel>(company);
         }
 
+        public async Task<CompanyViewModel> GetFirst()
+        {
+            var company = await _unitOfWork.CompanyRepository.GetFirst();
+            return _mapper.Map<CompanyViewModel>(company);
+        }
+
         public async Task SoftDelete(int id)
         {
             var company = await _unitOfWork.CompanyRepository.GetById(id);
@@ -36,13 +42,17 @@ namespace MyWebsite.Application.Services
             existingCompany.Name = companyViewModel.Name;
             existingCompany.ShortName = companyViewModel.ShortName;
             existingCompany.BusinessField = companyViewModel.BusinessField;
-            existingCompany.Slogan = companyViewModel.Slogan;
             existingCompany.TaxCode = companyViewModel.TaxCode;
             existingCompany.FoundationYear = companyViewModel.FoundationYear;
             existingCompany.HeadquartersAddress = companyViewModel.HeadquartersAddress;
             existingCompany.PhoneNumber = companyViewModel.PhoneNumber;
             existingCompany.Email = companyViewModel.Email;
             existingCompany.Website = companyViewModel.Website;
+            existingCompany.ZaloOaId = companyViewModel.ZaloOaId;
+            existingCompany.ZaloNumber = companyViewModel.ZaloNumber;
+            existingCompany.WhatsAppNumber = companyViewModel.WhatsAppNumber;
+            existingCompany.ManagedBy = companyViewModel.ManagedBy;
+            existingCompany.TypeOfBusiness = companyViewModel.TypeOfBusiness;
 
             if (postFile is { Length: > 0 })
             {

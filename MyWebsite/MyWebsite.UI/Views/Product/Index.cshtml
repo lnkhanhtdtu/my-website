@@ -3,7 +3,8 @@
 @model IEnumerable<MyWebsite.Domain.Entities.Product>
 
 @{
-    ViewData["Title"] = "Sản phẩm";
+    var title = "Danh sách sản phẩm";
+    ViewData["Title"] = title;
 }
 
 <!-- Portfolio Section -->
@@ -12,34 +13,35 @@
     <!-- Section Title -->
     <div class="container section-title" data-aos="fade-up">
         <h2>Sản phầm</h2>
-        <div>Danh sách sản phẩm</div>
+        <div>@title</div>
     </div><!-- End Section Title -->
 
     <div class="container">
 
         <div class="isotope-layout" data-default-filter="*" data-layout="masonry" data-sort="original-order">
+            @if (!Model.Any())
+            {
+                <p class="text-center">Không có sản phẩm phù hợp</p>
+            }
+            else
+            {
+                <ul class="portfolio-filters isotope-filters" data-aos="fade-up" data-aos-delay="100">
+                    <li data-filter="*" class="filter-active">All (@Model.Count())</li>
 
-            <ul class="portfolio-filters isotope-filters" data-aos="fade-up" data-aos-delay="100">
-                <li data-filter="*" class="filter-active">All (@Model.Count())</li>
-
-                @foreach (var item in (ViewBag.Categories as IEnumerable<CategorySiteDTO>) ?? Enumerable.Empty<CategorySiteDTO>())
-                {
-                    if (item.TotalProducts > 0)
+                    @foreach (var item in (ViewBag.Categories as IEnumerable<CategorySiteDTO>) ?? Enumerable.Empty<CategorySiteDTO>())
                     {
-                        <li data-filter=".category-@item.Id">@item.Name @(item.TotalProducts > 0 ? $" ({item.TotalProducts})" : "")</li>
+                        if (item.TotalProducts > 0)
+                        {
+                            <li data-filter=".category-@item.Id">@item.Name @(item.TotalProducts > 0 ? $" ({item.TotalProducts})" : "")</li>
+                        }
                     }
-                }
 
-            </ul><!-- End Portfolio Filters -->
+                </ul>
 
-            <div class="row gy-4 isotope-container" data-aos="fade-up" data-aos-delay="200">
+                <!-- End Portfolio Filters -->
 
-                @if (!Model.Any())
-                {
-                    <h3>Không có sản phẩm phù hợp</h3>
-                }
-                else
-                {
+                <div class="row gy-4 isotope-container" data-aos="fade-up" data-aos-delay="200">
+
                     @foreach (var item in Model)
                     {
                         try
@@ -48,7 +50,8 @@
 
                             <div class="col-lg-4 col-md-6 portfolio-item isotope-item category-@item.CategoryId">
                                 <div class="portfolio-content h-100">
-                                    <a href="@imgSrc" data-gallery="portfolio-gallery-app" class="glightbox">
+                                    @* <a href="@imgSrc" data-gallery="portfolio-gallery-app" class="glightbox"> *@
+                                    <a asp-controller="Product" asp-action="Details" asp-route-id="@item.Id">
                                         <img src="@imgSrc" class="img-fluid" alt="">
                                     </a>
                                     <div class="portfolio-info">
@@ -65,132 +68,12 @@
                             Console.WriteLine(e);
                         }
                     }
-                }
 
-                @* <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-app">
-                <div class="portfolio-content h-100">
-                <a href="~/client/assets/img/portfolio/app-1.jpg" data-gallery="portfolio-gallery-app" class="glightbox"><img src="~/client/assets/img/portfolio/app-1.jpg" class="img-fluid" alt=""></a>
-                <div class="portfolio-info">
-                <h4><a asp-controller="Product" asp-action="Details" title="More Details">App 1</a></h4>
-                <p>Lorem ipsum, dolor sit amet consectetur</p>
                 </div>
-                </div>
-                </div><!-- End Portfolio Item -->
 
-                <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-product">
-                <div class="portfolio-content h-100">
-                <a href="~/client/assets/img/portfolio/product-1.jpg" data-gallery="portfolio-gallery-app" class="glightbox"><img src="~/client/assets/img/portfolio/product-1.jpg" class="img-fluid" alt=""></a>
-                <div class="portfolio-info">
-                <h4><a asp-controller="Product" asp-action="Details" title="More Details">Product 1</a></h4>
-                <p>Lorem ipsum, dolor sit amet consectetur</p>
-                </div>
-                </div>
-                </div><!-- End Portfolio Item -->
-
-                <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-branding">
-                <div class="portfolio-content h-100">
-                <a href="~/client/assets/img/portfolio/branding-1.jpg" data-gallery="portfolio-gallery-app" class="glightbox"><img src="~/client/assets/img/portfolio/branding-1.jpg" class="img-fluid" alt=""></a>
-                <div class="portfolio-info">
-                <h4><a asp-controller="Product" asp-action="Details" title="More Details">Branding 1</a></h4>
-                <p>Lorem ipsum, dolor sit amet consectetur</p>
-                </div>
-                </div>
-                </div><!-- End Portfolio Item -->
-
-                <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-books">
-                <div class="portfolio-content h-100">
-                <a href="~/client/assets/img/portfolio/books-1.jpg" data-gallery="portfolio-gallery-app" class="glightbox"><img src="~/client/assets/img/portfolio/books-1.jpg" class="img-fluid" alt=""></a>
-                <div class="portfolio-info">
-                <h4><a asp-controller="Product" asp-action="Details" title="More Details">Books 1</a></h4>
-                <p>Lorem ipsum, dolor sit amet consectetur</p>
-                </div>
-                </div>
-                </div><!-- End Portfolio Item -->
-
-                <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-app">
-                <div class="portfolio-content h-100">
-                <a href="~/client/assets/img/portfolio/app-2.jpg" data-gallery="portfolio-gallery-app" class="glightbox"><img src="~/client/assets/img/portfolio/app-2.jpg" class="img-fluid" alt=""></a>
-                <div class="portfolio-info">
-                <h4><a asp-controller="Product" asp-action="Details" title="More Details">App 2</a></h4>
-                <p>Lorem ipsum, dolor sit amet consectetur</p>
-                </div>
-                </div>
-                </div><!-- End Portfolio Item -->
-
-                <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-product">
-                <div class="portfolio-content h-100">
-                <a href="~/client/assets/img/portfolio/product-2.jpg" data-gallery="portfolio-gallery-app" class="glightbox"><img src="~/client/assets/img/portfolio/product-2.jpg" class="img-fluid" alt=""></a>
-                <div class="portfolio-info">
-                <h4><a asp-controller="Product" asp-action="Details" title="More Details">Product 2</a></h4>
-                <p>Lorem ipsum, dolor sit amet consectetur</p>
-                </div>
-                </div>
-                </div><!-- End Portfolio Item -->
-
-                <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-branding">
-                <div class="portfolio-content h-100">
-                <a href="~/client/assets/img/portfolio/branding-2.jpg" data-gallery="portfolio-gallery-app" class="glightbox"><img src="~/client/assets/img/portfolio/branding-2.jpg" class="img-fluid" alt=""></a>
-                <div class="portfolio-info">
-                <h4><a asp-controller="Product" asp-action="Details" title="More Details">Branding 2</a></h4>
-                <p>Lorem ipsum, dolor sit amet consectetur</p>
-                </div>
-                </div>
-                </div><!-- End Portfolio Item -->
-
-                <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-books">
-                <div class="portfolio-content h-100">
-                <a href="~/client/assets/img/portfolio/books-2.jpg" data-gallery="portfolio-gallery-app" class="glightbox"><img src="~/client/assets/img/portfolio/books-2.jpg" class="img-fluid" alt=""></a>
-                <div class="portfolio-info">
-                <h4><a asp-controller="Product" asp-action="Details" title="More Details">Books 2</a></h4>
-                <p>Lorem ipsum, dolor sit amet consectetur</p>
-                </div>
-                </div>
-                </div><!-- End Portfolio Item -->
-
-                <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-app">
-                <div class="portfolio-content h-100">
-                <a href="~/client/assets/img/portfolio/app-3.jpg" data-gallery="portfolio-gallery-app" class="glightbox"><img src="~/client/assets/img/portfolio/app-3.jpg" class="img-fluid" alt=""></a>
-                <div class="portfolio-info">
-                <h4><a asp-controller="Product" asp-action="Details" title="More Details">App 3</a></h4>
-                <p>Lorem ipsum, dolor sit amet consectetur</p>
-                </div>
-                </div>
-                </div><!-- End Portfolio Item -->
-
-                <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-product">
-                <div class="portfolio-content h-100">
-                <a href="~/client/assets/img/portfolio/product-3.jpg" data-gallery="portfolio-gallery-app" class="glightbox"><img src="~/client/assets/img/portfolio/product-3.jpg" class="img-fluid" alt=""></a>
-                <div class="portfolio-info">
-                <h4><a asp-controller="Product" asp-action="Details" title="More Details">Product 3</a></h4>
-                <p>Lorem ipsum, dolor sit amet consectetur</p>
-                </div>
-                </div>
-                </div><!-- End Portfolio Item -->
-
-                <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-branding">
-                <div class="portfolio-content h-100">
-                <a href="~/client/assets/img/portfolio/branding-3.jpg" data-gallery="portfolio-gallery-app" class="glightbox"><img src="~/client/assets/img/portfolio/branding-3.jpg" class="img-fluid" alt=""></a>
-                <div class="portfolio-info">
-                <h4><a asp-controller="Product" asp-action="Details" title="More Details">Branding 3</a></h4>
-                <p>Lorem ipsum, dolor sit amet consectetur</p>
-                </div>
-                </div>
-                </div><!-- End Portfolio Item -->
-
-                <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-books">
-                <div class="portfolio-content h-100">
-                <a href="~/client/assets/img/portfolio/books-3.jpg" data-gallery="portfolio-gallery-app" class="glightbox"><img src="~/client/assets/img/portfolio/books-3.jpg" class="img-fluid" alt=""></a>
-                <div class="portfolio-info">
-                <h4><a asp-controller="Product" asp-action="Details" title="More Details">Books 3</a></h4>
-                <p>Lorem ipsum, dolor sit amet consectetur</p>
-                </div>
-                </div>
-                </div><!-- End Portfolio Item --> *@
-
-            </div><!-- End Portfolio Container -->
-
+                <!-- End Portfolio Container -->
+            }
         </div>
-
     </div>
 
 </section><!-- /Portfolio Section -->
@@ -204,161 +87,74 @@
     </div><!-- End Section Title -->
 
     <div class="container" data-aos="fade-up" data-aos-delay="100">
-
-        <div class="swiper init-swiper">
-            <script type="application/json" class="swiper-config">
-                {
-                  "loop": true,
-                  "speed": 600,
-                  "autoplay": {
-                    "delay": 5000
-                  },
-                  "slidesPerView": "auto",
-                  "pagination": {
-                    "el": ".swiper-pagination",
-                    "type": "bullets",
-                    "clickable": true
-                  },
-                  "breakpoints": {
-                    "320": {
-                      "slidesPerView": 1,
-                      "spaceBetween": 40
-                    },
-                    "1200": {
-                      "slidesPerView": 2,
-                      "spaceBetween": 20
-                    }
-                  }
-                }
-            </script>
-            <div class="swiper-wrapper">
-
-                @foreach (var item in (ViewBag.FeaturedProducts as IEnumerable<Product>) ?? Enumerable.Empty<Product>())
-                {
-                    try
+        @if (!(ViewBag.FeaturedProducts as IEnumerable<Product>).Any())
+        {
+            <p class="text-center">Không có sản phẩm phù hợp</p>
+        }
+        else
+        {
+            <div class="swiper init-swiper">
+                <script type="application/json" class="swiper-config">
                     {
-                        var imgSrc = MyWebsite.UI.Utilities.ImageHelper.GetImageSource(item.ImageData, "client/assets/img/portfolio/app-1.jpg");
+                      "loop": true,
+                      "speed": 600,
+                      "autoplay": {
+                        "delay": 5000
+                      },
+                      "slidesPerView": "auto",
+                      "pagination": {
+                        "el": ".swiper-pagination",
+                        "type": "bullets",
+                        "clickable": true
+                      },
+                      "breakpoints": {
+                        "320": {
+                          "slidesPerView": 1,
+                          "spaceBetween": 40
+                        },
+                        "1200": {
+                          "slidesPerView": 2,
+                          "spaceBetween": 20
+                        }
+                      }
+                    }
+                </script>
+                <div class="swiper-wrapper">
+                    @foreach (var item in (ViewBag.FeaturedProducts as IEnumerable<Product>) ?? Enumerable.Empty<Product>())
+                    {
+                        try
+                        {
+                            var imgSrc = MyWebsite.UI.Utilities.ImageHelper.GetImageSource(item.ImageData, "client/assets/img/portfolio/app-1.jpg");
 
-                        <div class="swiper-slide">
-                            <div class="testimonial-wrap">
-                                <div class="testimonial-item">
-                                    <img src="@imgSrc" class="testimonial-img" alt="">
-                                    <h3><a asp-controller="Product" asp-action="Details" asp-route-id="@item.Id" title="More Details">@item.Name</a></h3>
-                                    <h4>@item.Category.Name</h4>
-                                    <div class="stars">
-                                        <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+                            <div class="swiper-slide">
+                                <div class="testimonial-wrap">
+                                    <div class="testimonial-item">
+                                        <img src="@imgSrc" class="testimonial-img" alt="">
+                                        <h3><a asp-controller="Product" asp-action="Details" asp-route-id="@item.Id" title="More Details">@item.Name</a></h3>
+                                        <h4>@item.Category?.Name</h4>
+                                        <div class="stars">
+                                            <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+                                        </div>
+                                        <p>
+                                            <i class="bi bi-quote quote-icon-left"></i>
+                                            <span>@item.Summary</span>
+                                            <i class="bi bi-quote quote-icon-right"></i>
+                                        </p>
                                     </div>
-                                    <p>
-                                        <i class="bi bi-quote quote-icon-left"></i>
-                                        <span>@item.Summary</span>
-                                        <i class="bi bi-quote quote-icon-right"></i>
-                                    </p>
                                 </div>
                             </div>
-                        </div>
 
-                        <!-- End testimonial item -->
+                            <!-- End testimonial item -->
+                        }
+                        catch (Exception e)
+                        {
+                            Console.WriteLine(e);
+                        }
                     }
-                    catch (Exception e)
-                    {
-                        Console.WriteLine(e);
-                    }
-                }
-
-                @*<div class="swiper-slide">
-                <div class="testimonial-wrap">
-                <div class="testimonial-item">
-                <img src="~/client/assets/img/testimonials/testimonials-1.jpg" class="testimonial-img" alt="">
-                <h3>Saul Goodman</h3>
-                <h4>Ceo &amp; Founder</h4>
-                <div class="stars">
-                <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
                 </div>
-                <p>
-                <i class="bi bi-quote quote-icon-left"></i>
-                <span>Proin iaculis purus consequat sem cure digni ssim donec porttitora entum suscipit rhoncus. Accusantium quam, ultricies eget id, aliquam eget nibh et. Maecen aliquam, risus at semper.</span>
-                <i class="bi bi-quote quote-icon-right"></i>
-                </p>
-                </div>
-                </div>
-                </div><!-- End testimonial item -->
-
-                <div class="swiper-slide">
-                <div class="testimonial-wrap">
-                <div class="testimonial-item">
-                <img src="~/client/assets/img/testimonials/testimonials-2.jpg" class="testimonial-img" alt="">
-                <h3>Sara Wilsson</h3>
-                <h4>Designer</h4>
-                <div class="stars">
-                <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
-                </div>
-                <p>
-                <i class="bi bi-quote quote-icon-left"></i>
-                <span>Export tempor illum tamen malis malis eram quae irure esse labore quem cillum quid cillum eram malis quorum velit fore eram velit sunt aliqua noster fugiat irure amet legam anim culpa.</span>
-                <i class="bi bi-quote quote-icon-right"></i>
-                </p>
-                </div>
-                </div>
-                </div><!-- End testimonial item -->
-
-                <div class="swiper-slide">
-                <div class="testimonial-wrap">
-                <div class="testimonial-item">
-                <img src="~/client/assets/img/testimonials/testimonials-3.jpg" class="testimonial-img" alt="">
-                <h3>Jena Karlis</h3>
-                <h4>Store Owner</h4>
-                <div class="stars">
-                <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
-                </div>
-                <p>
-                <i class="bi bi-quote quote-icon-left"></i>
-                <span>Enim nisi quem export duis labore cillum quae magna enim sint quorum nulla quem veniam duis minim tempor labore quem eram duis noster aute amet eram fore quis sint minim.</span>
-                <i class="bi bi-quote quote-icon-right"></i>
-                </p>
-                </div>
-                </div>
-                </div><!-- End testimonial item -->
-
-                <div class="swiper-slide">
-                <div class="testimonial-wrap">
-                <div class="testimonial-item">
-                <img src="~/client/assets/img/testimonials/testimonials-4.jpg" class="testimonial-img" alt="">
-                <h3>Matt Brandon</h3>
-                <h4>Freelancer</h4>
-                <div class="stars">
-                <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
-                </div>
-                <p>
-                <i class="bi bi-quote quote-icon-left"></i>
-                <span>Fugiat enim eram quae cillum dolore dolor amet nulla culpa multos export minim fugiat minim velit minim dolor enim duis veniam ipsum anim magna sunt elit fore quem dolore labore illum veniam.</span>
-                <i class="bi bi-quote quote-icon-right"></i>
-                </p>
-                </div>
-                </div>
-                </div><!-- End testimonial item -->
-
-                <div class="swiper-slide">
-                <div class="testimonial-wrap">
-                <div class="testimonial-item">
-                <img src="~/client/assets/img/testimonials/testimonials-5.jpg" class="testimonial-img" alt="">
-                <h3>John Larson</h3>
-                <h4>Entrepreneur</h4>
-                <div class="stars">
-                <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
-                </div>
-                <p>
-                <i class="bi bi-quote quote-icon-left"></i>
-                <span>Quis quorum aliqua sint quem legam fore sunt eram irure aliqua veniam tempor noster veniam enim culpa labore duis sunt culpa nulla illum cillum fugiat legam esse veniam culpa fore nisi cillum quid.</span>
-                <i class="bi bi-quote quote-icon-right"></i>
-                </p>
-                </div>
-                </div>
-                </div><!-- End testimonial item --> *@
-
+                <div class="swiper-pagination"></div>
             </div>
-            <div class="swiper-pagination"></div>
-        </div>
-
+        }
     </div>
 
 </section><!-- /Testimonials Section -->

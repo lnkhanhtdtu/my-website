@@ -8,10 +8,10 @@ namespace MyWebsite.Application.DTOs.ViewModels
     {
         public int Id { get; set; }
 
-        [Display(Name = "Tiêu đề")]
+        [Display(Name = "Tiêu đề (*)")]
         public string Title { get; set; }
 
-        [Display(Name = "Mô tả")]
+        [Display(Name = "Mô tả (*)")]
         public string Description { get; set; }
 
         [Display(Name = "Hình ảnh")]
@@ -20,7 +20,7 @@ namespace MyWebsite.Application.DTOs.ViewModels
         [Display(Name = "Thứ tự hiển thị")]
         public int InOrder { get; set; } = 0;
 
-        [Display(Name = "Hiển thị")]
+        [Display(Name = "Hiển thị (*)")]
         public bool IsActive { get; set; } = true;
     }
 }

@@ -109,7 +109,7 @@
             {
                 data: "productId", name: "productId", autoWidth: true,
                 render: function (data, type, row) {
-                    return row.product.name;
+                    return row.product?.name ?? "-";
                 }
             },
             {

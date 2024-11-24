@@ -12,6 +12,8 @@ namespace MyWebsite.Domain.Abstracts
     {
         Task<CompanyInfo> GetById(int id);
 
+        Task<CompanyInfo> GetFirst();
+
         Task SoftDelete(CompanyInfo company);
 
         Task SaveData(CompanyInfo company);

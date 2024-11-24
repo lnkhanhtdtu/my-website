@@ -8,13 +8,13 @@ namespace MyWebsite.Application.DTOs.ViewModels
     {
         public int Id { get; set; }
 
-        [Display(Name = "Tên khách hàng")]
+        [Display(Name = "Tên khách hàng (*)")]
         public string CustomerName { get; set; }
 
         [Display(Name = "Email")]
         public string? CustomerEmail { get; set; }
 
-        [Display(Name = "SĐT")]
+        [Display(Name = "SĐT (*)")]
         public string CustomerPhone { get; set; }
 
         [Display(Name = "Tên sản phẩm")]

@@ -56,6 +56,13 @@
                                         <label asp-for="ShortName"></label>
                                     </div>
                                 </div>
+
+                                <div class="col mb-6 mt-2">
+                                    <div class="form-floating form-floating-outline">
+                                        <input type="text" asp-for="TaxCode" class="form-control" placeholder="Nhập Mã số thuế" />
+                                        <label asp-for="TaxCode"></label>
+                                    </div>
+                                </div>
                             </div>
                             
                             <div class="row">
@@ -70,25 +77,7 @@
                             <div class="row">
                                 <div class="col mb-6 mt-2">
                                     <div class="form-floating form-floating-outline">
-                                        <input type="text" asp-for="Slogan" class="form-control" placeholder="Nhập Slogan" />
-                                        <label asp-for="Slogan"></label>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col mb-6 mt-2">
-                                    <div class="form-floating form-floating-outline">
-                                        <input type="text" asp-for="TaxCode" class="form-control" placeholder="Nhập Mã số thuế" />
-                                        <label asp-for="TaxCode"></label>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col mb-6 mt-2">
-                                    <div class="form-floating form-floating-outline">
-                                        <input type="number" asp-for="FoundationYear" class="form-control" placeholder="Nhập Năm thành lập" />
+                                        <input type="text" asp-for="FoundationYear" class="form-control" placeholder="Nhập Năm thành lập" />
                                         <label asp-for="FoundationYear"></label>
                                     </div>
                                 </div>
@@ -110,6 +99,29 @@
                                         <label asp-for="PhoneNumber"></label>
                                     </div>
                                 </div>
+
+                                <div class="col mb-6 mt-2">
+                                    <div class="form-floating form-floating-outline">
+                                        <input type="text" asp-for="WhatsAppNumber" class="form-control" placeholder="Nhập số WhatsApp (84xxxxxxxxx)" />
+                                        <label asp-for="WhatsAppNumber"></label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col mb-6 mt-2">
+                                    <div class="form-floating form-floating-outline">
+                                        <input type="text" asp-for="ZaloOaId" class="form-control" placeholder="Nhập Zalo OAId" />
+                                        <label asp-for="ZaloOaId"></label>
+                                    </div>
+                                </div>
+
+                                <div class="col mb-6 mt-2">
+                                    <div class="form-floating form-floating-outline">
+                                        <input type="text" asp-for="ZaloNumber" class="form-control" placeholder="Nhập Số Zalo" />
+                                        <label asp-for="ZaloNumber"></label>
+                                    </div>
+                                </div>
                             </div>
 
                             <div class="row">
@@ -119,9 +131,7 @@
                                         <label asp-for="Email"></label>
                                     </div>
                                 </div>
-                            </div>
 
-                            <div class="row">
                                 <div class="col mb-6 mt-2">
                                     <div class="form-floating form-floating-outline">
                                         <input type="text" asp-for="Website" class="form-control" placeholder="Nhập Website" />
@@ -130,6 +140,21 @@
                                 </div>
                             </div>
 
+                            <div class="row">
+                                <div class="col mb-6 mt-2">
+                                    <div class="form-floating form-floating-outline">
+                                        <input type="text" asp-for="ManagedBy" class="form-control" placeholder="Nhập Quản lý bởi" />
+                                        <label asp-for="ManagedBy"></label>
+                                    </div>
+                                </div>
+
+                                <div class="col mb-6 mt-2">
+                                    <div class="form-floating form-floating-outline">
+                                        <input type="text" asp-for="TypeOfBusiness" class="form-control" placeholder="Nhập Loại hình doanh nghiệp" />
+                                        <label asp-for="TypeOfBusiness"></label>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Đóng</button>

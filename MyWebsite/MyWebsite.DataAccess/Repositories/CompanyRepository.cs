@@ -14,6 +14,11 @@ namespace MyWebsite.DataAccess.Repositories
             return await GetSingleAsync(x => x.Id == id);
         }
 
+        public async Task<CompanyInfo> GetFirst()
+        {
+            return await GetSingleAsync(x => true);
+        }
+
         public async Task SoftDelete(CompanyInfo company)
         {
             if (company == null)
