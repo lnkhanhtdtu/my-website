@@ -82,14 +82,14 @@
                     <!-- Logo -->
                     <div class="app-brand justify-content-center mt-5">
                         <a href="#" class="app-brand-link gap-3">
-                            <span class="app-brand-logo demo">
-
-                                @if (!string.IsNullOrEmpty(logoBase64))
-                                {
-                                    <img style="width: 60px" src="@logoBase64" />
-                                }
-                            </span>
-                            <span class="app-brand-text demo text-heading fw-semibold">@companyInfo.ShortName</span>
+                            @if (!string.IsNullOrEmpty(logoBase64))
+                            {
+                                <span class="app-brand-logo demo"><img style="height: 50px" src="@logoBase64" /></span>
+                            }
+                            else
+                            {
+                                <span class="app-brand-text demo text-heading fw-semibold">@companyInfo.ShortName</span>
+                            }
                         </a>
                     </div>
                     <!-- /Logo -->

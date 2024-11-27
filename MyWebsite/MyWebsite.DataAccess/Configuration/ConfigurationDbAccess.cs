@@ -63,10 +63,10 @@ namespace MyWebsite.DataAccess.Configuration
                 {
                     Name = "CÔNG TY CỔ PHẦN BAO BÌ NÔNG SẢN MIỀN NAM",
                     ShortName = "SAGRIBAGS",
-                    BusinessField = "Sản xuất bao bì đay",
+                    BusinessField = "Các sản phẩm/dịch vụ chính: Bao đay A70 dầu thực vật",
                     TaxCode = "3701716622",
-                    FoundationYear = "2010-05-11",
-                    HeadquartersAddress = "Lô D-1N-CN, 1Q-CN, Khu công nghiệp Mỹ Phước 3, Phường Thới Hòa, Thị xã Bến Cát, Tỉnh Bình Dương, Việt Nam",
+                    FoundationYear = "17/09/2018",
+                    HeadquartersAddress = "Khu Phố Bình Phước B, Phường Bình Chuẩn, Thành phố Thuận An, Bình Dương",
                     ManagedBy = "Chi cục Thuế khu vực Bến Cát",
                     TypeOfBusiness = "Công ty cổ phần ngoài NN",
                     PhoneNumber = "0977781184",
