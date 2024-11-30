@@ -74,8 +74,16 @@ namespace MyWebsite.Application.Services
             var result = _mapper.Map<ProductViewModel>(product);
             var categoryProduct = await _unitOfWork.CategoryRepository.GetById(id);
             var imageProducts = await _unitOfWork.ImageRepository.GetImagesByProductIdAsync(id);
-            result.Images = imageProducts.ToList();
-            result.Category = categoryProduct;
+
+            if (imageProducts.Any())
+            {
+                result.Images = imageProducts.ToList();
+            }
+
+            if (categoryProduct != null)
+            {
+                result.Category = _mapper.Map<CategoryViewModel>(categoryProduct);
+            }
 
             return result;
         }
