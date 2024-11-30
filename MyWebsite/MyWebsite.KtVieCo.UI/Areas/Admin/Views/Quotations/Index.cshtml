@@ -1,0 +1,253 @@
+﻿@model MyWebsite.Application.DTOs.ViewModels.QuotationViewModel
+
+@{
+    ViewData["Title"] = "Danh sách báo giá";
+}
+
+<!-- Modal -->
+@await Html.PartialAsync("_ViewQuotationModal")
+
+<!-- Quotations Table -->
+<div class="card">
+    <h5 class="card-header">
+        <!-- Button trigger modal -->
+        <button type="button" class="btn" id="btnAdd">
+            <i class="ri-add-circle-fill"></i>
+        </button>
+        Danh sách báo giá
+    </h5>
+
+    <div class="table-responsive text-nowrap table-hover">
+        <table id="myTable" class="table">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.CustomerName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.CustomerEmail)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.CustomerPhone)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ProductId)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Status)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ResponseDate)
+                    </th>
+                    <th>Thao tác</th>
+                </tr>
+            </thead>
+            <tbody class="table-border-bottom-0">
+                <tr>
+                    <td>0</td>
+                    <td>No data</td>
+                    <td>No data</td>
+                    <td>No data</td>
+                    <td>No data</td>
+                    <td>No data</td>
+                    <td>No data</td>
+                    <td>
+                        <div class="dropdown">
+                            <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
+                                <i class="ri-more-2-line"></i>
+                            </button>
+                            <div class="dropdown-menu" data-key="${key}">
+                                <a class="dropdown-item btn-change-status" href="#" data-status="1">
+                                    <i class="ri-check-line me-1 text-success"></i> Chấp nhận
+                                </a>
+                                <a class="dropdown-item btn-change-status" href="#" data-status="2">
+                                    <i class="ri-close-line me-1 text-danger"></i> Từ chối
+                                </a>
+                                <a class="dropdown-item btn-change-status" href="#" data-status="3">
+                                    <i class="ri-checkbox-circle-line me-1 text-primary"></i> Hoàn thành
+                                </a>
+                                <a class="dropdown-item btn-delete" href="#">
+                                    <i class="ri-delete-bin-6-line me-1 text-danger"></i> Xóa
+                                </a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!--/ Quotations Table -->
+@section Scripts
+{
+    <script src="~/js/registerDataTable.js"></script>
+
+    <script>
+        const elementName = "#myTable";
+        const url = '@Url.Action("GetQuotationPagination", "Quotations")';
+        const getById = '@Url.Action("GetById", "Quotations", new { area = "Admin" })';
+        const changeStatusUrl = '@Url.Action("ChangeStatus", "Quotations", new { area = "Admin" })';
+        const deleteUrl = '@Url.Action("SoftDelete", "Quotations", new { area = "Admin" })';
+
+        const columns = [
+            // STT
+            {
+                data: null, name: "stt", autoWidth: true,
+                render: function (data, type, row, meta) { return meta.row + 1; }
+            },
+            {
+                data: "customerName", name: "customerName", autoWidth: true
+            },
+            {
+                data: "customerEmail", name: "customerEmail", autoWidth: true
+            },
+            {
+                data: "customerPhone", name: "customerPhone", autoWidth: true
+            },
+            {
+                data: "productId", name: "productId", autoWidth: true,
+                render: function (data, type, row) {
+                    return row.product?.name ?? "-";
+                }
+            },
+            {
+                data: "status", name: "status", autoWidth: true,
+                render: function (data) {
+                    switch (data) {
+                        case 0:
+                            return '<span class="badge bg-label-warning rounded-pill">Đang chờ</span>';
+                        case 1:
+                            return '<span class="badge bg-label-success rounded-pill">Chấp nhận</span>';
+                        case 2:
+                            return '<span class="badge bg-label-danger rounded-pill">Từ chối</span>';
+                        case 3:
+                            return '<span class="badge bg-label-primary rounded-pill">Hoàn thành</span>';
+                        default:
+                            return '<span class="badge bg-label-secondary rounded-pill">Không xác định</span>';
+                    }
+                }
+            },
+            {
+                data: "responseDate", name: "responseDate", autoWidth: true,
+                render: data => data ? moment(data).format("DD/MM/YYYY") : "-"
+            },
+            // Action Edit, Delete
+            {
+                data: "id", name: "id", width: "20",
+                render: function (key) {
+                    return `<div class="dropdown">
+                                <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
+                                    <i class="ri-more-2-line"></i>
+                                </button>
+                                <div class="dropdown-menu" data-key="${key}">
+                                    <a class="dropdown-item btn-change-status" href="#" data-status="1">
+                                        <i class="ri-check-line me-1 text-success"></i> Chấp nhận
+                                    </a>
+                                    <a class="dropdown-item btn-change-status" href="#" data-status="2">
+                                        <i class="ri-close-line me-1 text-danger"></i> Từ chối
+                                    </a>
+                                    <a class="dropdown-item btn-change-status" href="#" data-status="3">
+                                        <i class="ri-checkbox-circle-line me-1 text-primary"></i> Hoàn thành
+                                    </a>
+
+                                    <div class="dropdown-divider"></div>
+
+                                    <a class="dropdown-item btn-view" href="#">
+                                        <i class="ri-eye-line me-1 text-info"></i> Xem
+                                    </a>
+                                    <a class="dropdown-item btn-delete" href="#">
+                                        <i class="ri-delete-bin-6-line me-1 text-danger"></i> Xóa
+                                    </a>
+                                </div>
+                            </div>`;
+                }
+            }
+        ];
+
+        registerDataTable(elementName, columns, url);
+
+        $(document).on("click", ".btn-change-status", function (e) {
+            e.preventDefault();
+            const key = $(this).closest("div").data("key");
+            const status = $(this).data("status");
+            console.log("ChangeStatus key: ", key, "Status: ", status);
+
+            $.ajax({
+                url: `/Admin/Quotations/ChangeStatus`,
+                method: "POST",
+                data: { id: key, status: status },
+                success: function (data) {
+                    $(elementName).DataTable().ajax.reload();
+                    showToaster("Success", `Cập nhật trạng thái thành công`);
+                    console.log(data);
+                },
+                error: function (error) {
+                    showToaster("Error", "Có lỗi xảy ra khi cập nhật trạng thái");
+                    console.error(error);
+                }
+            });
+        });
+
+        $(document).on("click", ".btn-view", function () {
+            const key = $(this).closest("div").data("key");
+
+            $.ajax({
+                url: `${getById}/${key}`,
+                method: "GET",
+                success: function (data) {
+                    // Hiển thị modal
+                    $('#viewModal').modal('show');
+                    console.log("View: ", data);
+                    // Cập nhật dữ liệu trong modal
+                    updateModalData(data);
+                },
+                error: function(error) {
+                    console.error('Error fetching category data:', error);
+                }
+            });
+        });
+
+        function updateModalData(data) {
+            // Cập nhật các trường trong modal với dữ liệu từ AJAX
+            $('#viewModal #CustomerName').text(data.customerName);
+            $('#viewModal #CustomerEmail').text(data.customerEmail);
+            $('#viewModal #CustomerPhone').text(data.customerPhone);
+            $('#viewModal #ProductName').text(data.product.name);
+            $('#viewModal #Content').text(data.content);
+            $('#viewModal #Id').text(data.id);
+            
+            // Cập nhật trạng thái
+            let statusText = '';
+            switch(data.status) {
+                case 0: statusText = 'Đang chờ'; break;
+                case 1: statusText = 'Chấp nhận'; break;
+                case 2: statusText = 'Từ chối'; break;
+                case 3: statusText = 'Hoàn thành'; break;
+                default: statusText = 'Không xác định';
+            }
+            $('#viewModal #Status').text(statusText);
+
+            // Cập nhật ngày
+            $('#viewModal #CreatedAt').text(moment(data.createdAt).format("DD/MM/YYYY HH:mm"));
+            $('#viewModal #ResponseDate').text(data.responseDate ? moment(data.responseDate).format("DD/MM/YYYY HH:mm") : "Chưa phản hồi");
+
+            // Nếu có thêm trường nào khác, tiếp tục cập nhật ở đây
+        }
+
+        $(document).on("click", ".btn-delete", function () {
+            const key = $(this).closest("div").data("key");
+            console.log("Delete key: ", key);
+            $.ajax({
+                url: `${deleteUrl}/${key}`,
+                method: "POST",
+                success: function (data) {
+                    $(elementName).DataTable().ajax.reload();
+                    showToaster("Success", "Xóa thành công");
+                    console.log(data);
+                }
+            });
+        });
+    </script>
+}

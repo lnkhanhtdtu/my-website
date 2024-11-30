@@ -1,0 +1,1893 @@
+﻿@using MyWebsite.Domain.Entities
+@model IEnumerable<MyWebsite.Application.DTOs.ViewModels.BannerViewModel>
+
+@{
+    ViewData["Title"] = "Trang chủ";
+}
+
+<!-- SLIDER AREA START (slider-1) -->
+<div class="ltn__slider-area ltn__slider-6 mb-120---">
+    <div class="ltn__slide-one-active slick-slide-arrow-1 slick-slide-dots-1">
+        <!-- ltn__slide-item -->
+        <div class="ltn__slide-item section-bg-1">
+            <div class="ltn__slide-item-inner">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-6 col-md-7 col-sm-7 align-self-center">
+                            <div class="slide-item-info">
+                                <div class="slide-item-info-inner ltn__slide-animation">
+                                    <h4 class="slide-sub-title ltn__secondary-color animated text-uppercase">Chào mừng đến với cửa hàng của chúng tôi</h4>
+                                    <h1 class="slide-title  animated">Giảm giá 20% cho bộ lốp xe mới</h1>
+                                    <div class="slide-brief animated">
+                                        <p>Nâng cấp xe của bạn với bộ lốp chất lượng cao, an toàn và bền bỉ</p>
+                                    </div>
+                                    <div class="btn-wrapper  animated">
+                                        <a href="#" class="theme-btn-1 btn btn-effect-1 text-uppercase">Mua ngay</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-5 col-sm-5 align-self-center">
+                            <div class="slide-item-img">
+                                <a href="#"><img src="~/images/Banners/h1.jpg" alt="Image"></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- ltn__slide-item -->
+        <div class="ltn__slide-item section-bg-1">
+            <div class="ltn__slide-item-inner">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-6 col-md-5 col-sm-5 align-self-center">
+                            <div class="slide-item-img">
+                                <a href="#"><img src="~/images/Banners/h2.jpg" alt="Image"></a>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-7 col-sm-7 align-self-center">
+                            <div class="slide-item-info">
+                                <div class="slide-item-info-inner ltn__slide-animation">
+                                    <h4 class="slide-sub-title ltn__secondary-color animated text-uppercase">Nâng cấp nội thất xe</h4>
+                                    <h1 class="slide-title animated">Phụ kiện nội thất cao cấp</h1>
+                                    <div class="slide-brief animated">
+                                        <p>Trang bị nội thất xe với các phụ kiện sang trọng và tiện nghi</p>
+                                    </div>
+                                    <div class="btn-wrapper animated">
+                                        <a href="#" class="theme-btn-1 btn btn-effect-1 text-uppercase">Khám phá ngay</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- ltn__slide-item -->
+        <div class="ltn__slide-item section-bg-1">
+            <div class="ltn__slide-item-inner">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-6 col-md-7 col-sm-7 align-self-center">
+                            <div class="slide-item-info">
+                                <div class="slide-item-info-inner ltn__slide-animation">
+                                    <h4 class="slide-sub-title ltn__secondary-color animated text-uppercase">Bảo vệ xe của bạn</h4>
+                                    <h1 class="slide-title  animated">Phim cách nhiệt chất lượng cao</h1>
+                                    <div class="slide-brief animated">
+                                        <p>Bảo vệ nội thất xe và tăng cường sự riêng tư với phim cách nhiệt hàng đầu</p>
+                                    </div>
+                                    <div class="btn-wrapper  animated">
+                                        <a href="#" class="theme-btn-1 btn btn-effect-1 text-uppercase">Tìm hiểu thêm</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-5 col-sm-5 align-self-center">
+                            <div class="slide-item-img">
+                                <a href="#"><img src="~/images/Banners/h3.jpg" alt="Image"></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- SLIDER AREA END -->
+<!-- BANNER AREA START -->
+<div class="ltn__banner-area mt-120 d-none">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-6 col-md-6">
+                <div class="ltn__banner-item ltn__banner-style-3">
+                    <div class="ltn__banner-img">
+                        <a href="shop.html"><img src="~/client/assets/img/banner/4.jpg" alt="Image"></a>
+                    </div>
+                    <div class="ltn__banner-info">
+                        <div class="product-price ltn__secondary-color">
+                            <strong><span>FROM $49.00</span></strong>
+                        </div>
+                        <h2 class="white-color">
+                            <a href="shop.html">
+                                Latest & Beauty <br>
+                                Headlights
+                            </a>
+                        </h2>
+                    </div>
+                    <div class="banner-button">
+                        <a href="shop.html"><i class="fas fa-arrow-right"></i> </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-6">
+                <div class="ltn__banner-item ltn__banner-style-3">
+                    <div class="ltn__banner-img">
+                        <a href="shop.html"><img src="~/client/assets/img/banner/5.jpg" alt="Image"></a>
+                    </div>
+                    <div class="ltn__banner-info">
+                        <div class="product-price ltn__secondary-color">
+                            <strong><span>FROM $49.00</span></strong>
+                        </div>
+                        <h2 class="white-color">
+                            <a href="shop.html">
+                                Attractive Car <br>
+                                Dashboard
+                            </a>
+                        </h2>
+                    </div>
+                    <div class="banner-button">
+                        <a href="shop.html"><i class="fas fa-arrow-right"></i> </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- BANNER AREA END -->
+<!-- PRODUCT TAB AREA START (product-item-3) -->
+<div class="ltn__product-tab-area ltn__product-gutter pt-85 pb-70">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="section-title-area ltn__section-title-2 text-center">
+                    <h6 class="section-subtitle ltn__secondary-color">// Parts</h6>
+                    <h1 class="section-title">Our Products</h1>
+                </div>
+                <div class="ltn__tab-menu ltn__tab-menu-2 ltn__tab-menu-top-right-- text-uppercase text-center">
+                    <div class="nav">
+                        @foreach (var item in (ViewBag.Categories as IEnumerable<Category>) ?? Enumerable.Empty<Category>())
+                        {
+                            var isFirst = ((ViewBag.Categories as IEnumerable<Category>)!).FirstOrDefault() == item;
+
+                            <a data-bs-toggle="tab" href="@("#liton_tab" + item.Id)" class="@(isFirst ? "active show" : "")">@item.Name</a>
+                        }
+
+                        <a class="active show" data-bs-toggle="tab" href="#liton_tab_3_1">Wheels</a>
+                        <a data-bs-toggle="tab" href="#liton_tab_3_2" class="">Sounds</a>
+                        <a data-bs-toggle="tab" href="#liton_tab_3_3" class="">Featured</a>
+                        <a data-bs-toggle="tab" href="#liton_tab_3_4" class="">Colors</a>
+                    </div>
+                </div>
+                <div class="tab-content">
+                    <div class="tab-pane fade active show" id="liton_tab_3_1">
+                        <div class="ltn__product-tab-content-inner">
+                            <div class="row ltn__tab-product-slider-one-active slick-arrow-1">
+                                @foreach (var item in (ViewBag.FeaturedProducts as IEnumerable<Product>) ?? Enumerable.Empty<Product>())
+                                {
+                                    <!-- ltn__product-item -->
+                                    <div class="col-lg-12">
+                                        <div class="ltn__product-item ltn__product-item-3 text-center">
+                                            <div class="product-img">
+                                                @{
+                                                    var imgSrc = MyWebsite.UI.Utilities.ImageHelper.GetImageSource(item.ImageData, "client/assets/img/product/2.png");
+                                                }
+                                                <a asp-controller="Product" asp-action="Details" asp-route-id="@item.Id" title="More Details"><img src="@imgSrc" alt="#"></a>
+                                                <div class="product-badge">
+                                                    <ul>
+                                                        <li class="sale-badge">New</li>
+                                                    </ul>
+                                                </div>
+                                                <div class="product-hover-action d-none">
+                                                    <ul>
+                                                        <li>
+                                                            <a href="#" title="Quick View" data-bs-toggle="modal" data-bs-target="#quick_view_modal">
+                                                                <i class="far fa-eye"></i>
+                                                            </a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="#" title="Add to Cart" data-bs-toggle="modal" data-bs-target="#add_to_cart_modal">
+                                                                <i class="fas fa-shopping-cart"></i>
+                                                            </a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="#" title="Wishlist" data-bs-toggle="modal" data-bs-target="#liton_wishlist_modal">
+                                                                <i class="far fa-heart"></i>
+                                                            </a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <div class="product-info">
+                                                <div class="product-ratting">
+                                                    <ul>
+                                                        <li><a href="#"><i class="fas fa-star"></i></a></li>
+                                                        <li><a href="#"><i class="fas fa-star"></i></a></li>
+                                                        <li><a href="#"><i class="fas fa-star"></i></a></li>
+                                                        <li><a href="#"><i class="fas fa-star-half-alt"></i></a></li>
+                                                        <li><a href="#"><i class="far fa-star"></i></a></li>
+                                                    </ul>
+                                                </div>
+                                                <h2 class="product-title"><a asp-controller="Product" asp-action="Details" asp-route-id="@item.Id" title="More Details">@item.Name</a></h2>
+                                                <div class="product-price d-none">
+                                                    <span>$62.00</span>
+                                                    <del>$85.00</del>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="liton_tab_3_2">
+                        <div class="ltn__product-tab-content-inner">
+                            <div class="row ltn__tab-product-slider-one-active slick-arrow-1">
+                                <!-- ltn__product-item -->
+                                <div class="col-lg-12">
+                                    <div class="ltn__product-item ltn__product-item-3 text-center">
+                                        <div class="product-img">
+                                            <a href="product-details.html"><img src="~/client/assets/img/product/4.png" alt="#"></a>
+                                            <div class="product-badge">
+                                                <ul>
+                                                    <li class="sale-badge">New</li>
+                                                </ul>
+                                            </div>
+                                            <div class="product-hover-action">
+                                                <ul>
+                                                    <li>
+                                                        <a href="#" title="Quick View" data-bs-toggle="modal" data-bs-target="#quick_view_modal">
+                                                            <i class="far fa-eye"></i>
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#" title="Add to Cart" data-bs-toggle="modal" data-bs-target="#add_to_cart_modal">
+                                                            <i class="fas fa-shopping-cart"></i>
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#" title="Wishlist" data-bs-toggle="modal" data-bs-target="#liton_wishlist_modal">
+                                                            <i class="far fa-heart"></i>
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="product-info">
+                                            <div class="product-ratting">
+                                                <ul>
+                                                    <li><a href="#"><i class="fas fa-star"></i></a></li>
+                                                    <li><a href="#"><i class="fas fa-star"></i></a></li>
+                                                    <li><a href="#"><i class="fas fa-star"></i></a></li>
+                                                    <li><a href="#"><i class="fas fa-star-half-alt"></i></a></li>
+                                                    <li><a href="#"><i class="far fa-star"></i></a></li>
+                                                </ul>
+                                            </div>
+                                            <h2 class="product-title"><a href="product-details.html">Tail Light Lens</a></h2>
+                                            <div class="product-price">
+                                                <span>$78.00</span>
+                                                <del>$85.00</del>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- ltn__product-item -->
+                                <div class="col-lg-12">
+                                    <div class="ltn__product-item ltn__product-item-3 text-center">
+                                        <div class="product-img">
+                                            <a href="product-details.html"><img src="~/client/assets/img/product/5.png" alt="#"></a>
+                                            <div class="product-badge">
+                                                <ul>
+                                                    <li class="sale-badge">New</li>
+                                                </ul>
+                                            </div>
+                                            <div class="product-hover-action">
+                                                <ul>
+                                                    <li>
+                                                        <a href="#" title="Quick View" data-bs-toggle="modal" data-bs-target="#quick_view_modal">
+                                                            <i class="far fa-eye"></i>
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#" title="Add to Cart" data-bs-toggle="modal" data-bs-target="#add_to_cart_modal">
+                                                            <i class="fas fa-shopping-cart"></i>
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#" title="Wishlist" data-bs-toggle="modal" data-bs-target="#liton_wishlist_modal">
+                                                            <i class="far fa-heart"></i>
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="product-info">
+                                            <div class="product-ratting">
+                                                <ul>
+                                                    <li><a href="#"><i class="fas fa-star"></i></a></li>
+                                                    <li><a href="#"><i class="fas fa-star"></i></a></li>
+                                                    <li><a href="#"><i class="fas fa-star"></i></a></li>
+                                                    <li><a href="#"><i class="fas fa-star-half-alt"></i></a></li>
+                                                    <li><a href="#"><i class="far fa-star"></i></a></li>
+                                                </ul>
+                                            </div>
+                                            <h2 class="product-title"><a href="product-details.html">Coil Spring Conversion Kit</a></h2>
+                                            <div class="product-price">
+                                                <span>$150.00</span>
+                                                <del>$180.00</del>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- ltn__product-item -->
+                                <div class="col-lg-12">
+                                    <div class="ltn__product-item ltn__product-item-3 text-center">
+                                        <div class="product-img">
+                                            <a href="product-details.html"><img src="~/client/assets/img/product/7.png" alt="#"></a>
+                                            <div class="product-badge">
+                                                <ul>
+                                                    <li class="sale-badge">New</li>
+                                                </ul>
+                                            </div>
+                                            <div class="product-hover-action">
+                                                <ul>
+                                                    <li>
+                                                        <a href="#" title="Quick View" data-bs-toggle="modal" data-bs-target="#quick_view_modal">
+                                                            <i class="far fa-eye"></i>
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#" title="Add to Cart" data-bs-toggle="modal" data-bs-target="#add_to_cart_modal">
+                                                            <i class="fas fa-shopping-cart"></i>
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#" title="Wishlist" data-bs-toggle="modal" data-bs-target="#liton_wishlist_modal">
+                                                            <i class="far fa-heart"></i>
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="product-info">
+                                            <div class="product-ratting">
+                                                <ul>
+                                                    <li><a href="#"><i class="fas fa-star"></i></a></li>
+                                                    <li><a href="#"><i class="fas fa-star"></i></a></li>
+                                                    <li><a href="#"><i class="fas fa-star"></i></a></li>
+                                                    <li><a href="#"><i class="fas fa-star-half-alt"></i></a></li>
+                                                    <li><a href="#"><i class="far fa-star"></i></a></li>
+                                                </ul>
+                                            </div>
+                                            <h2 class="product-title"><a href="product-details.html">OE Replica Wheels</a></h2>
+                                            <div class="product-price">
+                                                <span>$150.00</span>
+                                                <del>$180.00</del>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- ltn__product-item -->
+                                <div class="col-lg-12">
+                                    <div class="ltn__product-item ltn__product-item-3 text-center">
+                                        <div class="product-img">
+                                            <a href="product-details.html"><img src="~/client/assets/img/product/1.png" alt="#"></a>
+                                            <div class="product-badge">
+                                                <ul>
+                                                    <li class="sale-badge">New</li>
+                                                </ul>
+                                            </div>
+                                            <div class="product-hover-action">
+                                                <ul>
+                                                    <li>
+                                                        <a href="#" title="Quick View" data-bs-toggle="modal" data-bs-target="#quick_view_modal">
+                                                            <i class="far fa-eye"></i>
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#" title="Add to Cart" data-bs-toggle="modal" data-bs-target="#add_to_cart_modal">
+                                                            <i class="fas fa-shopping-cart"></i>
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#" title="Wishlist" data-bs-toggle="modal" data-bs-target="#liton_wishlist_modal">
+                                                            <i class="far fa-heart"></i>
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="product-info">
+                                            <div class="product-ratting">
+                                                <ul>
+                                                    <li><a href="#"><i class="fas fa-star"></i></a></li>
+                                                    <li><a href="#"><i class="fas fa-star"></i></a></li>
+                                                    <li><a href="#"><i class="fas fa-star"></i></a></li>
+                                                    <li><a href="#"><i class="fas fa-star-half-alt"></i></a></li>
+                                                    <li><a href="#"><i class="far fa-star"></i></a></li>
+                                                </ul>
+                                            </div>
+                                            <h2 class="product-title"><a href="product-details.html">Wheel Bearing Retainer</a></h2>
+                                            <div class="product-price">
+                                                <span>$149.00</span>
+                                                <del>$162.00</del>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- ltn__product-item -->
+                                <div class="col-lg-12">
+                                    <div class="ltn__product-item ltn__product-item-3 text-center">
+                                        <div class="product-img">
+                                            <a href="product-details.html"><img src="~/client/assets/img/product/2.png" alt="#"></a>
+                                            <div class="product-badge">
+                                                <ul>
+                                                    <li class="sale-badge">New</li>
+                                                </ul>
+                                            </div>
+                                            <div class="product-hover-action">
+                                                <ul>
+                                                    <li>
+                                                        <a href="#" title="Quick View" data-bs-toggle="modal" data-bs-target="#quick_view_modal">
+                                                            <i class="far fa-eye"></i>
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#" title="Add to Cart" data-bs-toggle="modal" data-bs-target="#add_to_cart_modal">
+                                                            <i class="fas fa-shopping-cart"></i>
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#" title="Wishlist" data-bs-toggle="modal" data-bs-target="#liton_wishlist_modal">
+                                                            <i class="far fa-heart"></i>
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="product-info">
+                                            <div class="product-ratting">
+                                                <ul>
+                                                    <li><a href="#"><i class="fas fa-star"></i></a></li>
+                                                    <li><a href="#"><i class="fas fa-star"></i></a></li>
+                                                    <li><a href="#"><i class="fas fa-star"></i></a></li>
+                                                    <li><a href="#"><i class="fas fa-star-half-alt"></i></a></li>
+                                                    <li><a href="#"><i class="far fa-star"></i></a></li>
+                                                </ul>
+                                            </div>
+                                            <h2 class="product-title"><a href="product-details.html">Brake Conversion Kit</a></h2>
+                                            <div class="product-price">
+                                                <span>$62.00</span>
+                                                <del>$85.00</del>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- ltn__product-item -->
+                                <div class="col-lg-12">
+                                    <div class="ltn__product-item ltn__product-item-3 text-center">
+                                        <div class="product-img">
+                                            <a href="product-details.html"><img src="~/client/assets/img/product/3.png" alt="#"></a>
+                                            <div class="product-badge">
+                                                <ul>
+                                                    <li class="sale-badge">New</li>
+                                                </ul>
+                                            </div>
+                                            <div class="product-hover-action">
+                                                <ul>
+                                                    <li>
+                                                        <a href="#" title="Quick View" data-bs-toggle="modal" data-bs-target="#quick_view_modal">
+                                                            <i class="far fa-eye"></i>
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#" title="Add to Cart" data-bs-toggle="modal" data-bs-target="#add_to_cart_modal">
+                                                            <i class="fas fa-shopping-cart"></i>
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#" title="Wishlist" data-bs-toggle="modal" data-bs-target="#liton_wishlist_modal">
+                                                            <i class="far fa-heart"></i>
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="product-info">
+                                            <div class="product-ratting">
+                                                <ul>
+                                                    <li><a href="#"><i class="fas fa-star"></i></a></li>
+                                                    <li><a href="#"><i class="fas fa-star"></i></a></li>
+                                                    <li><a href="#"><i class="fas fa-star"></i></a></li>
+                                                    <li><a href="#"><i class="fas fa-star-half-alt"></i></a></li>
+                                                    <li><a href="#"><i class="far fa-star"></i></a></li>
+                                                </ul>
+                                            </div>
+                                            <h2 class="product-title"><a href="product-details.html">Shock Mount Insulator</a></h2>
+                                            <div class="product-price">
+                                                <span>$75.00</span>
+                                                <del>$92.00</del>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--  -->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="liton_tab_3_3">
+                        <div class="ltn__product-tab-content-inner">
+                            <div class="row ltn__tab-product-slider-one-active slick-arrow-1">
+                                <!-- ltn__product-item -->
+                                <div class="col-lg-12">
+                                    <div class="ltn__product-item ltn__product-item-3 text-center">
+                                        <div class="product-img">
+                                            <a href="product-details.html"><img src="~/client/assets/img/product/7.png" alt="#"></a>
+                                            <div class="product-badge">
+                                                <ul>
+                                                    <li class="sale-badge">New</li>
+                                                </ul>
+                                            </div>
+                                            <div class="product-hover-action">
+                                                <ul>
+                                                    <li>
+                                                        <a href="#" title="Quick View" data-bs-toggle="modal" data-bs-target="#quick_view_modal">
+                                                            <i class="far fa-eye"></i>
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#" title="Add to Cart" data-bs-toggle="modal" data-bs-target="#add_to_cart_modal">
+                                                            <i class="fas fa-shopping-cart"></i>
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#" title="Wishlist" data-bs-toggle="modal" data-bs-target="#liton_wishlist_modal">
+                                                            <i class="far fa-heart"></i>
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="product-info">
+                                            <div class="product-ratting">
+                                                <ul>
+                                                    <li><a href="#"><i class="fas fa-star"></i></a></li>
+                                                    <li><a href="#"><i class="fas fa-star"></i></a></li>
+                                                    <li><a href="#"><i class="fas fa-star"></i></a></li>
+                                                    <li><a href="#"><i class="fas fa-star-half-alt"></i></a></li>
+                                                    <li><a href="#"><i class="far fa-star"></i></a></li>
+                                                </ul>
+                                            </div>
+                                            <h2 class="product-title"><a href="product-details.html">OE Replica Wheels</a></h2>
+                                            <div class="product-price">
+                                                <span>$150.00</span>
+                                                <del>$180.00</del>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- ltn__product-item -->
+                                <div class="col-lg-12">
+                                    <div class="ltn__product-item ltn__product-item-3 text-center">
+                                        <div class="product-img">
+                                            <a href="product-details.html"><img src="~/client/assets/img/product/1.png" alt="#"></a>
+                                            <div class="product-badge">
+                                                <ul>
+                                                    <li class="sale-badge">New</li>
+                                                </ul>
+                                            </div>
+                                            <div class="product-hover-action">
+                                                <ul>
+                                                    <li>
+                                                        <a href="#" title="Quick View" data-bs-toggle="modal" data-bs-target="#quick_view_modal">
+                                                            <i class="far fa-eye"></i>
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#" title="Add to Cart" data-bs-toggle="modal" data-bs-target="#add_to_cart_modal">
+                                                            <i class="fas fa-shopping-cart"></i>
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#" title="Wishlist" data-bs-toggle="modal" data-bs-target="#liton_wishlist_modal">
+                                                            <i class="far fa-heart"></i>
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="product-info">
+                                            <div class="product-ratting">
+                                                <ul>
+                                                    <li><a href="#"><i class="fas fa-star"></i></a></li>
+                                                    <li><a href="#"><i class="fas fa-star"></i></a></li>
+                                                    <li><a href="#"><i class="fas fa-star"></i></a></li>
+                                                    <li><a href="#"><i class="fas fa-star-half-alt"></i></a></li>
+                                                    <li><a href="#"><i class="far fa-star"></i></a></li>
+                                                </ul>
+                                            </div>
+                                            <h2 class="product-title"><a href="product-details.html">Wheel Bearing Retainer</a></h2>
+                                            <div class="product-price">
+                                                <span>$149.00</span>
+                                                <del>$162.00</del>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- ltn__product-item -->
+                                <div class="col-lg-12">
+                                    <div class="ltn__product-item ltn__product-item-3 text-center">
+                                        <div class="product-img">
+                                            <a href="product-details.html"><img src="~/client/assets/img/product/4.png" alt="#"></a>
+                                            <div class="product-badge">
+                                                <ul>
+                                                    <li class="sale-badge">New</li>
+                                                </ul>
+                                            </div>
+                                            <div class="product-hover-action">
+                                                <ul>
+                                                    <li>
+                                                        <a href="#" title="Quick View" data-bs-toggle="modal" data-bs-target="#quick_view_modal">
+                                                            <i class="far fa-eye"></i>
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#" title="Add to Cart" data-bs-toggle="modal" data-bs-target="#add_to_cart_modal">
+                                                            <i class="fas fa-shopping-cart"></i>
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#" title="Wishlist" data-bs-toggle="modal" data-bs-target="#liton_wishlist_modal">
+                                                            <i class="far fa-heart"></i>
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="product-info">
+                                            <div class="product-ratting">
+                                                <ul>
+                                                    <li><a href="#"><i class="fas fa-star"></i></a></li>
+                                                    <li><a href="#"><i class="fas fa-star"></i></a></li>
+                                                    <li><a href="#"><i class="fas fa-star"></i></a></li>
+                                                    <li><a href="#"><i class="fas fa-star-half-alt"></i></a></li>
+                                                    <li><a href="#"><i class="far fa-star"></i></a></li>
+                                                </ul>
+                                            </div>
+                                            <h2 class="product-title"><a href="product-details.html">Tail Light Lens</a></h2>
+                                            <div class="product-price">
+                                                <span>$78.00</span>
+                                                <del>$85.00</del>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- ltn__product-item -->
+                                <div class="col-lg-12">
+                                    <div class="ltn__product-item ltn__product-item-3 text-center">
+                                        <div class="product-img">
+                                            <a href="product-details.html"><img src="~/client/assets/img/product/5.png" alt="#"></a>
+                                            <div class="product-badge">
+                                                <ul>
+                                                    <li class="sale-badge">New</li>
+                                                </ul>
+                                            </div>
+                                            <div class="product-hover-action">
+                                                <ul>
+                                                    <li>
+                                                        <a href="#" title="Quick View" data-bs-toggle="modal" data-bs-target="#quick_view_modal">
+                                                            <i class="far fa-eye"></i>
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#" title="Add to Cart" data-bs-toggle="modal" data-bs-target="#add_to_cart_modal">
+                                                            <i class="fas fa-shopping-cart"></i>
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#" title="Wishlist" data-bs-toggle="modal" data-bs-target="#liton_wishlist_modal">
+                                                            <i class="far fa-heart"></i>
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="product-info">
+                                            <div class="product-ratting">
+                                                <ul>
+                                                    <li><a href="#"><i class="fas fa-star"></i></a></li>
+                                                    <li><a href="#"><i class="fas fa-star"></i></a></li>
+                                                    <li><a href="#"><i class="fas fa-star"></i></a></li>
+                                                    <li><a href="#"><i class="fas fa-star-half-alt"></i></a></li>
+                                                    <li><a href="#"><i class="far fa-star"></i></a></li>
+                                                </ul>
+                                            </div>
+                                            <h2 class="product-title"><a href="product-details.html">Coil Spring Conversion Kit</a></h2>
+                                            <div class="product-price">
+                                                <span>$150.00</span>
+                                                <del>$180.00</del>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- ltn__product-item -->
+                                <div class="col-lg-12">
+                                    <div class="ltn__product-item ltn__product-item-3 text-center">
+                                        <div class="product-img">
+                                            <a href="product-details.html"><img src="~/client/assets/img/product/2.png" alt="#"></a>
+                                            <div class="product-badge">
+                                                <ul>
+                                                    <li class="sale-badge">New</li>
+                                                </ul>
+                                            </div>
+                                            <div class="product-hover-action">
+                                                <ul>
+                                                    <li>
+                                                        <a href="#" title="Quick View" data-bs-toggle="modal" data-bs-target="#quick_view_modal">
+                                                            <i class="far fa-eye"></i>
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#" title="Add to Cart" data-bs-toggle="modal" data-bs-target="#add_to_cart_modal">
+                                                            <i class="fas fa-shopping-cart"></i>
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#" title="Wishlist" data-bs-toggle="modal" data-bs-target="#liton_wishlist_modal">
+                                                            <i class="far fa-heart"></i>
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="product-info">
+                                            <div class="product-ratting">
+                                                <ul>
+                                                    <li><a href="#"><i class="fas fa-star"></i></a></li>
+                                                    <li><a href="#"><i class="fas fa-star"></i></a></li>
+                                                    <li><a href="#"><i class="fas fa-star"></i></a></li>
+                                                    <li><a href="#"><i class="fas fa-star-half-alt"></i></a></li>
+                                                    <li><a href="#"><i class="far fa-star"></i></a></li>
+                                                </ul>
+                                            </div>
+                                            <h2 class="product-title"><a href="product-details.html">Brake Conversion Kit</a></h2>
+                                            <div class="product-price">
+                                                <span>$62.00</span>
+                                                <del>$85.00</del>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- ltn__product-item -->
+                                <div class="col-lg-12">
+                                    <div class="ltn__product-item ltn__product-item-3 text-center">
+                                        <div class="product-img">
+                                            <a href="product-details.html"><img src="~/client/assets/img/product/3.png" alt="#"></a>
+                                            <div class="product-badge">
+                                                <ul>
+                                                    <li class="sale-badge">New</li>
+                                                </ul>
+                                            </div>
+                                            <div class="product-hover-action">
+                                                <ul>
+                                                    <li>
+                                                        <a href="#" title="Quick View" data-bs-toggle="modal" data-bs-target="#quick_view_modal">
+                                                            <i class="far fa-eye"></i>
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#" title="Add to Cart" data-bs-toggle="modal" data-bs-target="#add_to_cart_modal">
+                                                            <i class="fas fa-shopping-cart"></i>
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#" title="Wishlist" data-bs-toggle="modal" data-bs-target="#liton_wishlist_modal">
+                                                            <i class="far fa-heart"></i>
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="product-info">
+                                            <div class="product-ratting">
+                                                <ul>
+                                                    <li><a href="#"><i class="fas fa-star"></i></a></li>
+                                                    <li><a href="#"><i class="fas fa-star"></i></a></li>
+                                                    <li><a href="#"><i class="fas fa-star"></i></a></li>
+                                                    <li><a href="#"><i class="fas fa-star-half-alt"></i></a></li>
+                                                    <li><a href="#"><i class="far fa-star"></i></a></li>
+                                                </ul>
+                                            </div>
+                                            <h2 class="product-title"><a href="product-details.html">Shock Mount Insulator</a></h2>
+                                            <div class="product-price">
+                                                <span>$75.00</span>
+                                                <del>$92.00</del>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--  -->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="liton_tab_3_4">
+                        <div class="ltn__product-tab-content-inner">
+                            <div class="row ltn__tab-product-slider-one-active slick-arrow-1">
+                                <!-- ltn__product-item -->
+                                <div class="col-lg-12">
+                                    <div class="ltn__product-item ltn__product-item-3 text-center">
+                                        <div class="product-img">
+                                            <a href="product-details.html"><img src="~/client/assets/img/product/5.png" alt="#"></a>
+                                            <div class="product-badge">
+                                                <ul>
+                                                    <li class="sale-badge">New</li>
+                                                </ul>
+                                            </div>
+                                            <div class="product-hover-action">
+                                                <ul>
+                                                    <li>
+                                                        <a href="#" title="Quick View" data-bs-toggle="modal" data-bs-target="#quick_view_modal">
+                                                            <i class="far fa-eye"></i>
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#" title="Add to Cart" data-bs-toggle="modal" data-bs-target="#add_to_cart_modal">
+                                                            <i class="fas fa-shopping-cart"></i>
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#" title="Wishlist" data-bs-toggle="modal" data-bs-target="#liton_wishlist_modal">
+                                                            <i class="far fa-heart"></i>
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="product-info">
+                                            <div class="product-ratting">
+                                                <ul>
+                                                    <li><a href="#"><i class="fas fa-star"></i></a></li>
+                                                    <li><a href="#"><i class="fas fa-star"></i></a></li>
+                                                    <li><a href="#"><i class="fas fa-star"></i></a></li>
+                                                    <li><a href="#"><i class="fas fa-star-half-alt"></i></a></li>
+                                                    <li><a href="#"><i class="far fa-star"></i></a></li>
+                                                </ul>
+                                            </div>
+                                            <h2 class="product-title"><a href="product-details.html">Coil Spring Conversion Kit</a></h2>
+                                            <div class="product-price">
+                                                <span>$150.00</span>
+                                                <del>$180.00</del>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- ltn__product-item -->
+                                <div class="col-lg-12">
+                                    <div class="ltn__product-item ltn__product-item-3 text-center">
+                                        <div class="product-img">
+                                            <a href="product-details.html"><img src="~/client/assets/img/product/2.png" alt="#"></a>
+                                            <div class="product-badge">
+                                                <ul>
+                                                    <li class="sale-badge">New</li>
+                                                </ul>
+                                            </div>
+                                            <div class="product-hover-action">
+                                                <ul>
+                                                    <li>
+                                                        <a href="#" title="Quick View" data-bs-toggle="modal" data-bs-target="#quick_view_modal">
+                                                            <i class="far fa-eye"></i>
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#" title="Add to Cart" data-bs-toggle="modal" data-bs-target="#add_to_cart_modal">
+                                                            <i class="fas fa-shopping-cart"></i>
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#" title="Wishlist" data-bs-toggle="modal" data-bs-target="#liton_wishlist_modal">
+                                                            <i class="far fa-heart"></i>
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="product-info">
+                                            <div class="product-ratting">
+                                                <ul>
+                                                    <li><a href="#"><i class="fas fa-star"></i></a></li>
+                                                    <li><a href="#"><i class="fas fa-star"></i></a></li>
+                                                    <li><a href="#"><i class="fas fa-star"></i></a></li>
+                                                    <li><a href="#"><i class="fas fa-star-half-alt"></i></a></li>
+                                                    <li><a href="#"><i class="far fa-star"></i></a></li>
+                                                </ul>
+                                            </div>
+                                            <h2 class="product-title"><a href="product-details.html">Brake Conversion Kit</a></h2>
+                                            <div class="product-price">
+                                                <span>$62.00</span>
+                                                <del>$85.00</del>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- ltn__product-item -->
+                                <div class="col-lg-12">
+                                    <div class="ltn__product-item ltn__product-item-3 text-center">
+                                        <div class="product-img">
+                                            <a href="product-details.html"><img src="~/client/assets/img/product/7.png" alt="#"></a>
+                                            <div class="product-badge">
+                                                <ul>
+                                                    <li class="sale-badge">New</li>
+                                                </ul>
+                                            </div>
+                                            <div class="product-hover-action">
+                                                <ul>
+                                                    <li>
+                                                        <a href="#" title="Quick View" data-bs-toggle="modal" data-bs-target="#quick_view_modal">
+                                                            <i class="far fa-eye"></i>
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#" title="Add to Cart" data-bs-toggle="modal" data-bs-target="#add_to_cart_modal">
+                                                            <i class="fas fa-shopping-cart"></i>
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#" title="Wishlist" data-bs-toggle="modal" data-bs-target="#liton_wishlist_modal">
+                                                            <i class="far fa-heart"></i>
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="product-info">
+                                            <div class="product-ratting">
+                                                <ul>
+                                                    <li><a href="#"><i class="fas fa-star"></i></a></li>
+                                                    <li><a href="#"><i class="fas fa-star"></i></a></li>
+                                                    <li><a href="#"><i class="fas fa-star"></i></a></li>
+                                                    <li><a href="#"><i class="fas fa-star-half-alt"></i></a></li>
+                                                    <li><a href="#"><i class="far fa-star"></i></a></li>
+                                                </ul>
+                                            </div>
+                                            <h2 class="product-title"><a href="product-details.html">OE Replica Wheels</a></h2>
+                                            <div class="product-price">
+                                                <span>$150.00</span>
+                                                <del>$180.00</del>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- ltn__product-item -->
+                                <div class="col-lg-12">
+                                    <div class="ltn__product-item ltn__product-item-3 text-center">
+                                        <div class="product-img">
+                                            <a href="product-details.html"><img src="~/client/assets/img/product/1.png" alt="#"></a>
+                                            <div class="product-badge">
+                                                <ul>
+                                                    <li class="sale-badge">New</li>
+                                                </ul>
+                                            </div>
+                                            <div class="product-hover-action">
+                                                <ul>
+                                                    <li>
+                                                        <a href="#" title="Quick View" data-bs-toggle="modal" data-bs-target="#quick_view_modal">
+                                                            <i class="far fa-eye"></i>
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#" title="Add to Cart" data-bs-toggle="modal" data-bs-target="#add_to_cart_modal">
+                                                            <i class="fas fa-shopping-cart"></i>
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#" title="Wishlist" data-bs-toggle="modal" data-bs-target="#liton_wishlist_modal">
+                                                            <i class="far fa-heart"></i>
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="product-info">
+                                            <div class="product-ratting">
+                                                <ul>
+                                                    <li><a href="#"><i class="fas fa-star"></i></a></li>
+                                                    <li><a href="#"><i class="fas fa-star"></i></a></li>
+                                                    <li><a href="#"><i class="fas fa-star"></i></a></li>
+                                                    <li><a href="#"><i class="fas fa-star-half-alt"></i></a></li>
+                                                    <li><a href="#"><i class="far fa-star"></i></a></li>
+                                                </ul>
+                                            </div>
+                                            <h2 class="product-title"><a href="product-details.html">Wheel Bearing Retainer</a></h2>
+                                            <div class="product-price">
+                                                <span>$149.00</span>
+                                                <del>$162.00</del>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- ltn__product-item -->
+                                <div class="col-lg-12">
+                                    <div class="ltn__product-item ltn__product-item-3 text-center">
+                                        <div class="product-img">
+                                            <a href="product-details.html"><img src="~/client/assets/img/product/4.png" alt="#"></a>
+                                            <div class="product-badge">
+                                                <ul>
+                                                    <li class="sale-badge">New</li>
+                                                </ul>
+                                            </div>
+                                            <div class="product-hover-action">
+                                                <ul>
+                                                    <li>
+                                                        <a href="#" title="Quick View" data-bs-toggle="modal" data-bs-target="#quick_view_modal">
+                                                            <i class="far fa-eye"></i>
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#" title="Add to Cart" data-bs-toggle="modal" data-bs-target="#add_to_cart_modal">
+                                                            <i class="fas fa-shopping-cart"></i>
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#" title="Wishlist" data-bs-toggle="modal" data-bs-target="#liton_wishlist_modal">
+                                                            <i class="far fa-heart"></i>
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="product-info">
+                                            <div class="product-ratting">
+                                                <ul>
+                                                    <li><a href="#"><i class="fas fa-star"></i></a></li>
+                                                    <li><a href="#"><i class="fas fa-star"></i></a></li>
+                                                    <li><a href="#"><i class="fas fa-star"></i></a></li>
+                                                    <li><a href="#"><i class="fas fa-star-half-alt"></i></a></li>
+                                                    <li><a href="#"><i class="far fa-star"></i></a></li>
+                                                </ul>
+                                            </div>
+                                            <h2 class="product-title"><a href="product-details.html">Tail Light Lens</a></h2>
+                                            <div class="product-price">
+                                                <span>$78.00</span>
+                                                <del>$85.00</del>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- ltn__product-item -->
+                                <div class="col-lg-12">
+                                    <div class="ltn__product-item ltn__product-item-3 text-center">
+                                        <div class="product-img">
+                                            <a href="product-details.html"><img src="~/client/assets/img/product/3.png" alt="#"></a>
+                                            <div class="product-badge">
+                                                <ul>
+                                                    <li class="sale-badge">New</li>
+                                                </ul>
+                                            </div>
+                                            <div class="product-hover-action">
+                                                <ul>
+                                                    <li>
+                                                        <a href="#" title="Quick View" data-bs-toggle="modal" data-bs-target="#quick_view_modal">
+                                                            <i class="far fa-eye"></i>
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#" title="Add to Cart" data-bs-toggle="modal" data-bs-target="#add_to_cart_modal">
+                                                            <i class="fas fa-shopping-cart"></i>
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#" title="Wishlist" data-bs-toggle="modal" data-bs-target="#liton_wishlist_modal">
+                                                            <i class="far fa-heart"></i>
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="product-info">
+                                            <div class="product-ratting">
+                                                <ul>
+                                                    <li><a href="#"><i class="fas fa-star"></i></a></li>
+                                                    <li><a href="#"><i class="fas fa-star"></i></a></li>
+                                                    <li><a href="#"><i class="fas fa-star"></i></a></li>
+                                                    <li><a href="#"><i class="fas fa-star-half-alt"></i></a></li>
+                                                    <li><a href="#"><i class="far fa-star"></i></a></li>
+                                                </ul>
+                                            </div>
+                                            <h2 class="product-title"><a href="product-details.html">Shock Mount Insulator</a></h2>
+                                            <div class="product-price">
+                                                <span>$75.00</span>
+                                                <del>$92.00</del>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--  -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- PRODUCT TAB AREA END -->
+<!-- COUNTDOWN AREA START -->
+<div class="ltn__countdown-area section-bg-1 bg-image" data-bs-bg="~/client/assets/img/bg/14.jpg">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 align-self-center">
+                <div class="ltn__countdown-info text-center pt-100 pb-100">
+                    <div class="section-title-area ltn__section-title-2 mb-0">
+                        <h1 class="section-title">Ưu đãi hot! Giảm giá lên đến <span>25%</span></h1>
+                    </div>
+                    <p>Đừng bỏ lỡ cơ hội mua sắm với giá ưu đãi nhất. Số lượng có hạn, nhanh tay đặt hàng ngay hôm nay!</p>
+                    <div class="ltn__countdown ltn__countdown-1 bg-white" data-countdown="2024/12/01"></div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="countdown-img d-none d-lg-block">
+                    <img src="~/client/assets/img/bg/11.png" alt="#">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- COUNTDOWN AREA END -->
+<!-- PRODUCT SLIDER AREA START -->
+<div class="ltn__product-slider-area ltn__product-gutter pt-115 pb-70 d-none">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="section-title-area ltn__section-title-2 text-center">
+                    <h6 class="section-subtitle ltn__secondary-color">// Parts</h6>
+                    <h1 class="section-title">New Arrivals</h1>
+                </div>
+            </div>
+        </div>
+        <div class="row ltn__product-slider-item-four-active slick-arrow-1">
+            <!-- ltn__product-item -->
+            <div class="col-lg-12">
+                <div class="ltn__product-item ltn__product-item-3 text-center">
+                    <div class="product-img">
+                        <a href="product-details.html"><img src="~/client/assets/img/product/7.png" alt="#"></a>
+                        <div class="product-badge">
+                            <ul>
+                                <li class="sale-badge">New</li>
+                            </ul>
+                        </div>
+                        <div class="product-hover-action">
+                            <ul>
+                                <li>
+                                    <a href="#" title="Quick View" data-bs-toggle="modal" data-bs-target="#quick_view_modal">
+                                        <i class="far fa-eye"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" title="Add to Cart" data-bs-toggle="modal" data-bs-target="#add_to_cart_modal">
+                                        <i class="fas fa-shopping-cart"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" title="Wishlist" data-bs-toggle="modal" data-bs-target="#liton_wishlist_modal">
+                                        <i class="far fa-heart"></i>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <div class="product-ratting">
+                            <ul>
+                                <li><a href="#"><i class="fas fa-star"></i></a></li>
+                                <li><a href="#"><i class="fas fa-star"></i></a></li>
+                                <li><a href="#"><i class="fas fa-star"></i></a></li>
+                                <li><a href="#"><i class="fas fa-star-half-alt"></i></a></li>
+                                <li><a href="#"><i class="far fa-star"></i></a></li>
+                            </ul>
+                        </div>
+                        <h2 class="product-title"><a href="product-details.html">OE Replica Wheels</a></h2>
+                        <div class="product-price">
+                            <span>$150.00</span>
+                            <del>$180.00</del>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- ltn__product-item -->
+            <div class="col-lg-12">
+                <div class="ltn__product-item ltn__product-item-3 text-center">
+                    <div class="product-img">
+                        <a href="product-details.html"><img src="~/client/assets/img/product/1.png" alt="#"></a>
+                        <div class="product-badge">
+                            <ul>
+                                <li class="sale-badge">New</li>
+                            </ul>
+                        </div>
+                        <div class="product-hover-action">
+                            <ul>
+                                <li>
+                                    <a href="#" title="Quick View" data-bs-toggle="modal" data-bs-target="#quick_view_modal">
+                                        <i class="far fa-eye"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" title="Add to Cart" data-bs-toggle="modal" data-bs-target="#add_to_cart_modal">
+                                        <i class="fas fa-shopping-cart"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" title="Wishlist" data-bs-toggle="modal" data-bs-target="#liton_wishlist_modal">
+                                        <i class="far fa-heart"></i>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <div class="product-ratting">
+                            <ul>
+                                <li><a href="#"><i class="fas fa-star"></i></a></li>
+                                <li><a href="#"><i class="fas fa-star"></i></a></li>
+                                <li><a href="#"><i class="fas fa-star"></i></a></li>
+                                <li><a href="#"><i class="fas fa-star-half-alt"></i></a></li>
+                                <li><a href="#"><i class="far fa-star"></i></a></li>
+                            </ul>
+                        </div>
+                        <h2 class="product-title"><a href="product-details.html">Wheel Bearing Retainer</a></h2>
+                        <div class="product-price">
+                            <span>$149.00</span>
+                            <del>$162.00</del>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- ltn__product-item -->
+            <div class="col-lg-12">
+                <div class="ltn__product-item ltn__product-item-3 text-center">
+                    <div class="product-img">
+                        <a href="product-details.html"><img src="~/client/assets/img/product/4.png" alt="#"></a>
+                        <div class="product-badge">
+                            <ul>
+                                <li class="sale-badge">New</li>
+                            </ul>
+                        </div>
+                        <div class="product-hover-action">
+                            <ul>
+                                <li>
+                                    <a href="#" title="Quick View" data-bs-toggle="modal" data-bs-target="#quick_view_modal">
+                                        <i class="far fa-eye"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" title="Add to Cart" data-bs-toggle="modal" data-bs-target="#add_to_cart_modal">
+                                        <i class="fas fa-shopping-cart"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" title="Wishlist" data-bs-toggle="modal" data-bs-target="#liton_wishlist_modal">
+                                        <i class="far fa-heart"></i>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <div class="product-ratting">
+                            <ul>
+                                <li><a href="#"><i class="fas fa-star"></i></a></li>
+                                <li><a href="#"><i class="fas fa-star"></i></a></li>
+                                <li><a href="#"><i class="fas fa-star"></i></a></li>
+                                <li><a href="#"><i class="fas fa-star-half-alt"></i></a></li>
+                                <li><a href="#"><i class="far fa-star"></i></a></li>
+                            </ul>
+                        </div>
+                        <h2 class="product-title"><a href="product-details.html">Tail Light Lens</a></h2>
+                        <div class="product-price">
+                            <span>$78.00</span>
+                            <del>$85.00</del>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- ltn__product-item -->
+            <div class="col-lg-12">
+                <div class="ltn__product-item ltn__product-item-3 text-center">
+                    <div class="product-img">
+                        <a href="product-details.html"><img src="~/client/assets/img/product/5.png" alt="#"></a>
+                        <div class="product-badge">
+                            <ul>
+                                <li class="sale-badge">New</li>
+                            </ul>
+                        </div>
+                        <div class="product-hover-action">
+                            <ul>
+                                <li>
+                                    <a href="#" title="Quick View" data-bs-toggle="modal" data-bs-target="#quick_view_modal">
+                                        <i class="far fa-eye"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" title="Add to Cart" data-bs-toggle="modal" data-bs-target="#add_to_cart_modal">
+                                        <i class="fas fa-shopping-cart"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" title="Wishlist" data-bs-toggle="modal" data-bs-target="#liton_wishlist_modal">
+                                        <i class="far fa-heart"></i>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <div class="product-ratting">
+                            <ul>
+                                <li><a href="#"><i class="fas fa-star"></i></a></li>
+                                <li><a href="#"><i class="fas fa-star"></i></a></li>
+                                <li><a href="#"><i class="fas fa-star"></i></a></li>
+                                <li><a href="#"><i class="fas fa-star-half-alt"></i></a></li>
+                                <li><a href="#"><i class="far fa-star"></i></a></li>
+                            </ul>
+                        </div>
+                        <h2 class="product-title"><a href="product-details.html">Coil Spring Conversion Kit</a></h2>
+                        <div class="product-price">
+                            <span>$150.00</span>
+                            <del>$180.00</del>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- ltn__product-item -->
+            <div class="col-lg-12">
+                <div class="ltn__product-item ltn__product-item-3 text-center">
+                    <div class="product-img">
+                        <a href="product-details.html"><img src="~/client/assets/img/product/2.png" alt="#"></a>
+                        <div class="product-badge">
+                            <ul>
+                                <li class="sale-badge">New</li>
+                            </ul>
+                        </div>
+                        <div class="product-hover-action">
+                            <ul>
+                                <li>
+                                    <a href="#" title="Quick View" data-bs-toggle="modal" data-bs-target="#quick_view_modal">
+                                        <i class="far fa-eye"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" title="Add to Cart" data-bs-toggle="modal" data-bs-target="#add_to_cart_modal">
+                                        <i class="fas fa-shopping-cart"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" title="Wishlist" data-bs-toggle="modal" data-bs-target="#liton_wishlist_modal">
+                                        <i class="far fa-heart"></i>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <div class="product-ratting">
+                            <ul>
+                                <li><a href="#"><i class="fas fa-star"></i></a></li>
+                                <li><a href="#"><i class="fas fa-star"></i></a></li>
+                                <li><a href="#"><i class="fas fa-star"></i></a></li>
+                                <li><a href="#"><i class="fas fa-star-half-alt"></i></a></li>
+                                <li><a href="#"><i class="far fa-star"></i></a></li>
+                            </ul>
+                        </div>
+                        <h2 class="product-title"><a href="product-details.html">Brake Conversion Kit</a></h2>
+                        <div class="product-price">
+                            <span>$62.00</span>
+                            <del>$85.00</del>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- ltn__product-item -->
+            <div class="col-lg-12">
+                <div class="ltn__product-item ltn__product-item-3 text-center">
+                    <div class="product-img">
+                        <a href="product-details.html"><img src="~/client/assets/img/product/3.png" alt="#"></a>
+                        <div class="product-badge">
+                            <ul>
+                                <li class="sale-badge">New</li>
+                            </ul>
+                        </div>
+                        <div class="product-hover-action">
+                            <ul>
+                                <li>
+                                    <a href="#" title="Quick View" data-bs-toggle="modal" data-bs-target="#quick_view_modal">
+                                        <i class="far fa-eye"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" title="Add to Cart" data-bs-toggle="modal" data-bs-target="#add_to_cart_modal">
+                                        <i class="fas fa-shopping-cart"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" title="Wishlist" data-bs-toggle="modal" data-bs-target="#liton_wishlist_modal">
+                                        <i class="far fa-heart"></i>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <div class="product-ratting">
+                            <ul>
+                                <li><a href="#"><i class="fas fa-star"></i></a></li>
+                                <li><a href="#"><i class="fas fa-star"></i></a></li>
+                                <li><a href="#"><i class="fas fa-star"></i></a></li>
+                                <li><a href="#"><i class="fas fa-star-half-alt"></i></a></li>
+                                <li><a href="#"><i class="far fa-star"></i></a></li>
+                            </ul>
+                        </div>
+                        <h2 class="product-title"><a href="product-details.html">Shock Mount Insulator</a></h2>
+                        <div class="product-price">
+                            <span>$75.00</span>
+                            <del>$92.00</del>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--  -->
+        </div>
+    </div>
+</div>
+<!-- PRODUCT SLIDER AREA END -->
+<!-- CALL TO ACTION START (call-to-action-2) -->
+<div class="ltn__call-to-action-area call-to-action-2 pt-20 pb-20" data-bs-bg="~/client/assets/img/1.jpg--">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="call-to-action-inner call-to-action-inner-2 text-center">
+                    <h2>Nhận Dịch Vụ Miễn Phí Hoặc Gọi Điện</h2>
+                    <div class="btn-wrapper">
+                        <a class="btn btn-effect-4 btn-white" href="contact.html"><i class="fas fa-phone-volume"></i> GỌI ĐIỆN</a>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- CALL TO ACTION END -->
+<!-- SMALL PRODUCT LIST AREA START -->
+<div class="ltn__small-product-list-area pt-115 pb-90">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="section-title-area ltn__section-title-2 text-center">
+                    <h6 class="section-subtitle ltn__secondary-color">//  Top Rated products</h6>
+                    <h1 class="section-title">Sản phẩm nổi bật</h1>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            @foreach (var item in (ViewBag.FeaturedProducts as IEnumerable<Product>) ?? Enumerable.Empty<Product>())
+            {
+                <!-- small-product-item -->
+                <div class="col-lg-4 col-md-6 col-12">
+                    <div class="ltn__small-product-item">
+                        <div class="small-product-item-img">
+                            @{
+                                var imgSrc = MyWebsite.UI.Utilities.ImageHelper.GetImageSource(item.ImageData, "client/assets/img/product/2.png");
+                            }
+                            <a asp-controller="Product" asp-action="Details" asp-route-id="@item.Id" title="More Details"><img src="@imgSrc" alt="#"></a>
+                        </div>
+                        <div class="small-product-item-info">
+                            <div class="product-ratting">
+                                <ul>
+                                    <li><a href="#"><i class="fas fa-star"></i></a></li>
+                                    <li><a href="#"><i class="fas fa-star"></i></a></li>
+                                    <li><a href="#"><i class="fas fa-star"></i></a></li>
+                                    <li><a href="#"><i class="fas fa-star-half-alt"></i></a></li>
+                                    <li><a href="#"><i class="far fa-star"></i></a></li>
+                                </ul>
+                            </div>
+                            <h2 class="product-title"><a asp-controller="Product" asp-action="Details" asp-route-id="@item.Id" title="More Details">@item.Name</a></h2>
+                            <div class="product-price d-none">
+                                <span>$145.00</span>
+                                <del>$155.00</del>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+<!-- SMALL PRODUCT LIST AREA END -->
+<!-- NEWSLETTER AREA START -->
+<div class="ltn__newsletter-area section-bg-1 bg-overlay-white-30 bg-image pt-110 pb-90" data-bs-bg="~/client/assets/img/bg/8.jpg">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 offset-lg-2">
+                <div class="ltn__newsletter-inner text-center">
+                    <h2>We make your inbox better</h2>
+                    <p>Sign up to our newsletter to receive grooming tips, style inspiration, <br> exclusive access to pre-launch product pricing and more.</p>
+                    <form action="#" class="ltn__form-box">
+                        <input type="email" name="email" placeholder="Email*">
+                        <div class="btn-wrapper">
+                            <button class="theme-btn-1 btn btn-effect-1 text-uppercase" type="submit">Subscribe</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- NEWSLETTER AREA END -->
+<!-- TESTIMONIAL AREA START -->
+<div class="ltn__testimonial-area ltn__testimonial-4 pt-115 pb-100 plr--9 d-none">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="section-title-area ltn__section-title-2 text-center">
+                    <h6 class="section-subtitle ltn__secondary-color">//  Testimonials</h6>
+                    <h1 class="section-title">Clients Feedbacks<span>.</span></h1>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="ltn__testimonial-slider-4 ltn__testimonial-slider-4-active slick-arrow-1">
+                    <div class="ltn__testimonial-item-5">
+                        <div class="ltn__quote-icon">
+                            <i class="far fa-comments"></i>
+                        </div>
+                        <div class="ltn__testimonial-image">
+                            <img src="~/client/assets/img/testimonial/1.jpg" alt="quote">
+                        </div>
+                        <div class="ltn__testimonial-info">
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud  ullamco laboris nisi ut aliquip ex ea commodo.  </p>
+                            <h4>Jacob William</h4>
+                            <h6>Manager</h6>
+                        </div>
+                    </div>
+                    <div class="ltn__testimonial-item-5">
+                        <div class="ltn__quote-icon">
+                            <i class="far fa-comments"></i>
+                        </div>
+                        <div class="ltn__testimonial-image"><img src="~/client/assets/img/testimonial/2.jpg" alt="quote"></div>
+                        <div class="ltn__testimonial-info">
+                            <p>Quidem Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud  ullamco laboris nisi ut aliquip ex ea. </p>
+                            <h4>Ethan James</h4>
+                            <h6>Admin</h6>
+                        </div>
+                    </div>
+
+                    <div class="ltn__testimonial-item-5">
+                        <div class="ltn__quote-icon">
+                            <i class="far fa-comments"></i>
+                        </div>
+                        <div class="ltn__testimonial-image"><img src="~/client/assets/img/testimonial/3.jpg" alt="quote"></div>
+                        <div class="ltn__testimonial-info">
+                            <p>Dolor Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud  ullamco nisi ut aliquip ex ea commodo. </p>
+                            <h4>Noah Alexander</h4>
+                            <h6>Professor</h6>
+                        </div>
+                    </div>
+
+                    <div class="ltn__testimonial-item-5">
+                        <div class="ltn__quote-icon">
+                            <i class="far fa-comments"></i>
+                        </div>
+                        <div class="ltn__testimonial-image"><img src="~/client/assets/img/testimonial/4.jpg" alt="quote"></div>
+                        <div class="ltn__testimonial-info">
+                            <p>Amet Ipsum Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud  nisi ut aliquip ex ea commodo.  </p>
+                            <h4>Liam Mason</h4>
+                            <h6>Officer</h6>
+                        </div>
+                    </div>
+                </div>
+                <ul class="ltn__testimonial-quote-menu d-none d-lg-block">
+                    <li><img src="~/client/assets/img/testimonial/1.jpg" alt="Quote image"></li>
+                    <li><img src="~/client/assets/img/testimonial/2.jpg" alt="Quote image"></li>
+                    <li><img src="~/client/assets/img/testimonial/3.jpg" alt="Quote image"></li>
+                    <li><img src="~/client/assets/img/testimonial/4.jpg" alt="Quote image"></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- TESTIMONIAL AREA END -->
+<!-- BRAND LOGO AREA START -->
+<div class="ltn__brand-logo-area ltn__brand-logo-1 section-bg-1 pt-110 pb-110 plr--9">
+    <div class="container-fluid">
+        <div class="row ltn__brand-logo-active">
+            <div class="col-lg-12">
+                <div class="ltn__brand-logo-item">
+                    <img src="~/images/CustomerLogos/phat-tien.png" alt="Brand Logo">
+                </div>
+            </div>
+            <div class="col-lg-12">
+                <div class="ltn__brand-logo-item">
+                    <img src="~/images/CustomerLogos/toyota-ben-tre.png" alt="Brand Logo">
+                </div>
+            </div>
+            <div class="col-lg-12">
+                <div class="ltn__brand-logo-item">
+                    <img src="~/images/CustomerLogos/nam-auto.jpeg" alt="Brand Logo">
+                </div>
+            </div>
+            <div class="col-lg-12">
+                <div class="ltn__brand-logo-item">
+                    <img src="~/images/CustomerLogos/toyota-dong-sai-gon.jpg" alt="Brand Logo">
+                </div>
+            </div>
+            <div class="col-lg-12">
+                <div class="ltn__brand-logo-item">
+                    <img src="~/images/CustomerLogos/toyota-tien-giang.jpg" alt="Brand Logo">
+                </div>
+            </div>
+            <div class="col-lg-12">
+                <div class="ltn__brand-logo-item">
+                    <img src="~/images/CustomerLogos/phat-tien.png" alt="Brand Logo">
+                </div>
+            </div>
+            <div class="col-lg-12">
+                <div class="ltn__brand-logo-item">
+                    <img src="~/images/CustomerLogos/toyota-ben-tre.png" alt="Brand Logo">
+                </div>
+            </div>
+            <div class="col-lg-12">
+                <div class="ltn__brand-logo-item">
+                    <img src="~/images/CustomerLogos/nam-auto.jpeg" alt="Brand Logo">
+                </div>
+            </div>
+            <div class="col-lg-12">
+                <div class="ltn__brand-logo-item">
+                    <img src="~/images/CustomerLogos/toyota-dong-sai-gon.jpg" alt="Brand Logo">
+                </div>
+            </div>
+            <div class="col-lg-12">
+                <div class="ltn__brand-logo-item">
+                    <img src="~/images/CustomerLogos/toyota-tien-giang.jpg" alt="Brand Logo">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- BRAND LOGO AREA END -->
+<!-- BLOG AREA START (blog-4) -->
+<div class="ltn__blog-area pt-115 pb-90 d-none">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="section-title-area ltn__section-title-2 text-center">
+                    <h6 class="section-subtitle ltn__secondary-color">// blog & insights</h6>
+                    <h1 class="section-title">News Feeds<span>.</span></h1>
+                </div>
+            </div>
+        </div>
+        <div class="row  ltn__blog-slider-one-active slick-arrow-1">
+            <div class="col-lg-12">
+                <div class="ltn__blog-item ltn__blog-item-4 bg-image" data-bs-bg="~/client/assets/img/blog/1.jpg">
+                    <div class="ltn__blog-brief">
+                        <div class="ltn__blog-meta">
+                            <ul>
+                                <li class="ltn__blog-author">
+                                    <a href="#"><i class="far fa-user"></i>by: Admin</a>
+                                </li>
+                                <li class="ltn__blog-tags">
+                                    <a href="#"><i class="fas fa-tags"></i>Services</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <h3 class="ltn__blog-title"><a href="blog-details.html">Electric Car Maintenance, Servicing & Repairs</a></h3>
+                        <p>Lorem ipsum labore et dolore mag na aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.</p>
+                        <div class="ltn__blog-meta-btn">
+                            <div class="ltn__blog-meta">
+                                <ul>
+                                    <li class="ltn__blog-date"><i class="far fa-calendar-alt"></i> June 24, 2020</li>
+                                </ul>
+                            </div>
+                            <div class="ltn__blog-btn">
+                                <a href="blog-details.html">Read more</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-12">
+                <div class="ltn__blog-item ltn__blog-item-4 bg-image" data-bs-bg="~/client/assets/img/blog/2.jpg">
+                    <div class="ltn__blog-brief">
+                        <div class="ltn__blog-meta">
+                            <ul>
+                                <li class="ltn__blog-author">
+                                    <a href="#"><i class="far fa-user"></i>by: Admin</a>
+                                </li>
+                                <li class="ltn__blog-tags">
+                                    <a href="#"><i class="fas fa-tags"></i>Services</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <h3 class="ltn__blog-title"><a href="blog-details.html">Common Engine Oil Problems and Solutions</a></h3>
+                        <p>Lorem ipsum labore et dolore mag na aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.</p>
+                        <div class="ltn__blog-meta-btn">
+                            <div class="ltn__blog-meta">
+                                <ul>
+                                    <li class="ltn__blog-date"><i class="far fa-calendar-alt"></i> June 24, 2020</li>
+                                </ul>
+                            </div>
+                            <div class="ltn__blog-btn">
+                                <a href="blog-details.html">Read more</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-12">
+                <div class="ltn__blog-item ltn__blog-item-4 bg-image" data-bs-bg="~/client/assets/img/blog/3.jpg">
+                    <div class="ltn__blog-brief">
+                        <div class="ltn__blog-meta">
+                            <ul>
+                                <li class="ltn__blog-author">
+                                    <a href="#"><i class="far fa-user"></i>by: Admin</a>
+                                </li>
+                                <li class="ltn__blog-tags">
+                                    <a href="#"><i class="fas fa-tags"></i>Services</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <h3 class="ltn__blog-title"><a href="blog-details.html">How to Prepare for your First Track Day!</a></h3>
+                        <p>Lorem ipsum labore et dolore mag na aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.</p>
+                        <div class="ltn__blog-meta-btn">
+                            <div class="ltn__blog-meta">
+                                <ul>
+                                    <li class="ltn__blog-date"><i class="far fa-calendar-alt"></i> June 24, 2020</li>
+                                </ul>
+                            </div>
+                            <div class="ltn__blog-btn">
+                                <a href="blog-details.html">Read more</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-12">
+                <div class="ltn__blog-item ltn__blog-item-4 bg-image" data-bs-bg="~/client/assets/img/blog/4.jpg">
+                    <div class="ltn__blog-brief">
+                        <div class="ltn__blog-meta">
+                            <ul>
+                                <li class="ltn__blog-author">
+                                    <a href="#"><i class="far fa-user"></i>by: Admin</a>
+                                </li>
+                                <li class="ltn__blog-tags">
+                                    <a href="#"><i class="fas fa-tags"></i>Services</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <h3 class="ltn__blog-title"><a href="blog-details.html">The branch of biology that deals with the normal.</a></h3>
+                        <p>Lorem ipsum labore et dolore mag na aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.</p>
+                        <div class="ltn__blog-meta-btn">
+                            <div class="ltn__blog-meta">
+                                <ul>
+                                    <li class="ltn__blog-date"><i class="far fa-calendar-alt"></i> June 24, 2020</li>
+                                </ul>
+                            </div>
+                            <div class="ltn__blog-btn">
+                                <a href="blog-details.html">Read more</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-12">
+                <div class="ltn__blog-item ltn__blog-item-4">
+                    <div class="ltn__blog-brief">
+                        <div class="ltn__blog-meta">
+                            <ul>
+                                <li class="ltn__blog-author">
+                                    <a href="#"><i class="far fa-user"></i>by: Admin</a>
+                                </li>
+                                <li class="ltn__blog-tags">
+                                    <a href="#"><i class="fas fa-tags"></i>Services</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <h3 class="ltn__blog-title"><a href="blog-details.html">How to: Make Your Tires Last Longer</a></h3>
+                        <p>Lorem ipsum labore et dolore mag na aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.</p>
+                        <div class="ltn__blog-meta-btn">
+                            <div class="ltn__blog-meta">
+                                <ul>
+                                    <li class="ltn__blog-date"><i class="far fa-calendar-alt"></i> June 24, 2020</li>
+                                </ul>
+                            </div>
+                            <div class="ltn__blog-btn">
+                                <a href="blog-details.html">Read more</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- BLOG AREA END -->
+<!-- FEATURE AREA START ( Feature - 3) -->
+<div class="ltn__feature-area before-bg-bottom-2 mb--30--- plr--5">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="ltn__feature-item-box-wrap ltn__border-between-column white-bg">
+                    <div class="row">
+                        <div class="col-xl-3 col-md-6 col-12">
+                            <div class="ltn__feature-item ltn__feature-item-8">
+                                <div class="ltn__feature-icon">
+                                    <img src="~/client/assets/img/icons/svg/4-track.svg" alt="#">
+                                </div>
+                                <div class="ltn__feature-info">
+                                    <h4>Giao hàng miễn phí</h4>
+                                    <p>
+                                        Giao hàng miễn phí cho
+                                        tất cả đơn hàng trên 100$
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-md-6 col-12">
+                            <div class="ltn__feature-item ltn__feature-item-8">
+                                <div class="ltn__feature-icon">
+                                    <img src="~/client/assets/img/icons/svg/5-madel.svg" alt="#">
+                                </div>
+                                <div class="ltn__feature-info">
+                                    <h4>Sản phẩm chất lượng</h4>
+                                    <p>
+                                        Chúng tôi đảm bảo chất lượng sản phẩm
+                                        đó là mục tiêu chính của chúng tôi
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-md-6 col-12">
+                            <div class="ltn__feature-item ltn__feature-item-8">
+                                <div class="ltn__feature-icon">
+                                    <img src="~/client/assets/img/icons/svg/6-return.svg" alt="#">
+                                </div>
+                                <div class="ltn__feature-info">
+                                    <h4>Đổi trả trong 3 ngày</h4>
+                                    <p>
+                                        Đổi trả sản phẩm trong vòng 3 ngày
+                                        cho bất kỳ sản phẩm nào bạn mua
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-md-6 col-12">
+                            <div class="ltn__feature-item ltn__feature-item-8">
+                                <div class="ltn__feature-icon">
+                                    <img src="~/client/assets/img/icons/svg/7-support.svg" alt="#">
+                                </div>
+                                <div class="ltn__feature-info">
+                                    <h4>Hỗ trợ trực tuyến</h4>
+                                    <p>
+                                        Chúng tôi đảm bảo chất lượng sản phẩm
+                                        mà bạn có thể tin tưởng dễ dàng
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- FEATURE AREA END -->

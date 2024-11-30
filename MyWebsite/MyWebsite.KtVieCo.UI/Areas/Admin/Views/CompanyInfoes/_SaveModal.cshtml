@@ -1,0 +1,168 @@
+﻿@model MyWebsite.Application.DTOs.ViewModels.CompanyViewModel
+
+<!-- Vertically Centered Modal -->
+<div class="col-lg-4 col-md-6">
+    <div class="mt-4">
+        <!-- Modal -->
+        <!-- Modal -->
+        <div class="modal fade" id="saveModal" tabindex="-1" aria-hidden="true" data-backdrop="static">
+            <form asp-action="SaveData" asp-controller="CompanyInfoes" asp-area="Admin" method="post" id="formCompany" enctype="multipart/form-data" class="needs-validation" novalidate>
+                <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="saveModalTitle">Tạo mới</h5>
+                            <button type="button"
+                                    class="btn-close"
+                                    data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            <input type="hidden" asp-for="Id" />
+
+                            <div class="row">
+                                
+                                <div class="d-flex align-items-start align-items-sm-center gap-6">
+                                    @* Hiển thị hình ảnh khi load img *@
+                                    <div id="previewMainImage" class="mb-2">
+                                        <img id="previewImage" class="img-thumbnail" alt="Ảnh sản phẩm" style="max-height: 150px">
+                                    </div>
+                                
+                                    <div class="button-wrapper">
+                                        <label class="btn btn-sm btn-primary me-3 mb-4" tabindex="0">
+                                            <span class="d-none d-sm-block">Cập nhật ảnh mới</span>
+                                            <i class="ri-upload-2-line d-block d-sm-none"></i>
+                                            <input type="file" name="postFile" class="form-control mb-2" onchange="previewMainImage(this)" hidden accept="image/png, image/jpeg" />
+                                        </label>
+                                        <div>Chấp nhận file JPG hoặc PNG</div>
+                                    </div>
+                                
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col mb-6 mt-2">
+                                    <div class="form-floating form-floating-outline">
+                                        <input type="text" asp-for="Name" class="form-control" placeholder="Nhập Tên công ty" />
+                                        <label asp-for="Name"></label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col mb-6 mt-2">
+                                    <div class="form-floating form-floating-outline">
+                                        <input type="text" asp-for="ShortName" class="form-control" placeholder="Nhập Tên viết tắt" />
+                                        <label asp-for="ShortName"></label>
+                                    </div>
+                                </div>
+
+                                <div class="col mb-6 mt-2">
+                                    <div class="form-floating form-floating-outline">
+                                        <input type="text" asp-for="TaxCode" class="form-control" placeholder="Nhập Mã số thuế" />
+                                        <label asp-for="TaxCode"></label>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col mb-6 mt-2">
+                                    <div class="form-floating form-floating-outline">
+                                        <input type="text" asp-for="BusinessField" class="form-control" placeholder="Nhập Lĩnh vực" />
+                                        <label asp-for="BusinessField"></label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col mb-6 mt-2">
+                                    <div class="form-floating form-floating-outline">
+                                        <input type="text" asp-for="FoundationYear" class="form-control" placeholder="Nhập Năm thành lập" />
+                                        <label asp-for="FoundationYear"></label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col mb-6 mt-2">
+                                    <div class="form-floating form-floating-outline">
+                                        <input type="text" asp-for="HeadquartersAddress" class="form-control" placeholder="Nhập Địa chỉ" />
+                                        <label asp-for="HeadquartersAddress"></label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col mb-6 mt-2">
+                                    <div class="form-floating form-floating-outline">
+                                        <input type="text" asp-for="PhoneNumber" class="form-control" placeholder="Nhập Số điện thoại" />
+                                        <label asp-for="PhoneNumber"></label>
+                                    </div>
+                                </div>
+
+                                <div class="col mb-6 mt-2">
+                                    <div class="form-floating form-floating-outline">
+                                        <input type="text" asp-for="WhatsAppNumber" class="form-control" placeholder="Nhập số WhatsApp (84xxxxxxxxx)" />
+                                        <label asp-for="WhatsAppNumber"></label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col mb-6 mt-2">
+                                    <div class="form-floating form-floating-outline">
+                                        <input type="text" asp-for="ZaloOaId" class="form-control" placeholder="Nhập Zalo OAId" />
+                                        <label asp-for="ZaloOaId"></label>
+                                    </div>
+                                </div>
+
+                                <div class="col mb-6 mt-2">
+                                    <div class="form-floating form-floating-outline">
+                                        <input type="text" asp-for="ZaloNumber" class="form-control" placeholder="Nhập Số Zalo" />
+                                        <label asp-for="ZaloNumber"></label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col mb-6 mt-2">
+                                    <div class="form-floating form-floating-outline">
+                                        <input type="text" asp-for="Email" class="form-control" placeholder="Nhập Email" />
+                                        <label asp-for="Email"></label>
+                                    </div>
+                                </div>
+
+                                <div class="col mb-6 mt-2">
+                                    <div class="form-floating form-floating-outline">
+                                        <input type="text" asp-for="Website" class="form-control" placeholder="Nhập Website" />
+                                        <label asp-for="Website"></label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col mb-6 mt-2">
+                                    <div class="form-floating form-floating-outline">
+                                        <input type="text" asp-for="ManagedBy" class="form-control" placeholder="Nhập Quản lý bởi" />
+                                        <label asp-for="ManagedBy"></label>
+                                    </div>
+                                </div>
+
+                                <div class="col mb-6 mt-2">
+                                    <div class="form-floating form-floating-outline">
+                                        <input type="text" asp-for="TypeOfBusiness" class="form-control" placeholder="Nhập Loại hình doanh nghiệp" />
+                                        <label asp-for="TypeOfBusiness"></label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Đóng</button>
+                            <button type="submit" class="btn btn-primary">Lưu</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

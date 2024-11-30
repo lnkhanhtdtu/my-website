@@ -1,0 +1,88 @@
+﻿@model MyWebsite.Application.DTOs.ViewModels.BannerViewModel
+
+<!-- Vertically Centered Modal -->
+<div class="col-lg-4 col-md-6">
+    <div class="mt-4">
+        <!-- Modal -->
+        <div class="modal fade" id="saveModal" tabindex="-1" aria-hidden="true" data-backdrop="static">
+            <form asp-action="SaveData" asp-controller="Banners" asp-area="Admin" method="post" id="formBanner" enctype="multipart/form-data">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="saveModalTitle">Tạo mới</h5>
+                            <button type="button"
+                                    class="btn-close"
+                                    data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            <input type="hidden" asp-for="Id" />
+
+                            <div class="row">
+                                <div class="d-flex align-items-start align-items-sm-center gap-6">
+                                    @* Hiển thị hình ảnh khi load img *@
+                                    <div id="previewMainImage" class="mb-2">
+                                        <img id="previewImage" class="img-thumbnail" alt="Ảnh sản phẩm" style="max-height: 150px">
+                                    </div>
+
+                                    <div class="button-wrapper">
+                                        <label class="btn btn-sm btn-primary me-3 mb-4" tabindex="0">
+                                            <span class="d-none d-sm-block">Cập nhật ảnh mới</span>
+                                            <i class="ri-upload-2-line d-block d-sm-none"></i>
+                                            <input type="file" name="postFile" class="form-control mb-2" onchange="previewMainImage(this)" hidden accept="image/png, image/jpeg" />
+                                        </label>
+                                        <div>Chấp nhận file JPG hoặc PNG</div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col mb-6 mt-2">
+                                    <div class="form-floating form-floating-outline">
+                                        <input type="text" asp-for="Title" class="form-control" placeholder="Nhập tên Tiêu đề" required />
+                                        <label asp-for="Title">Tên tiêu đề</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col mb-6 mt-2">
+                                    <div class="form-floating form-floating-outline">
+                                        <textarea type="text" asp-for="Description" class="form-control" placeholder="Nhập Mô tả" rows="3" required></textarea>
+                                        <label asp-for="Description">Mô tả</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col mb-6 mt-2">
+                                    <div class="form-floating form-floating-outline">
+                                        <input type="number" asp-for="InOrder" class="form-control" placeholder="Nhập Thứ tự hiển thị" required />
+                                        <label asp-for="InOrder">Thức tự hiển thị</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col mb-6 mt-2">
+                                    <div class="form-check mb-0">
+                                        <input class="form-check-input" type="checkbox" asp-for="IsActive" />
+                                        <label class="form-check-label">Hiển thị</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                                Đóng
+                            </button>
+                            <button type="submit" class="btn btn-primary">Lưu</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
