@@ -1,0 +1,141 @@
+﻿@using System.Text.Json
+@using MyWebsite.Domain.Entities
+
+@{
+    var companyInfo = Context.Items["CompanyInfo"] as CompanyInfo;
+    var welcomeMessage = "Rất vui khi được hỗ trợ bạn!";
+    var zaloUrl = "https://zalo.me/" + companyInfo?.ZaloNumber;
+
+    string logoBase64 = null;
+    if (companyInfo?.Logo != null)
+    {
+        logoBase64 = $"data:image/png;base64,{Convert.ToBase64String(companyInfo.Logo)}";
+    }
+
+    var waBtnSetting = JsonSerializer.Serialize(new WhatsAppButtonSetting
+            {
+                BtnColor = "#16BE45",
+                CtaText = "",
+                CornerRadius = 40,
+                MarginBottom = 65,
+                MarginLeft = 20,
+                MarginRight = 12,
+                BtnPosition = "right",
+                WhatsAppNumber = companyInfo?.WhatsAppNumber ?? "",
+                WelcomeMessage = welcomeMessage,
+                ZIndex = 999999,
+                BtnColorScheme = "light"
+            }, new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase });
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>@ViewData["Title"]</title>
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+
+    <!-- Favicons -->
+    @if (!string.IsNullOrEmpty(logoBase64))
+    {
+        <link id="dynamic-favicon" rel="icon" href="data:;base64,iVBORw0KGgo=">
+        <script>
+            (function () {
+                var link = document.getElementById('dynamic-favicon');
+                link.href = '@Html.Raw(logoBase64)';
+            })();
+        </script>
+    }
+    else
+    {
+        <link href="~/client/assets/img/favicon.png" rel="icon">
+        <link href="~/client/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+    }
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com" rel="preconnect">
+    <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+
+    <!-- Vendor CSS Files -->
+    <link href="~/client/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="~/client/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="~/client/assets/vendor/aos/aos.css" rel="stylesheet">
+    <link href="~/client/assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+    <link href="~/client/assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+
+    <!-- Main CSS File -->
+    <link href="~/client/assets/css/main.css" rel="stylesheet">
+    <link href="~/client/assets/vendor/zalo/zalo1.css" rel="stylesheet" />
+
+</head>
+<body class="index-page">
+
+    @await Html.PartialAsync("_Header", companyInfo)
+    <main class="main">
+        @RenderBody()
+    </main>
+    @await Html.PartialAsync("_Footer", companyInfo)
+
+    <!-- Scroll Top -->
+    <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+    @if (!string.IsNullOrEmpty(companyInfo?.WhatsAppNumber))
+    {
+        <!-- WhatsApp: https://www.delightchat.io/whatsapp-chat-button-widget -->
+        <script src="~/client/assets/vendor/whatsapp/embed.min.js"></script>
+        <script>
+            var wa_btnSetting = @Html.Raw(waBtnSetting);
+            window.onload = () => {
+                _waEmbed(wa_btnSetting);
+            };
+        </script>
+    }
+
+    @if (!string.IsNullOrEmpty(companyInfo?.ZaloOaId))
+    {
+        <!-- Zalo: https://developers.zalo.me/docs/social/zalo-chat-widget -->
+        <div class="zalo-chat-widget" data-oaid=@companyInfo?.ZaloOaId data-welcome-message=@welcomeMessage data-autopopup="0" data-width="300" data-height="300"></div>
+        <style>
+            .zalo-chat-widget {
+                bottom: 120px !important;
+                right: 10px !important;
+            }
+        </style>
+
+        <script src="~/client/assets/vendor/zalo/sdk.js"></script>
+    }
+    else if (!string.IsNullOrEmpty(companyInfo?.ZaloNumber))
+    {
+        <!-- Zalo: https://vutruso.com/contact-me-on-zalo/ -->
+        <div class="zalo-container right">
+            <a id="zalo-btn" href="@zaloUrl" target="_blank" rel="noopener nofollow">
+                <span><img src="~/client/assets/vendor/zalo/zalo-2.png" alt="Contact Me on Zalo"></span>
+            </a>
+        </div>
+    }
+
+    <!-- Preloader -->
+    <div id="preloader">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+
+    <!-- Vendor JS Files -->
+    <script src="~/client/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="~/client/assets/vendor/aos/aos.js"></script>
+    <script src="~/client/assets/vendor/purecounter/purecounter_vanilla.js"></script>
+    <script src="~/client/assets/vendor/swiper/swiper-bundle.min.js"></script>
+    <script src="~/client/assets/vendor/glightbox/js/glightbox.min.js"></script>
+    <script src="~/client/assets/vendor/imagesloaded/imagesloaded.pkgd.min.js"></script>
+    <script src="~/client/assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+
+    <!-- Main JS File -->
+    <script src="~/client/assets/js/main.js"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

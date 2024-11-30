@@ -1,0 +1,322 @@
+﻿@model MyWebsite.Application.DTOs.ViewModels.ProductViewModel
+
+@{
+    ViewData["Title"] = "Danh sách sản phẩm";
+}
+
+<!-- Modal -->
+@await Html.PartialAsync("_SaveModal", Model)
+
+<!-- Basic Bootstrap Table -->
+<div class="card">
+    <h5 class="card-header">
+        <!-- Button trigger modal -->
+        <button type="button" class="btn" id="btnAddProduct">
+            <i class="ri-add-circle-fill"></i>
+        </button>
+        Danh sách sản phẩm
+    </h5>
+
+    <div class="table-responsive text-nowrap table-hover">
+        <table id="myTable" class="table">
+            <thead>
+                <tr>
+                    <th>
+                        #
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.CreatedAt)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Name)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.CategoryId)
+                    </th>
+                    @* <th>@Html.DisplayNameFor(model => model.Price)</th>
+                    <th>@Html.DisplayNameFor(model => model.OldPrice)</th> *@
+                    <th>
+                        @Html.DisplayNameFor(model => model.IsFeatured)
+                    </th>
+                    <th>Thao tác</th>
+                </tr>
+            </thead>
+            <tbody class="table-border-bottom-0">
+                <tr>
+                    <td>No Data</td>
+                    <td>No Data</td>
+                    <td>No Data</td>
+                    @* <td>No Data</td>
+                    <td>No Data</td> *@
+                    <td>No Data</td>
+                    <td>No Data</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!--/ Basic Bootstrap Table -->
+@section Scripts {
+    <script src="~/js/registerDataTable.js"></script>
+    
+    <script>
+        // Khởi tạo Description
+        tinyMCEInit("#Description");
+    </script>
+
+    <script>
+        const elementName = "#myTable";
+        const url = '@Url.Action("GetProductPagination", "Products")';
+        const viewUrl = "/san-pham/chi-tiet"; // TODO: Sửa lại theo 
+        const getById = '@Url.Action("GetById", "Products", new { area = "Admin" })';
+        const editUrl = '@Url.Action("SaveData", "Products", new { area = "Admin" })';
+        const deleteUrl = '@Url.Action("SoftDelete", "Products", new { area = "Admin" })';
+            
+        const columns = [
+            // STT
+            {
+                data: null, name: "stt", width: 50,
+                render: function (data, type, row, meta) { return meta.row + 1; }
+            },
+            {
+                data: "createdAt", name: "createdAt", autoWidth: true,
+                render: data => moment(data).format("DD/MM/YYYY")
+            },
+            {
+                data: "name", name: "name", width: 100,
+                render: function (data, type, row) {
+                    return `<td>
+                                                                <div class="d-flex align-items-center">
+                                                                    <div class="me-4">
+                                                                        <img src="${row.imageData ? `data:image/png;base64,${row.imageData}` : '/images/default-images/default-image.png'}" class="rounded-2"alt="Ảnh sản  phẩm" style="max-height: 75px; max-width:150px">
+                                                                    </div>
+                                                                    <div>
+                                                                        <h6 class="mb-0">${data}</h6>
+                                                                                        <!--<small>${row.price ? '<div>' + row.price.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' }) + '</div>' : ''}</small>-->
+<small class="text-truncate mb-0 d-none d-sm-block">${row.summary}</small>
+                                                                    </div>
+
+                                                                </div>
+                                                            </td>`;
+                }
+            },
+            {
+                data: "categoryName", name: "categoryName", autoWidth: true,
+                render: function (data, type, row) {
+                    return `<div class="d-flex align-items-center">
+                                <div class="avatar-wrapper me-3 rounded-2 bg-label-secondary user-name">
+                                    <div class="avatar"><img
+                                            src="${row.categoryImage ? `data:image/png;base64,${row.categoryImage}` : '/images/default-image.png'}"
+                                            alt="Product-8" class="rounded-2"></div>
+                                </div>
+                                <div class="d-flex flex-column justify-content-center">
+                                    <span class="text-heading fw-medium text-wrap">${data}</span>                                    
+                                </div>
+                            </div>`;
+                }
+            },
+            // {
+            //     data: "price", name: "price", autoWidth: true,
+            //     render: function (data, type, row) {
+            //         return data ? '<div class="text-end">' + data.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' }) + '</div>' : '';
+            //     }
+            // },
+            // {
+            //     data: "oldPrice", name: "oldPrice", autoWidth: true,
+            //     render: function (data, type, row) {
+            //         return data ? '<div class="text-end">' + data.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' }) + '</div>' : '';
+            //     }
+            // },
+            {
+                data: "isFeatured", name: "isFeatured", width: "30",
+                render: function (data, type, row) {
+                    return `<input type="checkbox" class="form-check-input" ${data ? 'checked' : ''} disabled>`;
+                }
+            },
+            // Action Edit, Delete
+            {
+                data: "id", name: "id", width: "20",
+                render: function (key) {
+                    return `<div class="dropdown">
+                                <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
+                                    <i class="ri-more-2-line"></i>
+                                </button>
+                                <div class="dropdown-menu" data-key="${key}">
+                                    <a class="dropdown-item btn-view" href="${viewUrl}/${key}">
+                                        <i class="ri-eye-line me-1 text-info"></i> Xem
+                                    </a>
+                                    <a class="dropdown-item btn-edit" href="#" >
+                                        <i class="ri-pencil-line me-1 text-warning"></i> Sửa
+                                    </a>
+                                    <a class="dropdown-item btn-delete" href="#">
+                                        <i class="ri-delete-bin-6-line me-1 text-danger"></i> Xóa
+                                    </a>
+                                </div>
+                            </div>`;
+                }
+            }
+        ];
+
+        registerDataTable(elementName, columns, url);
+
+        // TODO: Đưa vào hàm sử dụng chung
+        function InitImageUploader($inputImage, preloaded, maxSize = 5 * 1024 * 1024, maxFiles = 10) {
+            $($inputImage).empty().imageUploader({
+                imagesInputName: 'NewImages',
+                preloadedInputName: 'OldImages',
+                preloaded: preloaded,
+                label: 'Kéo và thả hình ảnh vào đây hoặc click để chọn',
+                extensions: ['.jpg', '.jpeg', '.png'],
+                mimes: ['image/jpeg', 'image/png'],
+                errorMessage: 'Chỉ cho phép các file hình ảnh có định dạng .jpg, .jpeg, .png',
+                maxSize: maxSize,
+                maxFiles: maxFiles
+            });
+        }
+
+        // "Thêm Sản Phẩm"
+        $(document).on("click", "#btnAddProduct", function () {
+            $('#saveProductModal').modal('show');
+            $('#formProduct').trigger("reset");
+            $('#previewImage').attr('src', '/images/default-image.png');
+
+            // Reset các trường ẩn
+            $('#Id').val('0');
+
+            // Khởi tạo lại bộ tải hình ảnh
+            InitImageUploader('.input-images', []);
+        });
+
+        // "Sửa Sản Phẩm"
+        $(document).on("click", ".btn-edit", function () {
+            $('#formProduct').trigger("reset");
+            // Reset các trường ẩn
+            $('#Id').val('0');
+
+            const key = $(this).closest("div").data("key");
+
+            $.ajax({
+                url: `${getById}/${key}`,
+                method: "GET",
+                success: function (data) {
+                    // Hiển thị modal trước
+                    $('#saveProductModal').modal('show');
+
+                    // Sau đó đợi một chút để đảm bảo modal đã được render
+                    setTimeout(function () {
+                        console.log(data);
+                        mapObjectToControlView(data);
+
+                        let preloaded = data.images ? data.images.map((img, index) => ({
+                            id: index + 1,
+                            src: `data:image/png;base64,${img.data}`
+                        })) : [];
+
+                        InitImageUploader('.input-images', preloaded);
+
+                        $('#previewImage').attr('src', `${data.imageData ? `data:image/png;base64,${data.imageData}` : '/images/default-image.png'}`);
+                    }, 100); // Đợi 100ms
+                },
+                error: function (error) {
+                    console.error('Error fetching category data:', error);
+                }
+            });
+        });
+
+        // "Xóa"
+        $(document).on("click", ".btn-delete", function () {
+            const key = $(this).closest("div").data("key");
+            console.log("Delete key: ", key);
+            $.ajax({
+                url: `${deleteUrl}/${key}`,
+                method: "POST",
+                success: function (data) {
+                    $(elementName).DataTable().ajax.reload();
+                    showToaster("Success", "Xóa thành công");
+                    console.log(data);
+                }
+            });
+        });
+
+        function previewMainImage(input) {
+            var preview = document.getElementById('previewMainImage');
+            preview.innerHTML = ''; // Xóa các hình ảnh trước đó để cập nhật hình ảnh mới
+
+            if (input.files) {
+                var filesAmount = input.files.length;
+
+                for (var i = 0; i < filesAmount; i++) {
+                    var reader = new FileReader();
+
+                    reader.onload = function (event) {
+                        var image = document.createElement('img');
+                        image.id = 'previewImage';
+                        image.className = 'img-thumbnail mr-3 mb-2';
+                        image.style.maxHeight = '200px';
+                        image.style.maxWidth = '300px';
+                        image.src = event.target.result;
+                        preview.appendChild(image);
+                    }
+
+                    reader.readAsDataURL(input.files[i]);
+                }
+            }
+        }
+
+        $('#formProduct').submit(function (e) {
+
+            e.preventDefault();
+
+            // Cập nhật giá trị TinyMCE vào input field
+            $('#Description').val(tinymce.get('Description').getContent());
+
+            var formData = new FormData(this);
+
+            // Append new images (actual files) to 'NewImages'
+            var newImages = $('.input-images input[type="file"]')[0].files;
+            for (const file of newImages) {
+                formData.append('NewImages', file);
+            }
+
+            $('.input-images .uploaded .uploaded-image').each(function () {
+                const imgSrc = $(this).find('img').attr('src');
+                if ($(this).data('preloaded')) {
+                    formData.append('OldImages', imgSrc); // Append each URL as a separate field
+                }
+            });
+
+            // Chuyển FormData thành object
+            var object = {};
+            formData.forEach(function (value, key) {
+                object[key] = value;
+            });
+
+            // Chuyển object thành JSON
+            var json = JSON.stringify(object);
+            console.log("Dữ liệu JSON từ formData:\n", json);
+
+            $.ajax({
+                url: $(this).attr('action'),
+                type: $(this).attr('method'),
+                data: formData,
+                contentType: false, // Important: Do not set content type
+                processData: false, // Important: Do not process data
+                success: function (response) {
+                    console.log(response);
+
+                    if (response.status !== 'Error') {
+                        $('#saveProductModal').modal('hide');
+                        $(elementName).DataTable().ajax.reload();
+                        showToaster("Success", formData.get('Id') === 0 ? "Tạo thành công" : "Cập nhật thành công");
+                    } else {
+                        showToaster("Error", formData.get('Id') === 0 ? "Tạo thất bại" : "Cập nhật thất bại");
+                    }
+                },
+                error: function (response) {
+                    console.log(response);
+                }
+            });
+        });
+    </script>
+}
