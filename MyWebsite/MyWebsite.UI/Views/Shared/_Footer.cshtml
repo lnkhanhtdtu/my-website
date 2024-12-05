@@ -14,13 +14,13 @@
                     <p><strong>Email:</strong> <span>@Model.Email</span></p>
                     <p><strong>MST:</strong> <span>@Model.TaxCode</span></p>
                 </div>
-                <div class="social-links d-flex mt-4">
-                    <a href=""><i class="bi bi-tiktok"></i></a>
-                    <a href=""><i class="bi bi-facebook"></i></a>
-                    <a href=""><i class="bi bi-youtube"></i></a>
-                    <a href=""><i class="bi bi-linkedin"></i></a>
-                    <a href=""><i class="bi bi-whatsapp"></i></a>
-                </div>
+                @* <div class="social-links d-flex mt-4"> *@
+                @*     <a href=""><i class="bi bi-tiktok"></i></a> *@
+                @*     <a href=""><i class="bi bi-facebook"></i></a> *@
+                @*     <a href=""><i class="bi bi-youtube"></i></a> *@
+                @*     <a href=""><i class="bi bi-linkedin"></i></a> *@
+                @*     <a href=""><i class="bi bi-whatsapp"></i></a> *@
+                @* </div> *@
             </div>
 
             <div class="col-lg-2 col-md-3 footer-links">
@@ -39,16 +39,14 @@
                     <li><a href="#">Chính sách đổi trả</a></li>
                     <li><a href="#">Chính sách bảo mật</a></li>
                     <li><a href="#">Chính sách giao hàng</a></li>
-                    <li><a href="#">Chính sách giao hàng</a></li>
-                    <li><a href="#">Chính sách giao hàng</a></li>
                     <li><a href="#">Hướng dẫn thanh toán</a></li>
                     <li><a href="#">Quy định đặt hàng</a></li>
                 </ul>
             </div>
 
             <div class="col-lg-4 col-md-12 footer-newsletter">
-                <h4>SẢN XUẤT BAO BÌ</h4>
-                <p>Xưởng sản xuất bao bì, In ấn bao bì, Thiết kế bao bì, Bao bì giấy kraft, Bao bì carton, Hộp giấy, Hộp giấy đựng bánh kẹo, Túi xách giấy, Bao bì thực phẩm, In bao bì cà phê, In offset, In flexo.</p>
+                <h4 class="text-uppercase">@Model.BusinessField</h4>
+                <p>@Model.Website</p>
             </div>
 
         </div>

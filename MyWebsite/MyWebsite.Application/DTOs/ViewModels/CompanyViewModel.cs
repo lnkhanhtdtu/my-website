@@ -34,7 +34,7 @@ namespace MyWebsite.Application.DTOs.ViewModels
         [Display(Name = "Địa chỉ email")]
         public string? Email { get; set; }
 
-        [Display(Name = "Website")]
+        [Display(Name = "Mô tả lĩnh vực")]
         public string? Website { get; set; }
 
         [Display(Name = "Zalo OA Id")]

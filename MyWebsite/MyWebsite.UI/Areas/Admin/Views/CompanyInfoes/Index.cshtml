@@ -33,9 +33,6 @@
                             </div>
                             <ul class="list-inline mb-0 d-flex align-items-center flex-wrap justify-content-sm-start justify-content-center gap-4">
                                 <li class="list-inline-item">
-                                    <i class="ri-palette-line me-2 ri-24px"></i><span class="fw-medium">@Model.BusinessField</span>
-                                </li>
-                                <li class="list-inline-item">
                                     <i class="ri-map-pin-line me-2 ri-24px"></i><span class="fw-medium">@Model.HeadquartersAddress</span>
                                 </li>
                                 <li class="list-inline-item">
@@ -102,6 +99,17 @@
                     <li class="d-flex align-items-center mb-4"><i class="ri-wechat-line ri-24px"></i><span class="fw-medium mx-2">Zalo:</span> <span>@Model.ZaloNumber</span></li>
                     <li class="d-flex align-items-center mb-4"><i class="ri-whatsapp-line ri-24px"></i><span class="fw-medium mx-2">Whatsapp:</span> <span>@Model.WhatsAppNumber</span></li>
                     <li class="d-flex align-items-center mb-2"><i class="ri-mail-open-line ri-24px"></i><span class="fw-medium mx-2">Email:</span> <span>@Model.Email</span></li>
+                </ul>
+            </div>
+        </div>
+        <!--/ Activity Timeline -->
+    </div>
+    <div class="col-xl-12 col-lg-12 col-md-12">
+        <div class="card mb-6">
+            <div class="card-body pt-3">
+                <small class="card-text text-uppercase text-muted small">@Model.BusinessField</small>
+                <ul class="list-unstyled my-3 py-1">
+                    <li class="d-flex align-items-center mb-4">@Model.Website</li>
                 </ul>
             </div>
         </div>
