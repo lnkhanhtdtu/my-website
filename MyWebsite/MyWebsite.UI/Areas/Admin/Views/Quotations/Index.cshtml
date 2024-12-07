@@ -214,9 +214,9 @@
             $('#viewModal #CustomerName').text(data.customerName);
             $('#viewModal #CustomerEmail').text(data.customerEmail);
             $('#viewModal #CustomerPhone').text(data.customerPhone);
-            $('#viewModal #ProductName').text(data.product.name);
             $('#viewModal #Content').text(data.content);
             $('#viewModal #Id').text(data.id);
+            $('#viewModal #ProductName').text(data.product?.name);            
             
             // Cập nhật trạng thái
             let statusText = '';
