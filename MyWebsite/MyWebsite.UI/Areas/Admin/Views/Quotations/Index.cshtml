@@ -172,7 +172,7 @@
             e.preventDefault();
             const key = $(this).closest("div").data("key");
             const status = $(this).data("status");
-            console.log("ChangeStatus key: ", key, "Status: ", status);
+            // console.log("ChangeStatus key: ", key, "Status: ", status);
 
             $.ajax({
                 url: `/Admin/Quotations/ChangeStatus`,
@@ -181,7 +181,7 @@
                 success: function (data) {
                     $(elementName).DataTable().ajax.reload();
                     showToaster("Success", `Cập nhật trạng thái thành công`);
-                    console.log(data);
+                    // console.log(data);
                 },
                 error: function (error) {
                     showToaster("Error", "Có lỗi xảy ra khi cập nhật trạng thái");
@@ -199,7 +199,7 @@
                 success: function (data) {
                     // Hiển thị modal
                     $('#viewModal').modal('show');
-                    console.log("View: ", data);
+                    // console.log("View: ", data);
                     // Cập nhật dữ liệu trong modal
                     updateModalData(data);
                 },
@@ -238,14 +238,14 @@
 
         $(document).on("click", ".btn-delete", function () {
             const key = $(this).closest("div").data("key");
-            console.log("Delete key: ", key);
+            // console.log("Delete key: ", key);
             $.ajax({
                 url: `${deleteUrl}/${key}`,
                 method: "POST",
                 success: function (data) {
                     $(elementName).DataTable().ajax.reload();
                     showToaster("Success", "Xóa thành công");
-                    console.log(data);
+                    // console.log(data);
                 }
             });
         });

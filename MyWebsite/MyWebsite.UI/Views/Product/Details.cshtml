@@ -206,7 +206,7 @@
 
             // Chuyển object thành JSON
             var json = JSON.stringify(object);
-            console.log("Dữ liệu JSON từ formData:\n", json);
+            // console.log("Dữ liệu JSON từ formData:\n", json);
 
             $.ajax({
                 url: $(this).attr('action'),
@@ -215,7 +215,7 @@
                 contentType: false, // Important: Do not set content type
                 processData: false, // Important: Do not process data
                 success: function (response) {
-                    console.log(response);
+                    // console.log(response);
 
                     if (response.status !== 'Error') {
                         $('#message').addClass('success-message').text('Nội dung đã được gửi thành công!');
@@ -224,7 +224,7 @@
                     }
                 },
                 error: function (response) {
-                    console.log(response);
+                    // console.log(response);
                 }
             });
         });

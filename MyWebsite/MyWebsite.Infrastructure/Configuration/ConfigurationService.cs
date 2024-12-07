@@ -26,7 +26,7 @@ namespace MyWebsite.Infrastructure.Configuration
             services.ConfigureApplicationCookie(options =>
             {
                 options.Cookie.Name = "MyWebsite";
-                options.ExpireTimeSpan = TimeSpan.FromMinutes(30);
+                options.ExpireTimeSpan = TimeSpan.FromHours(23);
                 options.LoginPath = "/Admin/Authentication/Login";
                 options.AccessDeniedPath = "/Admin/Authentication/AccessDenied";
             });

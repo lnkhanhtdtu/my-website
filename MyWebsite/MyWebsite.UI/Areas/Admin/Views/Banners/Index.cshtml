@@ -164,7 +164,7 @@
                 url: `${getById}/${key}`,
                 method: "GET",
                 success: function (data) {
-                    console.log(data);
+                    // console.log(data);
 
                     // Hiển thị modal trước
                     $('#saveModalTitle').text("Chỉnh sửa Banner");
@@ -188,14 +188,14 @@
 
         $(document).on("click", ".btn-delete", function () {
             const key = $(this).closest("div").data("key");
-            console.log("Delete key: ", key);
+            // console.log("Delete key: ", key);
             $.ajax({
                 url: `${deleteUrl}/${key}`,
                 method: "POST",
                 success: function (data) {
                     reloadTable();
                     showToaster("Success", "Xóa thành công");
-                    console.log(data);
+                    // console.log(data);
                 }
             });
         });

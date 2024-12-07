@@ -205,7 +205,7 @@
 
                     // Sau đó đợi một chút để đảm bảo modal đã được render
                     setTimeout(function () {
-                        console.log(data);
+                        // console.log(data);
                         mapObjectToControlView(data);
 
                         let preloaded = data.images ? data.images.map((img, index) => ({
@@ -227,14 +227,14 @@
         // "Xóa"
         $(document).on("click", ".btn-delete", function () {
             const key = $(this).closest("div").data("key");
-            console.log("Delete key: ", key);
+            // console.log("Delete key: ", key);
             $.ajax({
                 url: `${deleteUrl}/${key}`,
                 method: "POST",
                 success: function (data) {
                     $(elementName).DataTable().ajax.reload();
                     showToaster("Success", "Xóa thành công");
-                    console.log(data);
+                    // console.log(data);
                 }
             });
         });
@@ -294,7 +294,7 @@
 
             // Chuyển object thành JSON
             var json = JSON.stringify(object);
-            console.log("Dữ liệu JSON từ formData:\n", json);
+            // console.log("Dữ liệu JSON từ formData:\n", json);
 
             $.ajax({
                 url: $(this).attr('action'),
@@ -303,7 +303,7 @@
                 contentType: false, // Important: Do not set content type
                 processData: false, // Important: Do not process data
                 success: function (response) {
-                    console.log(response);
+                    // console.log(response);
 
                     if (response.status !== 'Error') {
                         $('#saveProductModal').modal('hide');
@@ -314,7 +314,7 @@
                     }
                 },
                 error: function (response) {
-                    console.log(response);
+                    // console.log(response);
                 }
             });
         });

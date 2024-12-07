@@ -158,7 +158,15 @@
     <script src="~/admin/libs/image-uploader/dist/image-uploader.min.js"></script>
 
     @* <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script> *@
-    <script src="https://cdn.tiny.cloud/1/bbyaalzflkoysrzgbozkp2atu9cmg9allcksiq8epoyfdvuz/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+    @* <script src="https://cdn.tiny.cloud/1/bbyaalzflkoysrzgbozkp2atu9cmg9allcksiq8epoyfdvuz/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script> *@
+    @{
+        var tinyMCEConfig = new MyWebsite.Application.ViewModels.TinyMCEConfigViewModel
+        {
+            ApiKey = Configuration["TinyMCE:ApiKey"]!
+        };
+    }
+
+    <script src="https://cdn.tiny.cloud/1/@tinyMCEConfig.ApiKey/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
 
     @await RenderSectionAsync("Scripts", required: false)
 </body>

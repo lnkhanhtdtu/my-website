@@ -58,7 +58,8 @@ namespace MyWebsite.UI.Controllers
             
             var emailInfo = Utilities.EmailHelper.EmailTemplateForQuotationNotification(quotationViewModel);
 
-            await _emailService.Send(emailInfo);
+            // await _emailService.Send(emailInfo);
+            await _emailService.SendEmailSmtpAsync(emailInfo);
 
             return Json(new { Message = "Ok" });
         }
