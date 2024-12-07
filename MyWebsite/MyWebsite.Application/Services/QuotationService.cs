@@ -58,8 +58,11 @@ namespace MyWebsite.Application.Services
         {
             var quotation = await _unitOfWork.QuotationRepository.GetById(id);
             var result = _mapper.Map<QuotationViewModel>(quotation);
-            var product = await _unitOfWork.ProductRepository.GetById(id);
-            result.Product = product;
+            if (quotation.ProductId != null)
+            {
+                var product = await _unitOfWork.ProductRepository.GetById(quotation.ProductId.Value);
+                result.Product = product;
+            }
 
             return result;
         }
