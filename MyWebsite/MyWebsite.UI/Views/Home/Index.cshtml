@@ -16,7 +16,7 @@
                 var isFirst = Model.First() == item;
 
                 <div class="carousel-item @(isFirst ? "active" : "")">
-                    <img src="@imgSrc" alt="">
+                    <img src="@imgSrc" alt="@item.Description">
                     <div class="carousel-container">
                         <h2>@item.Title<br></h2>
                         <p>@item.Description</p>

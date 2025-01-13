@@ -39,5 +39,7 @@ namespace MyWebsite.Application.DTOs.Products
 
         [Display(Name = "Giá cũ")]
         public double? OldPrice { get; set; }
+
+        public DateTime CreatedAt { get; set; } = DateTime.Now;
     }
 }

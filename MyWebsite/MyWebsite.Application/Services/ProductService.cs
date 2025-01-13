@@ -120,6 +120,10 @@ namespace MyWebsite.Application.Services
                     await _unitOfWork.ProductRepository.SaveData(existingProduct);
                 }
             }
+            else
+            {
+                throw new Exception("Lưu dữ liệu không thành công!");
+            }
 
             await _unitOfWork.Commit(); // Lưu dữ liệu để lấy ProductId
             await _unitOfWork.ImageRepository.SaveImageProductAsync(productEntity.Id, newImages, oldImages);
